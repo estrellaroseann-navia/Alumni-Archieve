@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Confirmation</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/ConfirmLogout.css'%}">
+</head>
+<body>
+    <div class="header-container">
+        <div class="header">
+            <h1>Alumni Archive</h1>
+            <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="left-section">
+            <p>Are you sure you want to log out of your account?</p>
+        </div>
+        <div class="right-section">
+            <div class="confirmation-box">
+                <h2>Log Out</h2>
+                <div class="buttons">
+                    <button class="yes-btn"><a href="{% url 'userlogout' %}">Yes</a></button>
+                    <button class="no-btn">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Alumni Archive. All Rights Reserved.</p>
+    </footer>
+
+    <script src="{% static 'script/ConfirmLogout.js'%}"></script>
+</body>
+</html>
+s

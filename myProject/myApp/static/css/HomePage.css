@@ -1,0 +1,217 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+html, body {
+    height: 100%; /* Ensure the body takes full height */
+}
+
+body {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Navbar Styles */
+header {
+    background-color: #f8eedf; /* Navbar background */
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Full width for navbar container */
+}
+
+.navbar-brand {
+    flex: 1; /* Take space on the left */
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Center the links */
+.navbar-links {
+    flex: 1; /* Center the links */
+    text-align: center; /* Center align */
+}
+
+.navbar-links a {
+    margin: 0 15px;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b; /* Hover color */
+}
+
+.navbar-links a.active {
+    color: #f07d3b; /* Change text color to match your theme */
+    font-weight: bold; /* Make the active link bold */
+    border-bottom: 2px solid #f07d3b; /* Add an underline effect */
+}
+
+/* Profile Icon */
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative; /* Needed for dropdown positioning */
+}
+
+.navbar-profile span {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-profile img.avatar {
+    width: 30px; /* Set avatar width */
+    height: 30px; /* Set avatar height */
+    border-radius: 50%;
+    border: 2px solid #333; /* Border for avatar */
+    cursor: pointer; /* Pointer cursor for profile image */
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none; /* Initially hide the dropdown */
+    position: absolute; /* Position it below the avatar */
+    top: 40px; /* Adjust based on avatar height */
+    right: 0; /* Align to the right */
+    background-color: #f8eedf; /* Background color for dropdown */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    z-index: 1; /* Ensure dropdown is above other content */
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f07d3b; /* Hover effect */
+    color: white; /* Change text color on hover */
+}
+
+/* Show dropdown when toggled */
+.show {
+    display: block; /* Show dropdown */
+}
+
+/* Slideshow Styles */
+.slideshow-container {
+    position: relative;
+    width: 100%; /* Full width */
+    margin: 20px auto; /* Center the slideshow and add vertical margins */
+    padding: 20px; /* Add padding for space inside the container */
+    background-color: #f8eedf; /* Optional: Background color for separation */
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
+}
+
+/* Add margin-top to separate from header */
+.slideshow-container {
+    margin-top: 20px; /* Adjust this value to increase or decrease space */
+}
+
+.slide {
+    display: none; /* Hide all slides by default */
+}
+
+.slide img {
+    width: 100%; /* Responsive images to fill the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 400px; /* Set a maximum height */
+    object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+}
+
+.prev, .next {
+    cursor: pointer; /* Pointer cursor for navigation */
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 20px;
+    margin-top: 10px; /* Add margin-top for space between slideshow and main content */
+    background-color: white; /* Optional: White background for contrast */
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
+    flex-grow: 1; /* Allow main content to grow and take up remaining space */
+}
+.main-content h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Article Styles */
+.article-container {
+    margin: 20px 0;
+    max-width: 800px; /* Set a max width for the article container */
+    margin-left: auto; /* Center the container */
+    margin-right: auto; /* Center the container */
+}
+
+.article {
+    margin: 10px 0; /* Add vertical margin for separation between articles */
+}
+
+.article-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block; /* Make the link a block element to occupy full width */
+    padding: 10px; /* Optional: Add padding for better click area */
+    border: 1px solid transparent; /* Add a border for visual separation */
+    border-radius: 4px; /* Optional: Rounded corners for links */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.article-link:hover {
+    color: #f07d3b; /* Hover color */
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b; /* Footer background */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Push the footer to the bottom */
+}

@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Archive - Palawan State University</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="containerr" id="containerr">
+        <div class="toggle-panell toggle-leftt">
+            <h1>Palawan State University Alumni Data Archive</h1>
+            <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+        </div>
+
+        <div class="toggle-panell toggle-rightt">
+            <h2>Welcome to Alumni Archive:<br>Preserving Palawan State University's Proud Legacy</h2>
+            <p>At Alumni Archive, our mission is to preserve and utilize the combined strength of our alumni network in order to celebrate Palawan State University's illustrious history.</p>
+            <a href="{% url 'userlogin' %}" class="get-started-btn">Get Started</a>
+        </div>
+    </div>
+
+    <script src="{% static 'script/script.js' %}"></script>
+</body>
+</html>
