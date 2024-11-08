@@ -13,13 +13,13 @@ from .models import Alumni
 from django.contrib.auth.forms import UserCreationForm
 
 from .models import *
-from .forms import CreateUserForm
+from .forms import RegistrationForm
 
 from .decorators import allowed_users, unauthenticated_user
 
 
 def landingpage(request):
-    return render(request, 'base/landingpage.html')
+    return render(request, 'landingpage.html')
 
 
 # for sign up and login and logout
@@ -27,19 +27,17 @@ def landingpage(request):
 def usersignup(request):
     if request.user.is_authenticated:
         return redirect('homepage')
-    else: 
-        form = CreateUserForm()
+    else:
+        form = RegistrationForm()
         if request.method == 'POST':
-            form = CreateUserForm(request.POST)
+            form = RegistrationForm(request.POST)
             if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
-
-                return redirect('userlogin')
+                user = form.save() 
+                messages.success(request, f'Account created for {user.first_name}')
+                return redirect('userlogin')  
 
         context = {'form': form}
-        return render (request, 'base/signup.html', context)
+        return render(request, 'signup.html', context)
 
 @unauthenticated_user
 def userlogin(request):
@@ -56,10 +54,10 @@ def userlogin(request):
             messages.info(request, 'Username or Password is incorrect!')
 
     context = {}
-    return render (request, 'base/login.html', context)
+    return render (request, 'login.html', context)
 
 def userconfirmlogout(request):
-    return render (request, 'base/confirmlogout.html')
+    return render (request, 'confirmlogout.html')
 
 def userlogout(request):
     logout(request)
@@ -69,35 +67,35 @@ def userlogout(request):
 @login_required(login_url='userlogin')
 @allowed_users(allowed_roles=['admin'])
 def adminhomepage(request):
-    return render(request, 'base/adminhomepage.html')
+    return render(request, 'adminhomepage.html')
 
 @login_required(login_url='userlogin')
 @allowed_users(allowed_roles=['alumni'])
 def homepage(request):
-    return render(request, 'base/homepage.html')
+    return render(request, 'homepage.html')
 
 # end of sign up and log in
 
 @login_required(login_url='userlogin')
 def about(request):
-    return render(request, 'base/about.html')
+    return render(request, 'about.html')
 
 @login_required(login_url='userlogin')
 def contact(request):
-    return render(request, 'base/contact.html')
+    return render(request, 'contact.html')
 
 @login_required(login_url='userlogin')
 def survey(request):
-    return render(request, 'base/survey.html')
+    return render(request, 'survey.html')
 
 @login_required(login_url='userlogin')
 def forgotpassword(request):
-    return render(request, 'base/forgotpassword.html')
+    return render(request, 'forgotpassword.html')
 
 @login_required(login_url='userlogin')
 def donation(request):
-    return render (request, 'base/donation.html')
+    return render (request, 'donation.html')
 
 def alumni(request):
     alum=Alumni.objects.all()
-    return render(request, 'base/alumni.html', {'alum': alum})
+    return render(request, 'alumni.html', {'alum': alum})
