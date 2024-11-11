@@ -13,11 +13,13 @@ def register_view(request):
     if request.method == 'POST':
         form = AlumniRegistrationForm(request.POST)
         if form.is_valid():
+            # Save the form and show success message
             form.save()
             messages.success(request, "Registration successful. Please log in.")
-            return redirect('login')
+            return redirect('login')  # Redirect to the login page
     else:
-        form = AlumniRegistrationForm()
+        form = AlumniRegistrationForm()  # GET request - show an empty form
+    
     return render(request, 'register.html', {'form': form})
 
 def login_view(request):
