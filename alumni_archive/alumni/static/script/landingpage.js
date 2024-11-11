@@ -7,6 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault(); // Prevent default anchor behavior
 
         // Redirect to the admin login page
-        window.location.href = "LogIn.html"; // Change to your actual admin login page URL
+        window.location.href = "login.html"; // Change to your actual admin login page URL
     });
 });
