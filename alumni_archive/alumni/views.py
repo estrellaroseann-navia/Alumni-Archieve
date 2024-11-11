@@ -49,3 +49,6 @@ def homepage_view(request):
     if not alumni_id:
         # Redirect to login or handle the case when alumni_id is missing
         return redirect('login')  # or an appropriate URL name
+
+def forgotpassword_view(request):
+    return render(request, 'forgotpassword.html') 

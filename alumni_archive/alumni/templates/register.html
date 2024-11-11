@@ -1,152 +1,192 @@
-{% load django_bootstrap5 %}
-{% load crispy_forms_tags %}
-{% load crispy_forms_filters %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5hb7ie3b6KlS3Es1Tw1G+3mZ5pR5n2U6s+j5oP" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background: #fff !important;
-        }
-        .user_card {
-            width: 400px;
-            margin-top: auto;
-            margin-bottom: auto;
-            background: #EF8354;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            padding: 15px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 5px;
-        }
-        .form_container {
-            margin-top: 20px;
-        }
-        #form-title {
-            color: #fff;
-        }
-        .login_btn {
-            width: 100%;
-            background: #333 !important;
-            color: white !important;
-        }
-        .input-group-text {
-            background: #f7ba5b !important;
-            color: white !important;
-        }
-        .section-divider {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #fff;
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/Register.css' %}"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
-            <div class="user_card">
-                <div class="d-flex justify-content-center">
-                    <h3 id="form-title">REGISTER ACCOUNT</h3>
-                </div>
-                <div class="d-flex justify-content-center form_container">
-                    <form method="POST" action="">
-                        
-                        {% csrf_token %}
-                        {% crispy form %}
+    <header>
+        <h1>Sign Up</h1>
+    </header>
 
-                        <!-- Basic Info Section -->
-                        <div class="section-divider">Personal Information</div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            {{ form.first_name }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            {{ form.middle_initial }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            {{ form.last_name }}
-                        </div>
-
-                        <!-- Detailed Info Section -->
-                        <div class="section-divider">Detailed Information</div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                            {{ form.age }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
-                            {{ form.birthday }}
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="address" class="text-white">Address</label>
-                            {{ form.address|as_crispy_field }}
-                        </div> 
-
-                        <!-- Academic Information Section -->
-                        <div class="section-divider">Academic Information</div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-book"></i></span>
-                            {{ form.course }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-university"></i></span>
-                            {{ form.college }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-users"></i></span>
-                            {{ form.cluster }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                            {{ form.year_graduated }}
-                        </div>
-
-                        <!-- Account Section -->
-                        <div class="section-divider">Account Information</div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            {{ form.email }}
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            {{ form.password }}
-                        </div>
-
-                        <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="submit" class="btn login_btn">Register Account</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="mt-4">
-                    <div class="d-flex justify-content-center links">
-                        Already have an account? <a href="{% url 'login' %}" class="ms-2">Login</a>
+    <main>
+        <div class="container" id="containerr">
+            <div class="form-container">
+                <form id="signup-form">
+                    <!-- First Name -->
+                    <div class="input-group">
+                        <label for="firstname">First Name:</label>
+                        <input type="text" id="firstname" required />
+                        <p class="error-message" id="firstname-error" style="display: none; color: red;">Please fill out this field.</p>
                     </div>
-                </div>
+
+                    <!-- Last Name -->
+                    <div class="input-group">
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" id="lastname" required />
+                        <p class="error-message" id="lastname-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Middle Initial -->
+                    <div class="input-group">
+                        <label for="middle-initial">Middle Initial:</label>
+                        <input type="text" id="middle-initial" maxlength="1" />
+                    </div>
+
+                    <!-- Age -->
+                    <div class="input-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" required />
+                        <p class="error-message" id="age-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Birthday -->
+                    <div class="input-group">
+                        <label for="birthday">Birthday:</label>
+                        <input type="date" id="birthday" required />
+                        <p class="error-message" id="birthday-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="input-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" required />
+                        <p class="error-message" id="address-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- School Program -->
+                    <div class="input-group">
+                        <label for="program">School Program:</label>
+                        <input type="text" id="program" required />
+                        <p class="error-message" id="program-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- College -->
+                    <div class="input-group">
+                        <label for="college">College:</label>
+                        <input type="text" id="college" required />
+                        <p class="error-message" id="college-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Cluster -->
+                    <div class="input-group">
+                        <label for="cluster">Cluster:</label>
+                        <input type="text" id="cluster" required />
+                        <p class="error-message" id="cluster-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Year Graduated -->
+                    <div class="input-group">
+                        <label for="year-graduated">Year Graduated:</label>
+                        <input type="number" id="year-graduated" required />
+                        <p class="error-message" id="year-graduated-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required />
+                        <p class="error-message" id="email-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required />
+                        <p class="error-message" id="password-error" style="display: none; color: red;">Please fill out this field.</p>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input type="password" id="confirm-password" required />
+                        <p class="error-message" id="confirm-password-error" style="display: none; color: red;">Please fill out this field.</p>
+                        <p class="error-message" id="mismatch-error" style="display: none; color: red;">Passwords do not match.</p>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="input-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="terms-accepted" />
+                            I have read and understand the terms and conditions.
+                        </label>
+                    </div>
+                    
+                    <button type="submit" id="submit-btn" class="get-started-btn" disabled>Sign Up</button>
+                </form>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const checkbox = document.getElementById('terms-accepted');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Function to validate the form and toggle the button
+        function validateForm() {
+            // Check if all fields are filled and checkbox is checked
+            const isEmailFilled = emailInput.value.trim() !== '';
+            const isPasswordFilled = passwordInput.value.trim() !== '';
+            const isConfirmPasswordFilled = confirmPasswordInput.value.trim() !== '';
+            const isCheckboxChecked = checkbox.checked;
+
+            // Enable the button only if all conditions are met
+            submitBtn.disabled = !(isEmailFilled && isPasswordFilled && isConfirmPasswordFilled && isCheckboxChecked);
+        }
+
+        // Function to display error messages for empty fields and password mismatch
+        function checkFields() {
+            const isPasswordMatch = passwordInput.value === confirmPasswordInput.value;
+            document.getElementById('firstname-error').style.display = document.getElementById('firstname').value.trim() === '' ? 'block' : 'none';
+            document.getElementById('lastname-error').style.display = document.getElementById('lastname').value.trim() === '' ? 'block' : 'none';
+            document.getElementById('email-error').style.display = emailInput.value.trim() === '' ? 'block' : 'none';
+            document.getElementById('password-error').style.display = passwordInput.value.trim() === '' ? 'block' : 'none';
+            document.getElementById('confirm-password-error').style.display = confirmPasswordInput.value.trim() === '' ? 'block' : 'none';
+            document.getElementById('mismatch-error').style.display = isPasswordMatch ? 'none' : 'block';
+        }
+
+        // Event listeners for input changes and checkbox
+        emailInput.addEventListener('input', function() {
+            validateForm();
+            checkFields();
+        });
+
+        passwordInput.addEventListener('input', function() {
+            validateForm();
+            checkFields();
+        });
+
+        confirmPasswordInput.addEventListener('input', function() {
+            validateForm();
+            checkFields();
+        });
+
+        checkbox.addEventListener('change', function() {
+            validateForm();
+        });
+
+        // Form submit event
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Redirect to UserLogIn.html after successful validation
+            if (passwordInput.value === confirmPasswordInput.value) {
+                window.location.href = 'UserLogIn.html'; // Redirect to the UserLogIn page
+            } else {
+                alert("Please ensure that all fields are filled correctly and passwords match.");
+            }
+        });
+    </script> <!-- Link to the external JavaScript file -->
 </body>
 </html>

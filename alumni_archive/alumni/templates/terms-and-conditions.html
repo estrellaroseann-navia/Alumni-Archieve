@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+    <link rel="stylesheet" href="{% static 'css/ter.css' %}"> <!-- Reuse your CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Terms and Conditions</h1>
+    </header>
+
+    <main>
+        <div class="container" id="containerr">
+            <div class="form-container">
+                <h2>Please read and accept our terms and conditions</h2>
+                <p>Here is a sample Terms and Conditions document for your Alumni Archive system. You can customize it further to fit your specific requirements:
+                    <br><br>
+                    <b>Terms and Conditions for Alumni Archive</b>
+                    <br><br>
+                    Welcome to the Alumni Archive! By accessing or using our record management system, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use our system.
+                    <br><br>
+                    <b>1. Acceptance of Terms</b>
+                    By using the Alumni Archive system, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions, as well as our Privacy Policy.
+                    <br><br>
+                    <b>2. Eligibility</b>
+                    You must be a registered user or an authorized personnel of the Office of Alumni Affairs to access and use the Alumni Archive system. By using this system, you represent that you meet these eligibility requirements.
+                    <br><br>
+                    <b>3. User Account</b>
+                    You are responsible for maintaining the confidentiality of your account credentials.
+                    You agree to notify us immediately of any unauthorized use of your account or any other breach of security.
+                    You are responsible for all activities that occur under your account.
+                    <br><br>
+                    <b>4. Use of the System</b>
+                    You agree to use the Alumni Archive system only for lawful purposes and in accordance with these Terms and Conditions.
+                    You shall not use the system in any way that violates any applicable federal, state, local, or international law or regulation.
+                    <br><br>
+                    <b>5. Data Management</b>
+                    The Alumni Archive system is designed to manage and store alumni records securely. You agree to ensure that the data you provide is accurate and up-to-date.
+                    We reserve the right to review, retain, or disclose any information as required by law or in accordance with our Privacy Policy.
+                    <br><br>
+                    <b>6. Intellectual Property</b>
+                    All content, features, and functionality of the Alumni Archive system, including but not limited to text, graphics, logos, and software, are the exclusive property of the Alumni Archive and are protected by copyright, trademark, and other intellectual property laws.
+                    <br><br>
+                    <b>7. Disclaimer of Warranties</b>
+                    The Alumni Archive system is provided on an "as is" and "as available" basis. We make no warranties of any kind, either express or implied, regarding the operation of the system or the information, content, materials, or products included in it.
+                    <br><br>
+                    <b>8. Limitation of Liability</b>
+                    To the fullest extent permitted by law, we will not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of the Alumni Archive system.
+                    <br><br>
+                    <b>9. Changes to Terms</b>
+                    We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting on this page. Your continued use of the system after changes are made constitutes your acceptance of the revised terms.
+                    <br><br>
+                    <b>10. Governing Law</b>
+                    These Terms and Conditions shall be governed by and construed in accordance with the laws of [Insert Your Jurisdiction].
+                    <br><br>
+                    <b>11. Contact Information</b>
+                    For any questions or concerns regarding these Terms and Conditions, please contact us at palsu@psu.palawan.edu.ph.
+
+                    </p>
+                <div class="input-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="terms-accepted" />
+                        I have read and understand the terms and conditions.
+                    </label>
+                </div>
+                <button type="button" id="agree-btn" class="get-started-btn" disabled>I Agree</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const checkbox = document.getElementById('terms-accepted');
+        const agreeBtn = document.getElementById('agree-btn');
+
+        // Function to toggle the button based on checkbox state
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                // Enable the button when the checkbox is checked
+                agreeBtn.disabled = false;
+            } else {
+                // Disable the button when the checkbox is unchecked
+                agreeBtn.disabled = true;
+            }
+        });
+
+        // Function to handle the button click
+        agreeBtn.addEventListener('click', function () {
+            if (!agreeBtn.disabled) {
+                // Redirect to the UserSignUp.html page
+                window.location.href = 'register.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes the full height */
+}
+
+/* Main Content Styles */
+.main-content {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-grow: 1; /* Allow main to grow and fill the available space */
+    padding: 20px; /* Add some padding around the main content */
+}
+
+/* Form Container Styles */
+.form-container {
+    background: white;
+    padding: 60px; /* Increased padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    max-width: 600px; /* Increased limit width for the form */
+    width: 100%; /* Full width */
+}
+
+/* Additional Styles */
+.form-container h2 {
+    margin-bottom: 20px; /* Space below the heading */
+    text-align: center; /* Centered text for heading */
+    font-size: 1.5rem; /* Adjusted font size for heading */
+    color: #333; /* Darker color for better contrast */
+}
+
+/* Input Group Styles */
+.input-group {
+    margin-bottom: 20px; /* Space between input fields */
+}
+
+.input-group label {
+    display: block; /* Block display for labels */
+    margin-bottom: 5px; /* Space below label */
+    font-weight: bold; /* Bold labels for emphasis */
+    color: #666; /* Label color */
+}
+
+.input-group input {
+    width: 100%; /* Full width for inputs */
+    padding: 12px; /* Increased padding inside the input */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners for inputs */
+    font-size: 1rem; /* Consistent font size for inputs */
+    max-width: 500px; /* Make inputs wider */
+}
+
+/* Button Styles */
+.login-button {
+    display: block; /* Make the button a block element */
+    background-color: #f07d3b; /* Button background color */
+    color: white;
+    padding: 10px 16px; /* Adjusted padding for better touch target */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+    margin: 20px auto 0; /* Center the button */
+    font-size: 1rem; /* Increased font size for button text */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.login-button:hover {
+    background-color: #f3b294; /* Darker shade for hover effect */
+}
+
+/* Center Link Styles */
+.center-link {
+    text-align: center; /* Centered text */
+    margin-top: 15px; /* Space above links */
+    font-size: 0.9rem; /* Font size for links */
+    color: #333; /* Link color */
+}
+
+.center-link a {
+    text-decoration: none; /* Remove underline from links */
+    color: #007bff; /* Initial link color */
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.center-link a:hover {
+    color: #f07d3b; /* Change color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Header (Navbar) Styles */
+header {
+    background-color: #f8eedf; /* Navbar background */
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    flex: 1; /* Take space on the left */
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b; /* Footer background */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Push footer to the bottom */
+}
