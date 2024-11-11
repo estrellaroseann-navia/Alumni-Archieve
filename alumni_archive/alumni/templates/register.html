@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,98 +16,103 @@
         <div class="container" id="containerr">
             <div class="form-container">
                 <form id="signup-form">
-                    <!-- First Name -->
+                    <!-- First Name, Middle Initial, Last Name -->
                     <div class="input-group">
                         <label for="firstname">First Name:</label>
                         <input type="text" id="firstname" required />
-                        <p class="error-message" id="firstname-error" style="display: none; color: red;">Please fill out this field.</p>
                     </div>
 
-                    <!-- Last Name -->
-                    <div class="input-group">
-                        <label for="lastname">Last Name:</label>
-                        <input type="text" id="lastname" required />
-                        <p class="error-message" id="lastname-error" style="display: none; color: red;">Please fill out this field.</p>
-                    </div>
-
-                    <!-- Middle Initial -->
                     <div class="input-group">
                         <label for="middle-initial">Middle Initial:</label>
                         <input type="text" id="middle-initial" maxlength="1" />
                     </div>
 
-                    <!-- Age -->
+                    <div class="input-group">
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" id="lastname" required />
+                    </div>
+
+                    <!-- Age and Birthday -->
                     <div class="input-group">
                         <label for="age">Age:</label>
                         <input type="number" id="age" required />
-                        <p class="error-message" id="age-error" style="display: none; color: red;">Please fill out this field.</p>
                     </div>
 
-                    <!-- Birthday -->
                     <div class="input-group">
                         <label for="birthday">Birthday:</label>
                         <input type="date" id="birthday" required />
-                        <p class="error-message" id="birthday-error" style="display: none; color: red;">Please fill out this field.</p>
                     </div>
 
                     <!-- Address -->
                     <div class="input-group">
                         <label for="address">Address:</label>
                         <input type="text" id="address" required />
-                        <p class="error-message" id="address-error" style="display: none; color: red;">Please fill out this field.</p>
-                    </div>
-
-                    <!-- School Program -->
-                    <div class="input-group">
-                        <label for="program">School Program:</label>
-                        <input type="text" id="program" required />
-                        <p class="error-message" id="program-error" style="display: none; color: red;">Please fill out this field.</p>
-                    </div>
-
-                    <!-- College -->
-                    <div class="input-group">
-                        <label for="college">College:</label>
-                        <input type="text" id="college" required />
-                        <p class="error-message" id="college-error" style="display: none; color: red;">Please fill out this field.</p>
-                    </div>
-
-                    <!-- Cluster -->
-                    <div class="input-group">
-                        <label for="cluster">Cluster:</label>
-                        <input type="text" id="cluster" required />
-                        <p class="error-message" id="cluster-error" style="display: none; color: red;">Please fill out this field.</p>
                     </div>
 
                     <!-- Year Graduated -->
                     <div class="input-group">
                         <label for="year-graduated">Year Graduated:</label>
                         <input type="number" id="year-graduated" required />
-                        <p class="error-message" id="year-graduated-error" style="display: none; color: red;">Please fill out this field.</p>
                     </div>
 
-                    <!-- Email -->
+                    <!-- Cluster dropdown -->
+                    <div class="input-group">
+                        <label for="cluster">Cluster:</label>
+                        <select id="cluster" required>
+                            <option value="">Select Cluster</option>
+                            <option value="cluster1">Main Campus</option>
+                            <option value="cluster1">Cluster 1</option>
+                            <option value="cluster2">Cluster 2</option>
+                            <option value="cluster3">Cluster 3</option>
+                            <option value="cluster1">Cluster 4</option>
+                            <option value="cluster1">PCAT Cuyo</option>
+
+
+                        </select>
+                    </div>
+
+                    <!-- Campus, College, and School Program dropdowns (initially hidden) -->
+                    <div class="input-group" id="campus-group" style="display:none;">
+                        <label for="campus">Campus:</label>
+                        <select id="campus" required>
+                            <option value="">Select Campus</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" id="college-group" style="display:none;">
+                        <label for="college">College:</label>
+                        <select id="college" required>
+                            <option value="">Select College</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" id="school-program-group" style="display:none;">
+                        <label for="school-program">School Program:</label>
+                        <select id="school-program" required>
+                            <option value="">Select Program</option>
+                        </select>
+                    </div>
+
+                    <!-- Email, Password, and Confirm Password -->
                     <div class="input-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" required />
-                        <p class="error-message" id="email-error" style="display: none; color: red;">Please fill out this field.</p>
+                        <p class="error-message" id="email-error" style="display: none; color: red;">Please fill out this form.</p>
                     </div>
 
-                    <!-- Password -->
                     <div class="input-group">
                         <label for="password">Password:</label>
                         <input type="password" id="password" required />
-                        <p class="error-message" id="password-error" style="display: none; color: red;">Please fill out this field.</p>
+                        <p class="error-message" id="password-error" style="display: none; color: red;">Please fill out this form.</p>
                     </div>
 
-                    <!-- Confirm Password -->
                     <div class="input-group">
                         <label for="confirm-password">Confirm Password:</label>
                         <input type="password" id="confirm-password" required />
-                        <p class="error-message" id="confirm-password-error" style="display: none; color: red;">Please fill out this field.</p>
+                        <p class="error-message" id="confirm-password-error" style="display: none; color: red;">Please fill out this form.</p>
                         <p class="error-message" id="mismatch-error" style="display: none; color: red;">Passwords do not match.</p>
                     </div>
 
-                    <!-- Terms and Conditions -->
                     <div class="input-group checkbox-group">
                         <label>
                             <input type="checkbox" id="terms-accepted" />
@@ -127,66 +131,142 @@
     </footer>
 
     <script>
+        // Access DOM elements
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirm-password');
         const checkbox = document.getElementById('terms-accepted');
         const submitBtn = document.getElementById('submit-btn');
-
+        const clusterSelect = document.getElementById('cluster');
+        const campusSelect = document.getElementById('campus');
+        const collegeSelect = document.getElementById('college');
+        const programSelect = document.getElementById('school-program');
+        const campusGroup = document.getElementById('campus-group');
+        const collegeGroup = document.getElementById('college-group');
+        const programGroup = document.getElementById('school-program-group');
+    
         // Function to validate the form and toggle the button
         function validateForm() {
-            // Check if all fields are filled and checkbox is checked
             const isEmailFilled = emailInput.value.trim() !== '';
             const isPasswordFilled = passwordInput.value.trim() !== '';
             const isConfirmPasswordFilled = confirmPasswordInput.value.trim() !== '';
             const isCheckboxChecked = checkbox.checked;
-
-            // Enable the button only if all conditions are met
+    
             submitBtn.disabled = !(isEmailFilled && isPasswordFilled && isConfirmPasswordFilled && isCheckboxChecked);
         }
-
-        // Function to display error messages for empty fields and password mismatch
+    
+        // Function to check field validation and toggle error messages
         function checkFields() {
             const isPasswordMatch = passwordInput.value === confirmPasswordInput.value;
-            document.getElementById('firstname-error').style.display = document.getElementById('firstname').value.trim() === '' ? 'block' : 'none';
-            document.getElementById('lastname-error').style.display = document.getElementById('lastname').value.trim() === '' ? 'block' : 'none';
             document.getElementById('email-error').style.display = emailInput.value.trim() === '' ? 'block' : 'none';
             document.getElementById('password-error').style.display = passwordInput.value.trim() === '' ? 'block' : 'none';
             document.getElementById('confirm-password-error').style.display = confirmPasswordInput.value.trim() === '' ? 'block' : 'none';
             document.getElementById('mismatch-error').style.display = isPasswordMatch ? 'none' : 'block';
         }
-
+    
         // Event listeners for input changes and checkbox
         emailInput.addEventListener('input', function() {
             validateForm();
             checkFields();
         });
-
+    
         passwordInput.addEventListener('input', function() {
             validateForm();
             checkFields();
         });
-
+    
         confirmPasswordInput.addEventListener('input', function() {
             validateForm();
             checkFields();
         });
-
+    
         checkbox.addEventListener('change', function() {
             validateForm();
         });
-
+    
+        // Function to reset and populate options for campus, college, and program
+        function updateOptions(clusterValue) {
+            // Hide and reset campus, college, and program options
+            campusGroup.style.display = 'none';
+            collegeGroup.style.display = 'none';
+            programGroup.style.display = 'none';
+            campusSelect.innerHTML = '<option value="">Select Campus</option>';
+            collegeSelect.innerHTML = '<option value="">Select College</option>';
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+    
+            if (clusterValue === 'main-campus') {
+                campusGroup.style.display = 'block';
+                campusSelect.innerHTML += '<option value="main">Puerto Princesa City</option>';
+                collegeGroup.style.display = 'block';
+                collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering</option>';
+            } else if (clusterValue === 'cluster1') {
+                campusGroup.style.display = 'block';
+                campusSelect.innerHTML += '<option value="campus1">Campus 1</option><option value="campus2">Campus 2</option>';
+                collegeGroup.style.display = 'block';
+                collegeSelect.innerHTML += '<option value="college1">College 1</option><option value="college2">College 2</option>';
+            } else if (clusterValue === 'cluster2') {
+                campusGroup.style.display = 'block';
+                campusSelect.innerHTML += '<option value="campus3">Campus 3</option>';
+                collegeGroup.style.display = 'block';
+                collegeSelect.innerHTML += '<option value="college3">College 3</option>';
+            } else if (clusterValue === 'cluster3') {
+                campusGroup.style.display = 'block';
+                campusSelect.innerHTML += '<option value="campus4">Campus 4</option>';
+                collegeGroup.style.display = 'block';
+                collegeSelect.innerHTML += '<option value="college4">College 4</option>';
+            } else if (clusterValue === 'cluster4' || clusterValue === 'Cuyo') {
+                campusGroup.style.display = 'block';
+                campusSelect.innerHTML += '<option value="campus4">Campus 4</option>';
+                collegeGroup.style.display = 'block';
+                collegeSelect.innerHTML += '<option value="college4">College 4</option>';
+            }
+        }
+    
+        // Cluster change listener to populate campus, college, and program
+        clusterSelect.addEventListener('change', function() {
+            const clusterValue = clusterSelect.value;
+            updateOptions(clusterValue);
+        });
+    
+        // College change listener to update program options
+        collegeSelect.addEventListener('change', function() {
+            const collegeValue = collegeSelect.value;
+            programGroup.style.display = 'none';
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+    
+            if (collegeValue === 'cs') {
+                programGroup.style.display = 'block';
+                programSelect.innerHTML += '<option value="bio">Bachelor of Science in Biology</option><option value="marbio">Bachelor of Science in Marine Biology</option><option value="comsci">Bachelor of Science in Computer Science</option><option value="envisci">Bachelor of Science in Environmental Science</option><option value="it">Bachelor of Science in Information Technology</option>';
+            } else if (collegeValue === 'ceat') {
+                programGroup.style.display = 'block';
+                programSelect.innerHTML += '<option value="archi">Bachelor of Science in Architecture</option><option value="civil">Bachelor of Science in Civil Engineering</option>';
+            } else if (collegeValue === 'college1') {
+                programGroup.style.display = 'block';
+                programSelect.innerHTML += '<option value="program5">Program 5</option><option value="program6">Program 6</option>';
+            } else if (collegeValue === 'college2') {
+                programGroup.style.display = 'block';
+                programSelect.innerHTML += '<option value="program7">Program 7</option><option value="program8">Program 8</option>';
+            } else if (collegeValue === 'college3') {
+                programGroup.style.display = 'block';
+                programSelect.innerHTML += '<option value="program9">Program 9</option><option value="program10">Program 10</option>';
+            } else if (collegeValue === 'college4') {
+                programGroup.style.display = 'block';
+                programSelect.innerHTML += '<option value="program11">Program 11</option><option value="program12">Program 12</option>';
+            }
+        });
+    
         // Form submit event
         document.getElementById('signup-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
-
+    
             // Redirect to UserLogIn.html after successful validation
             if (passwordInput.value === confirmPasswordInput.value) {
+                // You can save data or perform any actions here if needed
                 window.location.href = 'UserLogIn.html'; // Redirect to the UserLogIn page
             } else {
                 alert("Please ensure that all fields are filled correctly and passwords match.");
             }
         });
-    </script> <!-- Link to the external JavaScript file -->
+    </script>    
 </body>
 </html>

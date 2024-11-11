@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Archive - Palawan State University</title>
-
-    {% load static %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landingpage.css'%}"> 
 </head>
 <body>
-    <div class="containerr" id="containerr">
-        <div class="toggle-panell toggle-leftt">
-            <h1>Palawan State University Alumni Data Archive</h1>
-            <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <div class="toggle-panell toggle-rightt">
-            <h2>Welcome to Alumni Archive:<br>Preserving Palawan State University's Proud Legacy</h2>
-            <p>At Alumni Archive, our mission is to preserve and utilize the combined strength of our alumni network in order to celebrate Palawan State University's illustrious history.</p>
-            <a href="{% url 'login' %}" class="get-started-btn">Get Started</a>
+    <main>
+        <div class="center-container">
+            <div class="toggle-panel toggle-right">
+                <h2>Welcome to Alumni Archive:<br>Preserving Palawan State University's Proud Legacy</h2>
+                <p>At Alumni Archive, our mission is to preserve and utilize the combined strength of our alumni network in order to celebrate Palawan State University's illustrious history.</p>
+                <a href="{% url 'login' %}" class="get-started-btn">Get Started</a> 
+            </div>
         </div>
-    </div>
+    </main>
 
-    <script src="{% static 'script/script.js' %}"></script>
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            const getStartedButton = document.querySelector(".get-started-btn");
+
+            getStartedButton.addEventListener("click", function (event) {
+                event.preventDefault(); 
+                window.location.href = "login.html"; 
+            });
+        });
+    </script>
 </body>
 </html>

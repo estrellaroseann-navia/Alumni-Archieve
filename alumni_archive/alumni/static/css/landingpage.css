@@ -1,4 +1,4 @@
-
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,29 +6,31 @@
     font-family: Arial, sans-serif;
 }
 
-
+/* Body Styles */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    position: relative; 
+    position: relative; /* Ensure body is positioned relative for the pseudo-element */
 }
 
+/* Apply Background Image and Blur Effect Using ::before */
 body::before {
-    content: ''; 
+    content: ''; /* Empty content for the pseudo-element */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('landing.jpg') no-repeat center center fixed; 
-    background-size: cover; 
-    filter: blur(5px);
-    z-index: -1; 
+    background: url('landing.jpg') no-repeat center center fixed; /* Add the background image */
+    background-size: cover; /* Ensure the image covers the full screen */
+    filter: blur(5px); /* Apply blur effect to the background */
+    z-index: -1; /* Place the pseudo-element behind the content */
 }
 
+/* Header (Navbar) Styles */
 header {
-    background-color: rgba(248, 238, 223, 0.8); 
+    background-color: rgba(248, 238, 223, 0.8); /* Semi-transparent background */
     padding: 20px;
     width: 100%;
 }
