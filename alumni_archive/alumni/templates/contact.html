@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% load static %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/ContactUs.css'%}">
+    <title>Contact Us</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}" class="active">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="{% static 'img/profile.png' %}" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="{% url 'userconfirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="main-content">
+        <div class="contact-container">
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt fa-5x"></i> <!-- Location Icon -->
+            </div>
+            <div class="contact-text">
+                <h2>Contact Us</h2>
+                <p>Have questions or feedback? Reach out to us...</p>
+                <p><strong>Email:</strong> <a href="mailto:palsualumni@gmail.com">palsualumni@gmail.com</a></p>
+                <p><strong>Location</strong>Tiniguiban Heights, Puerto Princesa City, Palawan</p>
+            </div>
+
+            <!-- Google Map -->
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <iframe src="https://maps.google.com/maps?q=Palawan%20State%20University,%20Puerto%20Princesa%20City&amp;t=k&amp;z=17&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" style="width: 100%; height: 400px;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Alumni Archive. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'script/ContactUs.js'%}"></script>
+</body>
+
+</html>

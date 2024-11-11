@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/AboutUs.css '%}"> <!-- Link to the same CSS for consistent style -->
+    <title>About Us</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}" class="active">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="{% static 'img/profile.png' %}" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="{% url 'userconfirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Us Content -->
+    <section class="main-content">
+        <div class="about-container">
+            <div class="picture-container">
+                <img src="{% static 'img/PSU.png' %}" alt="University Building"> 
+            </div>
+            <div class="text-container">
+                <h2>About Palawan State University</h2>
+                <p>The Palawan State University (PSU) has its humble beginnings as a teacher-training institution known as Palawan Teacher’s College (PTC). The school was founded on June 19, 1965, through Republic Act 4303 and has started operating since March 2, 1972. In 1984, PTC was recognized as Palawan State College by virtue of Batas Pambansa 797, which authorized the school to offer other undergraduate degrees in the Arts, Sciences, and Technology. The conversion into a state university came a decade later on November 12, 1994, through Republic Act 7818. After 48 years, the Palawan State University emerged as the premier institute of higher learning in the province of Palawan, with more than 26,000 students and almost 1,000 faculty and staff members.</p>
+                <p>The Palawan State University, the first university in Region IV, has 19 campuses all over the province. The main campus situated in Tiniguiban, Puerto Princesa City, is sprawled on a 68-hectare site where the central administration and executive offices, undergraduate, and the Laboratory Junior and Senior High School are located. The Laboratory Elementary School, Graduate School, and the School of Law are housed in buildings at the Manalo Campus, Puerto Princesa City. The main campus has eight colleges (College of Arts and Humanities, College of Business and Accountancy, College of Engineering, Architecture and Technology, College of Hospitality Management and Tourism, College of Nursing and Health Sciences, College of Sciences, College of Teacher Education, and College of Criminal Justice Education) established to fulfill the university’s four-fold function of instruction, research, extension, and production.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'script/AboutUs.js' %}"></script> <!-- Include any necessary JavaScript -->
+</body>
+
+</html>

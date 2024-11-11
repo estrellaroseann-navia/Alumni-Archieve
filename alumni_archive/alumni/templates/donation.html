@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href=" {% static 'css/donation.css' %}"> 
+    <title>Donation Page</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}" class="active">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="{% static 'img/profile.png' %}" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="{% url 'userconfirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Donation Section -->
+    <section class="main-content">
+        <div class="donation-container">
+            <div class="donation-icon">
+                <i class="fas fa-donate fa-5x"></i> <!-- Donation Icon -->
+            </div>
+            <div class="donation-text">
+                <h2>Support the Future</h2>
+                <p>Your generous contribution supports the students' programs and improves campus facilities. Let's make a difference today!</p>
+                <p class="contact-info">Would you like to donate? Please contact <a href="mailto:alumniaffairs@gmail.com">alumniaffairs@gmail.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'script/donation.js'%}"></script> <!-- Include any necessary JavaScript -->
+</body>
+
+</html>

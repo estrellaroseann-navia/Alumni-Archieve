@@ -1,0 +1,127 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative; 
+}
+
+body::before {
+    content: ''; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('landing.jpg') no-repeat center center fixed; 
+    background-size: cover; 
+    filter: blur(5px);
+    z-index: -1; 
+}
+
+header {
+    background-color: rgba(248, 238, 223, 0.8); 
+    padding: 20px;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar-brand h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Main Content Styles */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Center Container for Content */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Toggle Panel Styles */
+.toggle-panel {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Take up more space on the screen */
+    max-width: 800px;
+}
+
+.toggle-panel h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.toggle-panel p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Button Styles */
+.get-started-btn {
+    display: inline-block;
+    background-color: #f07d3b;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: #f3b294;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    margin-top: auto;
+}

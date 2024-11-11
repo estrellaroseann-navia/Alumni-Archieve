@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="dashboard-header">
+        <nav class="dashboard-nav">
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'survey' %}"> Take Tracking Survey</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            </ul>
+            <div class="logo">
+                <img src="{% static 'img/logo.png' %}" alt="PalSU Logo" />
+            </div>
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="main-content">
+        <div class="tracking-container">
+            <h2>Alumni Tracking Survey</h2>
+            <p>Would you like to join our alumni tracking survey?</p>
+            <div class="checkbox-container">
+                <input type="checkbox" id="consentCheckbox">
+                <label for="consentCheckbox">I agree to participate in the survey</label>
+            </div>
+            <button id="proceedButton" class="submit-button" disabled>Proceed</button>
+        </div>
+    </section>
+
+    <script src="{% static 'script/script.js' %}"></script>
+</body>
+</html>
+

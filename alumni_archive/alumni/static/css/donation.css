@@ -1,0 +1,181 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+html, body {
+    height: 100%; /* Ensure the body takes full height */
+}
+
+body {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Navbar Styles */
+header {
+    background-color: #f8eedf; /* Navbar background */
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Full width for navbar container */
+}
+
+.navbar-brand {
+    flex: 1; /* Take space on the left */
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Center the links */
+.navbar-links {
+    flex: 1; /* Center the links */
+    text-align: center; /* Center align */
+}
+
+.navbar-links a {
+    margin: 0 15px;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b; /* Hover color */
+}
+
+/* Active link styling */
+.navbar-links a.active {
+    color: #f07d3b; /* Change text color to match your theme */
+    font-weight: bold; /* Make the active link bold */
+    border-bottom: 2px solid #f07d3b; /* Add an underline effect */
+}
+
+/* Profile Icon */
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative; /* Needed for dropdown positioning */
+}
+
+.navbar-profile span {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-profile img.avatar {
+    width: 30px; /* Set avatar width */
+    height: 30px; /* Set avatar height */
+    border-radius: 50%;
+    border: 2px solid #333; /* Border for avatar */
+    cursor: pointer; /* Pointer cursor for profile image */
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none; /* Initially hide the dropdown */
+    position: absolute; /* Position it below the avatar */
+    top: 40px; /* Adjust based on avatar height */
+    right: 0; /* Align to the right */
+    background-color: #f8eedf; /* Background color for dropdown */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    z-index: 1; /* Ensure dropdown is above other content */
+}
+
+.dropdown-content a {
+    display: flex; /* Align icon and text horizontally */
+    align-items: center; /* Vertically align icon and text */
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 16px;    /* Adjust icon size */
+}
+
+.dropdown-content a:hover {
+    background-color: #f07d3b; /* Hover effect */
+    color: white; /* Change text color on hover */
+}
+
+/* Show dropdown when toggled */
+.show {
+    display: block; /* Show dropdown */
+}
+
+/* Donation Section Styles */
+.donation-container {
+    display: flex;
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center; /* Center align the content */
+    padding: 40px; /* Padding for the donation section */
+    background-color: #f8eedf; /* Background color for the donation section */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    margin: 20px; /* Margin around the donation section */
+}
+
+.donation-icon {
+    margin-bottom: 20px; /* Space below the icon */
+}
+
+.donation-text h2 {
+    font-size: 1.5rem; /* Heading font size */
+    color: #333; /* Heading color */
+    margin-bottom: 10px; /* Space below heading */
+    text-align: center; /* Center align the heading */
+}
+
+.donation-text p {
+    font-size: 1rem; /* Paragraph font size */
+    color: #666; /* Paragraph color */
+    text-align: center; /* Center align the paragraph */
+}
+
+.contact-info {
+    margin-top: 15px; /* Space above contact info */
+    font-size: 0.9rem; /* Font size for contact info */
+}
+
+/* Links in Donation Section */
+.contact-info a {
+    color: #f07d3b; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.contact-info a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b; /* Footer background */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Push the footer to the bottom */
+}
