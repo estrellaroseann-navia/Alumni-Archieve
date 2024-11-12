@@ -61,31 +61,36 @@
      collegeSelect.innerHTML = '<option value="">Select College</option>';
      programSelect.innerHTML = '<option value="">Select Program</option>';
 
-     if (clusterValue === 'main-campus') {
+     if (clusterValue === 'main') {
          campusGroup.style.display = 'block';
          campusSelect.innerHTML += '<option value="main">Puerto Princesa City</option>';
          collegeGroup.style.display = 'block';
-         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering</option>';
+         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster1') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="campus1">vjosvjsdj 1</option><option value="campus2">Campus 2</option>';
+         campusSelect.innerHTML += '<option value="cluster1-campus1">ROXAS</option><option value="cluster1campus2">ARACELI</option><option value="cluster1campus3">DUMARAN</option><option value="clustercampus4">SAN VICENTE</option>';
          collegeGroup.style.display = 'block';
-         collegeSelect.innerHTML += '<option value="college1">College 1</option><option value="college2">College 2</option>';
+         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster2') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="campus3">Campus 3</option>';
+         campusSelect.innerHTML += '<option value="cluster2campus1">TAYTAY</option><option value="cluster2campus2">EL NIDO</option><option value="cluster2campus3">NILAPACAN</option><option value="cluster2campus4">TCORON</option>';
          collegeGroup.style.display = 'block';
-         collegeSelect.innerHTML += '<option value="college3">College 3</option>';
+         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster3') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="campus4">Campus 4</option>';
+         campusSelect.innerHTML += '<option value="cluster3campus1">NARRA</option><option value="cluster3campus2">QUEZON</option><option value="cluster3campus3">RIZAL</option>';
          collegeGroup.style.display = 'block';
-         collegeSelect.innerHTML += '<option value="college4">College 4</option>';
-     } else if (clusterValue === 'cluster4' || clusterValue === 'Cuyo') {
+         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
+     } else if (clusterValue === 'cluster4') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="campus4">Campus 4</option>';
+         campusSelect.innerHTML += '<option value="cluster4campus1">ESPANOLA</option><option value="cluster4campus2">BROOKES POINT</option><option value="cluster4campus3">ESPANOLA</option><option value="cluster4campus4">BATARAZA</option>';
          collegeGroup.style.display = 'block';
-         collegeSelect.innerHTML += '<option value="college4">College 4</option>';
+         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
+     } else if (clusterValue === 'cuyo') {
+        campusGroup.style.display = 'block';
+         campusSelect.innerHTML += '<option value="cuyocampus1">CUYO</option>';
+         collegeGroup.style.display = 'block';
+         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      }
  }
 
@@ -106,19 +111,28 @@
          programSelect.innerHTML += '<option value="bio">Bachelor of Science in Biology</option><option value="marbio">Bachelor of Science in Marine Biology</option><option value="comsci">Bachelor of Science in Computer Science</option><option value="envisci">Bachelor of Science in Environmental Science</option><option value="it">Bachelor of Science in Information Technology</option>';
      } else if (collegeValue === 'ceat') {
          programGroup.style.display = 'block';
-         programSelect.innerHTML += '<option value="archi">Bachelor of Science in Architecture</option><option value="civil">Bachelor of Science in Civil Engineering</option>';
-     } else if (collegeValue === 'college1') {
+         programSelect.innerHTML += '<option value="archi">Bachelor of Science in Architecture</option><option value="civil">Bachelor of Science in Civil Engineering</option><option value="elect">Bachelor of Science in Electrical Engineering</option><option value="peteng">Bachelor of Science in Petroleum Engineering</option>';
+     } else if (collegeValue === 'cah') {
          programGroup.style.display = 'block';
-         programSelect.innerHTML += '<option value="program5">Program 5</option><option value="program6">Program 6</option>';
-     } else if (collegeValue === 'college2') {
+         programSelect.innerHTML += '<option value="com">Bachelor of Arts in Communication</option><option value="polsci">Bachelor of Arts in Political Science</option><option value="solwork">Bachelor of Arts in Social Work</option><option value="psych">Bachelor of Arts in Psychology </option>';
+     } else if (collegeValue === 'cba') {
          programGroup.style.display = 'block';
-         programSelect.innerHTML += '<option value="program7">Program 7</option><option value="program8">Program 8</option>';
-     } else if (collegeValue === 'college3') {
+         programSelect.innerHTML += '<option value="accountancy">Bachelor of Science in Accountancy</option><option value="manaccount">Bachelor of Science in Management Accounting</option><option value="bus-add">Bachelor of Science in Business Administration</option><option value="entrep">Bachelor of Science in Entreprenuership</option><option value="fm">Bachelor of Science in Financial Management</option>';
+     } else if (collegeValue === 'ccje') {
          programGroup.style.display = 'block';
-         programSelect.innerHTML += '<option value="program9">Program 9</option><option value="program10">Program 10</option>';
-     } else if (collegeValue === 'college4') {
+         programSelect.innerHTML += '<option value="crim">Bachelor of Science in Crinimology</option><option value="program10">Program 10</option>';
+     } else if (collegeValue === 'cte') {
          programGroup.style.display = 'block';
-         programSelect.innerHTML += '<option value="program11">Program 11</option><option value="program12">Program 12</option>';
+         programSelect.innerHTML += '<option value="bee">Bachelor of Elementary Education</option><option value="bse">Bachelor of Secondary Education</option><option value="bpe">Bachelor of Physical Education</option>';
+     } else if (collegeValue === 'cnhs') {
+        programGroup.style.display = 'block';
+        programSelect.innerHTML += '<option value="bsn">Bachelor of Science in Nursing</option><option value="bsm">Bachelor of Science in Midwifery</option><option value="diploma">Diploma in Midwifery</option>';
+     } else if (collegeValue === 'chtm') {
+        programGroup.style.display = 'block';
+        programSelect.innerHTML += '<option value="hm">Bachelor of Science in Hositality Management</option><option value="btm">Bachelor of Science in Tourism Management</option><option value="diploma">Diploma in Midwifery</option>';
+     } else if (collegeValue === 'graduate-school') {
+        programGroup.style.display = 'block';
+        programSelect.innerHTML += '<option value="de">Doctor of Education</option><option value="msa">Master of Business Administration</option><option value="mst">Master of Science in Technopreneurship</option><option value="mat">Master of Arts in Teaching</option><option value="msem">Master of Science in Environmental Management</option><option value="mpa">Master in Public Administration</option><option value="msn">Master of Science in Nursing</option>';
      }
  });
 
