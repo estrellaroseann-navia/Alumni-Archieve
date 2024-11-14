@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 6</title>
+    <link rel="stylesheet" href="css/Survey6.2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="questionnaire-form">
+            <div class="question">
+                <p><strong>What made you pursue advanced studies?</strong></p>
+                <div class="checkbox">
+                    <input type="checkbox" id="promotion" name="reason" value="promotion">
+                    <label for="promotion">For promotion</label><br>
+                    <input type="checkbox" id="professional-development" name="reason" value="professional-development">
+                    <label for="professional-development">For professional development</label><br>
+                    <input type="checkbox" id="others" name="reason" value="others">
+                    <label for="others">Others, please specify</label>
+                    <input type="text" id="other-reason" name="other-reason" class="others-input">
+                </div>
+            </div>
+            <div class="question">
+                <p><strong>EMPLOYMENT DATA</strong></p>
+                <p><strong>Are you presently employed?</strong></p>
+                <div class="checkbox">
+                    <input type="checkbox" id="yes" name="employment" value="yes">
+                    <label for="yes">Yes</label><br>
+                    <input type="checkbox" id="no" name="employment" value="no">
+                    <label for="no">No</label><br>
+                    <input type="checkbox" id="never-employed" name="employment" value="never-employed">
+                    <label for="never-employed">Never Employed</label>
+                    <p>If NO or NEVER BEEN EMPLOYED, Proceed to Next Page</p>
+                    <p>If Yes, proceed to Skip Question</p>
+                </div>
+            </div>
+                <!-- Buttons Inside the Form Container -->
+                <div class="buttoncon">
+                    <button class="custom-button" type="button" onclick="location.href='page4.html'">Previous Page</button>
+                <button class="custom-button" type="button" onclick="location.href='page6.html'">Next Page</button>
+                <button class="custom-button" type="button" onclick="location.href='page6p2.html'">Skip Question</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Function to toggle the dropdown menu
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdown-menu');
+            dropdownContent.classList.toggle('show');
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            const dropdownContent = document.getElementById('dropdown-menu');
+            const profile = document.getElementById('profile');
+            if (!profile.contains(event.target)) {
+                dropdownContent.classList.remove('show');
+            }
+        }
+
+        // Attach the click event to the profile avatar
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileAvatar = document.getElementById('navbarProfileImg');
+            profileAvatar.addEventListener('click', toggleDropdown);
+
+            // Handle button actions for navigation
+            const prevButton = document.querySelector('.buttoncon .custom-button:nth-child(1)');
+            const nextButton = document.querySelector('.buttoncon .custom-button:nth-child(2)');
+            const skipButton = document.querySelector('.buttoncon .custom-button:nth-child(3)');
+
+            prevButton.addEventListener('click', function () {
+                saveSurveyData();  // Save data before navigating
+                location.href = 'page4.html'; // Navigate to the previous page
+            });
+
+            nextButton.addEventListener('click', function () {
+                saveSurveyData();  // Save data before navigating
+                location.href = 'page6.html'; // Navigate to the next page
+            });
+
+            skipButton.addEventListener('click', function () {
+                saveSurveyData();  // Save data before skipping
+                location.href = 'page6p2.html'; // Skip question and navigate to the next page
+            });
+
+            // Load saved data from localStorage when the page loads
+            loadSurveyData();
+        });
+
+        // Function to save survey data
+        function saveSurveyData() {
+            const surveyData = {
+                reasons: [],
+                employmentStatus: ''
+            };
+
+            // Store checkbox values for reasons
+            const reasonCheckboxes = document.querySelectorAll('input[name="reason"]');
+            reasonCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    surveyData.reasons.push(checkbox.value);
+                }
+            });
+
+            // Store the value of the 'Others' input
+            const otherReasonInput = document.getElementById('other-reason');
+            surveyData.otherReason = otherReasonInput.value;
+
+            // Store employment data
+            const employmentCheckboxes = document.querySelectorAll('input[name="employment"]');
+            employmentCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    surveyData.employmentStatus = checkbox.value;
+                }
+            });
+
+            // Save data to localStorage
+            localStorage.setItem('surveyPage5Data', JSON.stringify(surveyData));
+        }
+
+        // Function to load survey data
+        function loadSurveyData() {
+            const savedData = JSON.parse(localStorage.getItem('surveyPage5Data'));
+
+            if (savedData) {
+                // Load reason checkbox values
+                const reasonCheckboxes = document.querySelectorAll('input[name="reason"]');
+                reasonCheckboxes.forEach((checkbox) => {
+                    checkbox.checked = savedData.reasons.includes(checkbox.value);
+                });
+
+                // Load 'Others' input value
+                const otherReasonInput = document.getElementById('other-reason');
+                otherReasonInput.value = savedData.otherReason || '';
+
+                // Load employment status checkbox values
+                const employmentCheckboxes = document.querySelectorAll('input[name="employment"]');
+                employmentCheckboxes.forEach((checkbox) => {
+                    checkbox.checked = checkbox.value === savedData.employmentStatus;
+                });
+            }
+        }
+
+    </script>
+</body>
+</html>
