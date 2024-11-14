@@ -128,12 +128,12 @@
     </footer>
 
     <script>
-        // Access DOM elements
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirm-password');
         const checkbox = document.getElementById('terms-accepted');
         const submitBtn = document.getElementById('submit-btn');
+        // Cluster
         const clusterSelect = document.getElementById('cluster');
         const campusSelect = document.getElementById('campus');
         const collegeSelect = document.getElementById('college');
@@ -194,12 +194,12 @@
             if (clusterValue === 'main') {
                 campusGroup.style.display = 'block';
                 collegeGroup.style.display = 'block';
-                campusSelect.innerHTML += '<option value="main">Puerto Princesa City</option>';
+                campusSelect.innerHTML += '<option value="maincampus">Puerto Princesa City</option>';
                 collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
             } else if (clusterValue === 'cluster1') {
                 campusGroup.style.display = 'block';
                 collegeGroup.style.display = 'block';
-                campusSelect.innerHTML += '<option value="cluster1-campus1">ROXAS</option><option value="cluster1campus2">ARACELI</option><option value="cluster1campus3">DUMARAN</option><option value="clustercampus4">SAN VICENTE</option>';
+                campusSelect.innerHTML += '<option value="cluster1campus1">ROXAS</option><option value="cluster1campus2">ARACELI</option><option value="cluster1campus3">DUMARAN</option><option value="clustercampus4">SAN VICENTE</option>';
                 collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
             } else if (clusterValue === 'cluster2') {
                 campusGroup.style.display = 'block';
@@ -225,10 +225,11 @@
         }
        
         // Cluster change listener to populate campus, college, and program
-        clusterSelect.addEventListener('change', function() {
-            const clusterValue = clusterSelect.value;
-            updateOptions(clusterValue);
+        document.getElementById('clusterSelect').addEventListener('change', function() {
+        const clusterValue = this.value;
+        updateOptions(clusterValue);
         });
+
        
         // College change listener to update program options
         collegeSelect.addEventListener('change', function() {

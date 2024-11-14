@@ -65,12 +65,6 @@ header {
     color: #f07d3b; /* Hover color */
 }
 
-.navbar-links a.active {
-    color: #f07d3b; /* Change text color to match your theme */
-    font-weight: bold; /* Make the active link bold */
-    border-bottom: 2px solid #f07d3b; /* Add an underline effect */
-}
-
 /* Profile Icon */
 .navbar-profile {
     display: flex;
@@ -90,6 +84,12 @@ header {
     border-radius: 50%;
     border: 2px solid #333; /* Border for avatar */
     cursor: pointer; /* Pointer cursor for profile image */
+}
+
+.navbar-links a.active {
+    color: #f07d3b;
+    font-weight: bold; 
+    border-bottom: 2px solid #f07d3b; 
 }
 
 /* Dropdown Menu */
@@ -135,10 +135,6 @@ header {
     background-color: #f8eedf; /* Optional: Background color for separation */
     border-radius: 8px; /* Optional: Rounded corners */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
-}
-
-.slideshow-container {
-    margin-top: 20px; /* Add margin-top to separate from header */
 }
 
 .slide {
@@ -189,15 +185,46 @@ header {
     margin-left: auto; /* Center the container */
     margin-right: auto; /* Center the container */
 }
-.announcement p{
-    text-align: center;
+
+.announcement p {
+    text-align: center; /* Center the announcement text */
 }
+
 .announcement {
     background-color: #ffffff; /* White background for individual announcements */
     border-radius: 5px; /* Rounded corners for announcements */
     padding: 10px; /* Padding inside the announcement */
     margin-bottom: 10px; /* Space between announcements */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+    text-align: center; /* Center-align the content inside the announcement */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; /* Center the content horizontally */
+}
+
+/* Edit Button Styles */
+.edit-btn {
+    background-color: #f07d3b; /* Matches the accent color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text and icon */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 10px; /* Add space between the announcement text and the button */
+}
+
+.edit-btn i {
+    margin-right: 5px; /* Space between the icon and text */
+    font-size: 1rem;
+}
+
+.edit-btn:hover {
+    background-color: #d45e24; /* Darker shade for hover effect */
 }
 
 /* Main Content Styles */
@@ -259,6 +286,15 @@ header {
     border-top: 1px solid #ccc;
     margin-top: 10px;
 }
+
+a {
+    text-decoration: none;
+}
+
+.edit-btn {
+    margin-left: auto; /* Push the edit button to the right */
+}
+
 
 /* Footer Styles */
 footer {

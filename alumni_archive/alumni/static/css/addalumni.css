@@ -1,0 +1,167 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #f8eedf;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.navbar-links a {
+    margin: 0 15px;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative; /* Needed for dropdown positioning */
+}
+
+.navbar-profile span {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-profile img.avatar {
+    width: 30px; /* Set avatar width */
+    height: 30px; /* Set avatar height */
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer; /* Add pointer cursor for the profile image */
+}
+/* Dropdown Menu */
+.dropdown-content {
+    display: none; /* Initially hide the dropdown */
+    position: absolute; /* Position it below the avatar */
+    top: 40px; /* Adjust based on avatar height */
+    right: 0; /* Align to the right */
+    background-color: #f8eedf; /* Background color for dropdown */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    z-index: 1; /* Ensure dropdown is above other content */
+}
+
+.dropdown-content a {
+    display: flex; /* Align icon and text horizontally */
+    align-items: center; /* Vertically align icon and text */
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 16px;    /* Adjust icon size */
+}
+
+.dropdown-content a:hover {
+    background-color: #f07d3b; /* Hover effect */
+    color: white; /* Change text color on hover */
+}
+
+/* Show dropdown when toggled */
+.show {
+    display: block; /* Show dropdown */
+}
+/* Main Content Styles */
+main {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #f07d3b;
+    text-align: center;
+}
+
+/* Container Styles */
+.container {
+    max-width: 600px; /* Set a max width for the container */
+    margin: 20px auto; /* Center the container */
+    padding: 20px; /* Add padding inside the container */
+    border-radius: 10px; /* Round the corners */
+    background-color: #ffffff; /* White background for the form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 15px; /* Spacing between form fields */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="file"] {
+    width: 100%; /* Full width input */
+    padding: 10px;
+    border: 1px solid #ddd; /* Border style */
+    border-radius: 5px; /* Rounded corners */
+}
+.required {
+    color: red; /* Change the color to red */
+}
+
+
+.submit-btn {
+    padding: 10px 20px;
+    background-color: #f07d3b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%; /* Full width button */
+}
+
+.submit-btn:hover {
+    background-color: #f3b294;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f07d3b;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

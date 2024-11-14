@@ -45,14 +45,62 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+# def homepage_view(request):
+#     alumni_id = request.session.get('alumni_id')
+#     if not alumni_id:
+#         # Redirect to login or handle the case when alumni_id is missing
+#         return redirect('login')  # or an appropriate URL name
+
 def homepage_view(request):
-    alumni_id = request.session.get('alumni_id')
-    if not alumni_id:
-        # Redirect to login or handle the case when alumni_id is missing
-        return redirect('login')  # or an appropriate URL name
+    return render(request, 'homepage.html' )
 
 def forgotpassword_view(request):
-    return render(request, 'forgotpassword.html') 
+    return render(request, 'forgotpassword.html' ) 
+
+def about_view(request):
+    return render(request, 'about.html' )
+
+def contact_view(request):
+    return render(request, 'contact.html' )
+
+def donation_view(request):
+    return render(request, 'donation.html' )
+
+# admin pages
 
 def adminlogin_view(request):
     return render(request, 'adminlogin.html' )
+
+def adminhomepage_view (request):
+    return render(request, 'adminhomepage.html' )
+
+def addalumni_view(request):
+    return render(request, 'addalumni.html' )
+
+def services_view(request):
+    return render(request, 'service.html' )
+
+# alumni pages
+
+def confirmlogout_view(request):
+    return render(request, 'confirmlogout.html' )
+
+# survey
+
+def survey_view(request):
+    return render(request, 'survey.html' )
+
+def page1_view(request):
+    return render(request, 'page1.html' )
+
+def page2_view(request):
+    return render(request, 'page2.html' )
+
+def page3_view(request):
+    return render(request, 'page3.html' )
+
+def page4_view(request):
+    return render(request, 'page4.html' )
+
+def page5_view(request):
+    return render(request, 'page5.html' )

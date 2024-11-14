@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/addalumni.css' %}"> <!-- Use the same CSS file for consistent style -->
+    <title>Home Page</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'adminhomepage' %}">Home</a>
+                    <a href="{% url 'service' %}" class="active">Alumni Search</a>
+                    <a href="{% url 'addalumni' %}">Add Alumni</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Add New Alumni</h2>
+        <div class="container">
+            <form id="alumni-form">
+                <div class="form-group">
+                    <label for="photo">Photo <span class="required">*</span></label>
+                    <input type="file" id="photo" name="photo" required>
+                </div>
+                <div class="form-group">
+                    <label for="first-name">First Name <span class="required">*</span><label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date & Place of Birth <span class="required">*</span></label>
+                    <input type="text" id="dob" name="dob" placeholder="e.g. 12/31/1987, Manila" required>
+                </div>
+                <div class="form-group">
+                    <label for="college">College <span class="required">*</span></label>
+                    <input type="text" id="college" name="college" required>
+                </div>
+                <div class="form-group">
+                    <label for="program">Program <span class="required">*</span></label>
+                    <input type="text" id="program" name="program" required>
+                </div>
+                <div class="form-group">
+                    <label for="year-graduated">Year Graduated <span class="required">*</span></label>
+                    <input type="number" id="year-graduated" name="year-graduated" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address <span class="required">*</span></label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Alumni Archive. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("alumni-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Handle the form data
+            const formData = new FormData(this);
+            
+            // Example: Log the form data to the console
+            for (const [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+
+            alert("New alumni added successfully!"); // Show a success message
+
+            // Reset the form
+            this.reset();
+        });
+
+        // Dropdown functionality for the profile
+        const profile = document.getElementById("profile");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+
+        profile.addEventListener("click", function() {
+            dropdownMenu.classList.toggle("show");
+        });
+
+        // Close the dropdown if the user clicks outside of it
+        window.addEventListener("click", function(event) {
+            if (!profile.contains(event.target)) {
+                dropdownMenu.classList.remove("show");
+            }
+        });
+
+    </script>
+</body>
+</html>

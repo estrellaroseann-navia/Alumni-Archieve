@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 3</title>
+    <link rel="stylesheet" href="{% static 'css/page3.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="HomePage.html"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="surveyForm">
+            <h2>Alumni Survey Form</h2>
+            <h3>Reason(s) for taking the course(s) or pursuing degree(s). You may check more than one answer.</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factors</th>
+                        <th>Undergraduate/AB/BS</th>
+                        <th>Graduate/MS/MA/PhD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows with checkboxes -->
+                    <tr>
+                        <td>High grades in the course or subject area(s) related to the course</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    <tr>
+                        <td>Good grades in high school</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Influence of parents or relatives</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Peer Influence</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Inspired by a role model</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Strong passion for the profession</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Prospect for immediate employment</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Status or prestige of the profession</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Availability of course offering in chosen institution</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Prospect of career advancement</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Affordable for the family</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Prospect of attractive compensation package</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>Opportunity for employment abroad</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>No particular choice or no better idea</td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                        <td class="checkbox"><input type="checkbox"></td>
+                    </tr>
+                        <td>Others, please specify</td>
+                        <td colspan="2">
+                            <input type="text" name="Others" required class="others-input">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Buttons inside the form container, centered -->
+            <div class="buttoncon">
+                <button class="custom-button" onclick="location.href='page2.html'">Previous Page</button>
+                <button class="custom-button" onclick="location.href='page4.html'">Next Page</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to toggle the dropdown menu and handle page interactions
+        document.addEventListener('DOMContentLoaded', function () {
+            const profile = document.getElementById('profile');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const othersInput = document.querySelector('input[name="Others"]'); // Ensure the correct input name
+
+            // Toggle the dropdown menu when the profile icon is clicked
+            profile.addEventListener('click', function () {
+                dropdownMenu.classList.toggle('show');
+            });
+
+            // Close the dropdown if the user clicks outside
+            window.addEventListener('click', function (event) {
+                if (!profile.contains(event.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Load saved data from localStorage when the page loads
+            loadSurveyData();
+
+            // Button handling for navigation
+            const previousButton = document.querySelector('.buttoncon .custom-button:nth-child(1)');
+            const nextButton = document.querySelector('.buttoncon .custom-button:nth-child(2)');
+
+            previousButton.addEventListener('click', function () {
+                saveSurveyData();  // Save data before navigating
+                window.location.href = 'page2.html';  // Redirect to Survey2.html
+            });
+
+            nextButton.addEventListener('click', function () {
+                saveSurveyData();  // Save data before navigating
+                window.location.href = 'page4.html';  // Redirect to Survey4.html
+            });
+
+            // Function to save survey data
+            function saveSurveyData() {
+                const surveyData = {};
+
+                // Store checkbox values
+                checkboxes.forEach((checkbox, index) => {
+                    surveyData[`checkbox${index}`] = checkbox.checked;
+                });
+
+                // Store the value of the 'Others' input
+                surveyData.others = othersInput.value;
+
+                // Save data to localStorage
+                localStorage.setItem('surveyPage3Data', JSON.stringify(surveyData));
+            }
+
+            // Function to load survey data
+            function loadSurveyData() {
+                const savedData = JSON.parse(localStorage.getItem('surveyPage3Data'));
+
+                if (savedData) {
+                    // Load checkbox values
+                    checkboxes.forEach((checkbox, index) => {
+                        checkbox.checked = savedData[`checkbox${index}`] || false;
+                    });
+
+                    // Load 'Others' input value
+                    othersInput.value = savedData.others || '';
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alumni Survey Form</title>
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/survey.css' %}"> <!-- Link to the same CSS for consistent style -->
+    <title>Tracking Page</title>
 </head>
+
 <body>
-    <header class="dashboard-header">
-        <nav class="dashboard-nav">
-            <ul>
-                <li><a href="{% url 'homepage' %}">Home</a></li>
-                <li><a href="{% url 'survey' %}"> Take Tracking Survey</a></li>
-                <li><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'contact' %}">Contact Us</a></li>
-            </ul>
-            <div class="logo">
-                <img src="{% static 'img/logo.png' %}" alt="PalSU Logo" />
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-        </nav>
+        </div>
     </header>
 
+    <!-- Tracking Information Section -->
     <section class="main-content">
         <div class="tracking-container">
             <h2>Alumni Tracking Survey</h2>
@@ -39,7 +55,56 @@
         </div>
     </section>
 
-    <script src="{% static 'script/script.js' %}"></script>
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dropdown menu functionality
+        const profile = document.getElementById('profile');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        // Toggle visibility of dropdown on profile click
+        profile.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Close dropdown if clicked outside
+        window.addEventListener('click', function (event) {
+            if (!profile.contains(event.target)) {
+                dropdownMenu.classList.remove('show'); // Hide dropdown
+            }
+        });
+
+        // Enable/disable the Proceed button based on checkbox state
+        document.addEventListener('DOMContentLoaded', function() {
+            const consentCheckbox = document.getElementById('consentCheckbox');
+            const proceedButton = document.getElementById('proceedButton');
+
+            // Load saved checkbox state from local storage
+            loadCheckboxState();
+
+            consentCheckbox.addEventListener('change', function() {
+                proceedButton.disabled = !this.checked; // Enable button if checked, disable if not
+                // Save the checkbox state to local storage whenever it changes
+                localStorage.setItem('consentCheckboxState', this.checked);
+            });
+
+            // Optional: Redirect on button click (you can change the URL)
+            proceedButton.addEventListener('click', function() {
+                window.location.href = 'page1.html'; // Next page
+            });
+
+            // Function to load checkbox state from local storage
+            function loadCheckboxState() {
+                const savedState = localStorage.getItem('consentCheckboxState');
+                if (savedState !== null) {
+                    consentCheckbox.checked = (savedState === 'true'); // Convert string back to boolean
+                    proceedButton.disabled = !consentCheckbox.checked; // Update button state
+                }
+            }
+        });
+
+    </script>
 </body>
 </html>
-

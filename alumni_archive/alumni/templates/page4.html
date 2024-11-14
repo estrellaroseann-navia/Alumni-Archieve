@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 4</title>
+    <link rel="stylesheet" href="{% static 'css/page4.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="surveyForm">
+            <h2>Alumni Survey Form</h2>
+            <form id="train-form">
+            <h3>Please list down all professional or work-related training program(s) including advance studies youhave attended after college.</h3>
+                <table>
+                    <tr>
+                        <th>Title of Training of Advance Study</th>
+                        <th>Duration and Credits Earned</th>
+                        <th>Name of Training Institution/College/University</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="title" required></td>
+                        <td><input type="text" type="number" name="duration" required></td>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="title" required></td>
+                        <td><input type="text" type="number" name="duration" required></td>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="title" required></td>
+                        <td><input type="text" type="number" name="duration" required></td>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="buttoncon">
+            <button class="custom-button" onclick="location.href='Survey3.html'">Previous Page</button>
+            <button class="custom-button" onclick="location.href='page5.html'">Next Page</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script>
+                document.addEventListener('DOMContentLoaded', () => {
+            // Dropdown menu functionality for the profile section
+            const profile = document.getElementById('profile');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const navbarProfileImg = document.getElementById('navbarProfileImg');
+
+            // Toggle dropdown on click
+            navbarProfileImg.addEventListener('click', () => {
+                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+            });
+
+            // Close dropdown when clicking outside of the profile section
+            window.addEventListener('click', (event) => {
+                if (!profile.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+
+            // Responsive behavior for Previous and Next buttons
+            const prevButton = document.querySelector(".custom-button:nth-child(1)");
+            const nextButton = document.querySelector(".custom-button:nth-child(2)");
+
+            prevButton.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default action to handle it with JS
+                saveSurveyData(); // Save data before navigating
+                window.location.href = 'page3.html'; // Redirect to Survey3.html
+            });
+
+            nextButton.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default action to handle it with JS
+                saveSurveyData(); // Save data before navigating
+                window.location.href = 'page5.html'; // Redirect to Survey5.html
+            });
+
+            // Survey form handling
+            const othersInput = document.querySelector('input[name="otherSkillsText"]'); // Ensure the correct input name
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            // Load saved data from localStorage when the page loads
+            loadSurveyData();
+
+            // Function to save survey data
+            function saveSurveyData() {
+                const surveyData = {};
+
+                // Store checkbox values
+                checkboxes.forEach((checkbox, index) => {
+                    surveyData[`checkbox${index}`] = checkbox.checked;
+                });
+
+                // Store the value of the 'Others' input
+                surveyData.others = othersInput.value;
+
+                // Save data to localStorage
+                localStorage.setItem('surveyPage4Data', JSON.stringify(surveyData));
+            }
+
+            // Function to load survey data
+            function loadSurveyData() {
+                const savedData = JSON.parse(localStorage.getItem('surveyPage4Data'));
+
+                if (savedData) {
+                    // Load checkbox values
+                    checkboxes.forEach((checkbox, index) => {
+                        checkbox.checked = savedData[`checkbox${index}`] || false;
+                    });
+
+                    // Load 'Others' input value
+                    othersInput.value = savedData.others || '';
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

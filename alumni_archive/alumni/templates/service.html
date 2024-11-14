@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Service Page</title>
+    <link rel="stylesheet" href="{% static 'css/service.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="#">Admin Panel</a>
+        </div>
+        <ul class="navbar-links">
+            <a href="{% url 'adminhomepage' %}">Home</a>
+            <a href="{% url 'service' %}">Alumni Search</a>
+            <a href="{% url 'addalumni' %}" class="active">Add Alumni</a>
+        </ul>
+        <div class="navbar-profile">
+            <img src="profile.png" alt="Profile Icon" class="profile-icon" onclick="toggleProfileDropdown()">
+            <!-- Profile Dropdown Menu -->
+            <div id="profile-dropdown" class="profile-dropdown">
+                <ul>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the Admin Service Page</h1>
+
+        <!-- Dropdown Forms -->
+        <div class="form-row"> <!-- First Row -->
+            <div class="form-group">
+                <label for="cluster">Cluster</label>
+                <select id="cluster" name="cluster" onchange="updateCampuses()">
+                    <option value="" disabled selected>Select a Cluster</option>
+                    <option value="Main">Main Campus</option>
+                    <option value="Cluster 1">Cluster 1</option>
+                    <option value="Cluster 2">Cluster 2</option>
+                    <option value="Cluster 3">Cluster 3</option>
+                    <option value="Cluster 4">Cluster 4</option>
+                    <option value="PCAT Cuyo">PCAT Cuyo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="campuses">Campuses</label>
+                <select id="campuses" name="campuses">
+                    <option value="" disabled selected>Select a Campus</option>
+                    <!-- Options will be dynamically populated based on selected cluster -->
+                </select>
+            </div>
+        </div> <!-- End of First Row -->
+
+        <div class="form-row"> <!-- Second Row -->
+            <div class="form-group">
+                <label for="college">College</label>
+                <select id="college" name="college" onchange="updatePrograms()">
+                    <option value="" disabled selected>Select a College</option>
+                    <option value="College of Science">College of Science</option>
+                    <option value="College of Engineering Architecture and Technology">College of Engineering Architecture and Technology</option>
+                    <option value="College of Arts and Humanities">College of Arts and Humanities</option>
+                    <option value="College of Business and Accountancy">College of Business and Accountancy</option>
+                    <option value="College of Criminal Justice Education">College of Criminal Justice Education</option>
+                    <option value="College of Teacher Education">College of Teacher Education</option>
+                    <option value="College of Nursing and Health Sciences">College of Nursing and Health Sciences</option>
+                    <option value="College of Hospitality Management and Tourism">College of Hospitality Management and Tourism</option>
+                    <option value="Graduate School">PSU - Graduate School</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="program">Program</label>
+                <select id="program" name="program">
+                    <option value="" disabled selected>Select a Program</option>
+                    <!-- Options will be dynamically populated based on selected college -->
+                </select>
+            </div>
+        </div> <!-- End of Second Row -->
+
+        <div class="form-row"> <!-- Third Row -->
+            <div class="form-group">
+                <label for="batch">Batch (Year)</label>
+                <select id="batch" name="batch">
+                    <option value="" disabled selected>Select a Batch</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+        </div> <!-- End of Third Row -->
+
+        <!-- SEARCH Button -->
+        <div class="search-container">
+            <button id="search-btn" class="search-button">SEARCH</button>
+        </div>
+    </div> <!-- End of Content -->
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Alumni Archive. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="{% static 'script/service.js' %}"></script>
+</body>
+</html>

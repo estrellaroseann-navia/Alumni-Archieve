@@ -1,0 +1,161 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Ensure the footer stays at the bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Make body fill the full height */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #f8eedf;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo a {
+    font-size: 1.8rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    list-style-type: none;
+}
+
+.navbar-links li {
+    margin: 0 15px;
+}
+
+.navbar-links a {
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative; /* Needed for dropdown positioning */
+}
+
+.navbar-profile img.profile-icon {
+    width: 30px; /* Set avatar width */
+    height: 30px; /* Set avatar height */
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer; /* Add pointer cursor for the profile image */
+}
+
+/* Profile Dropdown Menu */
+.profile-dropdown {
+    display: none; /* Initially hide the dropdown */
+    position: absolute; /* Position it below the avatar */
+    top: 40px; /* Adjust based on avatar height */
+    right: 0; /* Align to the right */
+    background-color: #f8eedf; /* Background color for dropdown */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    z-index: 1; /* Ensure dropdown is above other content */
+}
+
+.profile-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f07d3b; /* Hover effect */
+    color: white; /* Change text color on hover */
+}
+
+/* Show dropdown when toggled */
+.show {
+    display: block; /* Show dropdown */
+}
+
+/* Main Content Styles */
+.content {
+    flex: 1; /* Allow content to grow and take up remaining space */
+    padding: 20px; /* Add padding to the content */
+}
+
+h1 {
+    font-size: 2rem;
+    color: #f07d3b;
+    text-align: center;
+    margin: 20px;
+}
+
+/* Container Styles */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Spacing between rows */
+}
+
+.form-group {
+    flex: 1; /* Allow form groups to take equal space */
+    margin: 0 10px; /* Margin between form groups */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%; /* Full width input */
+    padding: 10px;
+    border: 1px solid #ddd; /* Border style */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.search-container {
+    text-align: center;
+    margin-top: 20px; /* Spacing above search button */
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #f07d3b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%; /* Full width button */
+}
+
+.search-button:hover {
+    background-color: #f3b294;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f07d3b;
+    color: white;
+    position: relative;
+    width: 100%;
+}
