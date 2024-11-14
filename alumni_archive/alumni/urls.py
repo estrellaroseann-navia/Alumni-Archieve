@@ -13,6 +13,11 @@ urlpatterns = [
 
     path('confirmlogout/', views.confirmlogout_view, name='confirmlogout'),
 
+    # alumni
+    path('alumniprofile/', views.alumniprofile_view, name='alumniprofile'),
+    path('alumniprofile/edit-alumniprofile.html/', views.editalumniprofile_view, name='editalumniprofile'),
+
+    # admin
     path('adminhomepage/', views.adminhomepage_view, name='adminhomepage'),
     path('addalumni/', views.addalumni_view, name='addalumni'),
     path('service/', views.services_view, name='service'),
@@ -27,6 +32,7 @@ urlpatterns = [
     path('survey/page3.html', views.page3_view, name='page3'),
     path('survey/page4.html', views.page4_view, name='page4'),
     path('survey/page5.html', views.page5_view, name='page5'),
+    path('survey/page6.2.html', views.page6_2_view, name='page6.2'),
     path('survey/page6.2.html', views.page6_2_view, name='page6.2'),
     path('survey/page6.html', views.page6_view, name='page6'),
     path('survey/page7.html', views.page7_view, name='page7'),

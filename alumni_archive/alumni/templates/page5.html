@@ -25,7 +25,7 @@
                     <a href="{% url 'donation' %}">Donate</a>
                 </nav>
                 <div class="navbar-profile" id="profile">
-                    <span id="navbarUserName">USER</span>
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
                     <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
