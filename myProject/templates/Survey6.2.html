@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 6</title>
+    <link rel="stylesheet" href="css/Survey6.2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="AboutUs.html">About Us</a>
+                    <a href="ContactPage.html">Contact Us</a>
+                    <a href="DonationPage.html">Donation</a>
+                    <a href="SurveyPage.html" class="active">Take Tracking Survey</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Alumni Survey Form</h1>
+        <form id="employmentStatusForm">
+            <div class="form-column">
+                <h4>Present Employment Status</h4>
+
+                <label for="regular">Regular or Permanent</label>
+                <input type="checkbox" id="regular" name="employmentStatus" value="regular">
+
+                <label for="contractual">Contractual</label>
+                <input type="checkbox" id="contractual" name="employmentStatus" value="contractual">
+
+                <label for="temporary">Temporary</label>
+                <input type="checkbox" id="temporary" name="employmentStatus" value="temporary">
+
+                <label for="selfEmployed">Self-employed</label>
+                <input type="checkbox" id="selfEmployed" name="employmentStatus" value="selfEmployed">
+
+                <label for="casual">Casual</label>
+                <input type="checkbox" id="casual" name="employmentStatus" value="casual">
+
+                <h4>If self-employed, what skills acquired in college were you able to apply in your work?</h4>
+                <input type="text" id="skills" name="skills" required>
+
+                <h4>Present occupation (Ex. Grade School Teacher, Electrical Engineer, Self-employed)</h4>
+                <input type="text" id="occupation" name="occupation" required>
+
+                <!-- Buttons Inside the Form Container -->
+                <div class="buttoncon">
+                    <button class="custom-button" type="button" onclick="history.back()">Previous Page</button>
+                    <button class="custom-button" type="submit" onclick="location.href='survey7.html'">Next Page</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <p id="responseMessage"></p>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Palawan State University Alumni Archive. All rights reserved.</p>
+    </footer>
+
+    <script src="js/Survey6.2.js"></script>
+</body>
+</html>
