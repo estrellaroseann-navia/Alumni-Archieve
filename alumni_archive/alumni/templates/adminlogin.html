@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{% static 'css/adminlogin.css' %}"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <main>
+        <div class="container" id="container">
+            <div class="form-container sign-in">
+                <form id="login-form">
+                    <h1>Admin Login</h1>
+                    <div class="input-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" placeholder="Email" id="login-email" required/>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" placeholder="Password" id="login-password" required/>
+                    </div>
+                    <button type="submit">Log In</button>
+                    <a href="#" id="forgot-password-link" class="center-link">Forgot your password?</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="forgot-password-container" id="forgot-password-container" style="display:none;">
+            <h1>Reset Password</h1>
+            <p>Enter your email address below and we'll send you a link to reset your password.</p>
+            <form id="reset-password-form">
+                <div class="input-group">
+                    <label for="reset-email">Email</label>
+                    <input type="email" placeholder="Email" id="reset-email" required/>
+                </div>
+                <button type="submit">Send Reset Link</button>
+            </form>
+            <p id="confirmation-message" style="display:none;">A reset link has been sent to your email.</p>
+            <a href="#" id="back-to-login" class="center-link">Back to login</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const validEmail = "admin@example.com"; // Replace with your email
+        const validPassword = "password123"; // Replace with your password
+
+        // Function to handle the login process
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get the entered email and password
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+            
+            // Check credentials
+            if (email === validEmail && password === validPassword) {
+                alert("Login successful!");
+                // Redirect to another page or perform desired actions
+                // window.location.href = "dashboard.html"; // Example redirection
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+
+        // Function to toggle forgot password section
+        document.getElementById("forgot-password-link").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            document.getElementById("container").style.display = "none"; // Hide login form
+            document.getElementById("forgot-password-container").style.display = "block"; // Show reset password form
+        });
+
+        // Function to handle back to login action
+        document.getElementById("back-to-login").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            document.getElementById("container").style.display = "flex"; // Show login form
+            document.getElementById("forgot-password-container").style.display = "none"; // Hide reset password form
+        });
+
+        // Function to handle password reset form submission
+        document.getElementById("reset-password-form")?.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get the entered email
+            const resetEmail = document.getElementById("reset-email").value;
+            
+            // Example: Show confirmation message (replace with actual reset link logic)
+            alert("A reset link has been sent to " + resetEmail);
+            document.getElementById("confirmation-message").style.display = "block"; // Show confirmation message
+        });
+
+
+    </script> 
+</body>
+</html>

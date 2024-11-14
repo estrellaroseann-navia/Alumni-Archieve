@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +18,7 @@
     <div class="main-content">
         <form id="loginForm">
             <div class="form-container">
-                <h2>User Log In</h2> 
+                <h2>Alumni Log In</h2> 
                 <div class="input-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" required>
@@ -28,8 +27,11 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" required>
                 </div>
-                <button type="submit" class="login-button">Log In</button>
                 
+                <div class="button-container">
+                    <button type="submit" class="login-button">Log In</button>
+                </div>
+
                 <p class="center-link">Don't have an account? <a href="{% url 'register' %}">Sign Up</a></p>
                 <p class="center-link"><a href="{% url 'forgotpassword' %}" id="forgot-password-link">Forgot your password?</a></p>
             </div>
@@ -39,34 +41,32 @@
     <footer>
         <p>&copy; 2024 Alumni Archive. All rights reserved.</p>
     </footer>
+    
     <script>
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent the default form submission
 
             // Get the email and password input values
-            const email = document.getElementById("email").value; // Match the id in the HTML
-            const password = document.getElementById("password").value; // Match the id in the HTML
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
             // Validate the input (you can add more complex validation here)
             if (validateEmail(email) && validatePassword(password)) {
                 // If valid, redirect to HomePage.html
                 window.location.href = "homepage.html";
             } else {
-                alert("Invalid email or password. Please try again."); // Show an alert for invalid input
+                alert("Invalid email or password. Please try again.");
             }
         });
 
-        // Simple email validation function
         function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic regex for email validation
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(String(email).toLowerCase());
         }
 
-        // Simple password validation (length check)
         function validatePassword(password) {
-            return password.length >= 6; // Example condition: password must be at least 6 characters
+            return password.length >= 6;
         }
-
     </script> 
 </body>
 </html>

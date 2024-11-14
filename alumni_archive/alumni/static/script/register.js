@@ -63,34 +63,34 @@
 
      if (clusterValue === 'main') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="main">Puerto Princesa City</option>';
          collegeGroup.style.display = 'block';
+         campusSelect.innerHTML += '<option value="main">Puerto Princesa City</option>';
          collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster1') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="cluster1-campus1">ROXAS</option><option value="cluster1campus2">ARACELI</option><option value="cluster1campus3">DUMARAN</option><option value="clustercampus4">SAN VICENTE</option>';
          collegeGroup.style.display = 'block';
+         campusSelect.innerHTML += '<option value="cluster1-campus1">ROXAS</option><option value="cluster1campus2">ARACELI</option><option value="cluster1campus3">DUMARAN</option><option value="clustercampus4">SAN VICENTE</option>';
          collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster2') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="cluster2campus1">TAYTAY</option><option value="cluster2campus2">EL NIDO</option><option value="cluster2campus3">NILAPACAN</option><option value="cluster2campus4">TCORON</option>';
          collegeGroup.style.display = 'block';
+         campusSelect.innerHTML += '<option value="cluster2campus1">TAYTAY</option><option value="cluster2campus2">EL NIDO</option><option value="cluster2campus3">NILAPACAN</option><option value="cluster2campus4">TCORON</option>';
          collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster3') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="cluster3campus1">NARRA</option><option value="cluster3campus2">QUEZON</option><option value="cluster3campus3">RIZAL</option>';
          collegeGroup.style.display = 'block';
+         campusSelect.innerHTML += '<option value="cluster3campus1">NARRA</option><option value="cluster3campus2">QUEZON</option><option value="cluster3campus3">RIZAL</option>';
          collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cluster4') {
          campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="cluster4campus1">ESPANOLA</option><option value="cluster4campus2">BROOKES POINT</option><option value="cluster4campus3">ESPANOLA</option><option value="cluster4campus4">BATARAZA</option>';
          collegeGroup.style.display = 'block';
+         campusSelect.innerHTML += '<option value="cluster4campus1">ESPANOLA</option><option value="cluster4campus2">BROOKES POINT</option><option value="cluster4campus3">ESPANOLA</option><option value="cluster4campus4">BATARAZA</option>';
          collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      } else if (clusterValue === 'cuyo') {
         campusGroup.style.display = 'block';
-         campusSelect.innerHTML += '<option value="cuyocampus1">CUYO</option>';
-         collegeGroup.style.display = 'block';
-         collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
+        collegeGroup.style.display = 'block';
+        campusSelect.innerHTML += '<option value="cuyocampus1">CUYO</option>';
+        collegeSelect.innerHTML += '<option value="cs">College of Sciences</option><option value="ceat">College of Engineering Architechture and Technology</option><option value="cah">College of Arts and Humanities</option><option value="cba">College of Business and Accountancy</option><option value="ccje">College of Criminal Justice Education</option><option value="cte">College of Teacher Education</option><option value="chtm">College of Nursing and Health Sciences</option><option value="ceat">College of Hospitality Management and Tourism</option><option value="graduate-school">College of PSU-Graduate School</option>';
      }
  }
 
@@ -136,15 +136,15 @@
      }
  });
 
- // Form submit event
- document.getElementById('signup-form').addEventListener('submit', function(event) {
-     event.preventDefault(); // Prevent default form submission
+ /// Form submit event
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
 
-     // Redirect to UserLogIn.html after successful validation
-     if (passwordInput.value === confirmPasswordInput.value) {
-         // You can save data or perform any actions here if needed
-         window.location.href = 'UserLogIn.html'; // Redirect to the UserLogIn page
-     } else {
-         alert("Please ensure that all fields are filled correctly and passwords match.");
-     }
+    // Redirect to UserLogIn.html after successful validation
+    if (passwordInput.value === confirmPasswordInput.value) {
+        // You can save data or perform any actions here if needed
+        window.location.href = 'UserLogIn.html'; // Redirect to the UserLogIn page
+    } else {
+        alert("Please ensure that all fields are filled correctly and passwords match.");
+    }
  });

@@ -61,24 +61,47 @@ body {
     max-width: 500px; /* Make inputs wider */
 }
 
-/* Button Styles */
+/* Container for both buttons to align them side by side */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center both buttons horizontally */
+    gap: 10px; /* Space between the buttons */
+    margin-top: 20px; /* Adds space above the button container */
+}
+
+/* User Login Button */
 .login-button {
-    display: block; /* Make the button a block element */
     background-color: #f07d3b; /* Button background color */
     color: white;
-    padding: 10px 16px; /* Adjusted padding for better touch target */
+    padding: 10px 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; /* Remove underline */
-    margin: 20px auto 0; /* Center the button */
-    font-size: 1rem; /* Increased font size for button text */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    font-size: 1rem;
+    transition: background-color 0.3s;
 }
 
-.login-button:hover {
-    background-color: #f3b294; /* Darker shade for hover effect */
+/* Admin Login Button */
+.admin-login-button {
+    background-color: #3b88f0; /* New color for admin button to match palette */
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 }
+
+/* Hover effects for both buttons */
+.login-button:hover {
+    background-color: #d86e35;
+}
+
+.admin-login-button:hover {
+    background-color: #3578d8;
+}
+
 
 /* Center Link Styles */
 .center-link {

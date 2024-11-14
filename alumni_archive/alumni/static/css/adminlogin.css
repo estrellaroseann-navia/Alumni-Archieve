@@ -1,0 +1,130 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes the full height */
+}
+
+
+/* Navbar Styles */
+header {
+    background-color: #f8eedf; /* Navbar background */
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Full width for navbar container */
+}
+
+.navbar-brand {
+    flex: 1; /* Take space on the left */
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+    flex-grow: 1; /* Allow main to grow */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+/* Form Container Styles */
+.container {
+    display: flex;
+    justify-content: center; /* Center the form */
+    margin-top: 20px; /* Add some top margin */
+}
+
+.form-container {
+    background: white;
+    padding: 20px; /* Increase padding for more space inside */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px; /* Increase the max width for the form */
+}
+
+.form-container h1 {
+    margin-bottom: 20px;
+}
+
+/* Input Group Styles */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+button {
+    background-color: #f07d3b; /* Button background color */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Full width for button */
+}
+
+button:hover {
+    background-color: #f3b294; /* Darker shade for hover effect */
+}
+
+/* Center Link Styles */
+.center-link {
+    display: block;
+    text-align: center; /* Center align */
+    margin-top: 15px; /* Add some top margin */
+    color: #f07d3b; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.center-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b; /* Footer background */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Push footer to the bottom */
+}
