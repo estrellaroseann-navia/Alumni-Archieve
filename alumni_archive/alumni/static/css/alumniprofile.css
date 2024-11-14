@@ -1,0 +1,178 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styles */
+header {
+    background-color: #f8eedf; /* Navbar background */
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-brand {
+    flex: 1;
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.navbar-links {
+    flex: 1;
+    text-align: center;
+}
+
+.navbar-links a {
+    margin: 0 15px;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b;
+}
+
+/* Profile Icon and Dropdown Menu */
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-profile span {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-profile img.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+/* Dropdown Menu */
+.dropdown-content {
+    display: none; /* Initially hide the dropdown */
+    position: absolute; /* Position it below the avatar */
+    top: 40px; /* Adjust based on avatar height */
+    right: 0; /* Align to the right */
+    background-color: #f8eedf; /* Background color for dropdown */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    z-index: 1; /* Ensure dropdown is above other content */
+}
+
+.dropdown-content a {
+    display: flex; /* Align icon and text horizontally */
+    align-items: center; /* Vertically align icon and text */
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 16px;    /* Adjust icon size */
+}
+
+.dropdown-content a:hover {
+    background-color: #f07d3b; /* Hover effect */
+    color: white; /* Change text color on hover */
+}
+
+/* Show dropdown when toggled */
+.show {
+    display: block; /* Show dropdown */
+}
+
+/* Profile Section Styles */
+.profile-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.profile-picture {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+#profileImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.profile-details {
+    margin-bottom: 20px;
+}
+
+.profile-details dt {
+    font-weight: bold;
+    color: #333;
+}
+
+.profile-details dd {
+    margin: 5px 0 10px 0;
+    color: #666;
+}
+
+#editBtn {
+    background-color: #f07d3b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#editBtn:hover {
+    background-color: #f3b294;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+}

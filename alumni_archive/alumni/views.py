@@ -1,4 +1,5 @@
 from os import renames
+from tkinter.messagebox import RETRY
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -67,7 +68,6 @@ def donation_view(request):
     return render(request, 'donation.html' )
 
 # admin pages
-
 def adminlogin_view(request):
     return render(request, 'adminlogin.html' )
 
@@ -81,12 +81,16 @@ def services_view(request):
     return render(request, 'service.html' )
 
 # alumni pages
-
 def confirmlogout_view(request):
     return render(request, 'confirmlogout.html' )
 
-# survey
+def alumniprofile_view(request):
+    return render(request, 'alumniprofile.html' )
 
+def editalumniprofile_view(request):
+    return render(request, 'edit-alumniprofile.html' )
+
+# survey
 def survey_view(request):
     return render(request, 'survey.html' )
 
@@ -104,3 +108,6 @@ def page4_view(request):
 
 def page5_view(request):
     return render(request, 'page5.html' )
+
+def page6_2_view(request):
+    return render(request, 'page6.2.html' )

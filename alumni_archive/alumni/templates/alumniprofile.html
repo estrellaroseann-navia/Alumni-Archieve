@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/alumniprofile.css' %}"> <!-- Use the same CSS file for consistent style -->
+    <title>Home Page</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <h1>Alumni Archive</h1>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="{% url 'alumniprofile' %}">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: Profile Section -->
+    <main>
+        <section class="profile-container">
+            <!-- Profile Picture Section -->
+            <div class="profile-picture">
+                <img src="profile.png" alt="Profile Picture" id="profileImg">
+            </div>
+
+            <!-- Profile Info Section -->
+            <div class="profile-info">
+                <h1 id="username">John Doe</h1> <!-- Display Full Name Here -->
+
+                <!-- Profile Details -->
+                <dl class="profile-details">
+                    <div>
+                        <dt>First Name:</dt>
+                        <dd id="firstName">John</dd>
+                    </div>
+                    <div>
+                        <dt>Last Name:</dt>
+                        <dd id="lastName">Doe</dd>
+                    </div>
+                    <div>
+                        <dt>Age:</dt>
+                        <dd id="age">25</dd>
+                    </div>
+                    <div>
+                        <dt>Birthday:</dt>
+                        <dd id="birthday">January 1, 1999</dd>
+                    </div>
+                    <div>
+                        <dt>Address:</dt>
+                        <dd id="address">123 Main St, City, Country</dd>
+                    </div>
+                    <div>
+                        <dt>Course:</dt>
+                        <dd id="course">Computer Science</dd>
+                    </div>
+                    <div>
+                        <dt>Year Graduated:</dt>
+                        <dd id="yearGraduated">2021</dd>
+                    </div>
+                    <div>
+                        <dt>College:</dt>
+                        <dd id="college">ABC University</dd>
+                    </div>
+                </dl>
+
+                <!-- Edit Profile Button -->
+                <button id="editBtn" onclick="location.href='edit-alumniprofile.html'">Edit Profile</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Load existing profile data into the profile page when the page is loaded
+        window.onload = function() {
+            const profileData = JSON.parse(localStorage.getItem('profileData'));
+
+            if (profileData) {
+                document.getElementById('username').textContent = `${profileData.firstName} ${profileData.lastName}`; // Display full name
+                document.getElementById('firstName').textContent = profileData.firstName || 'N/A'; // Display first name
+                document.getElementById('lastName').textContent = profileData.lastName || 'N/A'; // Display last name
+                document.getElementById('age').textContent = profileData.age || 'N/A'; // Display age
+                document.getElementById('birthday').textContent = profileData.birthday || 'N/A'; // Display birthday
+                document.getElementById('address').textContent = profileData.address || 'N/A'; // Display address
+                document.getElementById('course').textContent = profileData.course || 'N/A'; // Display course
+                document.getElementById('yearGraduated').textContent = profileData.yearGraduated || 'N/A'; // Display year graduated
+                document.getElementById('college').textContent = profileData.college || 'N/A'; // Display college
+                
+                // Update the profile image
+                document.getElementById('profileImg').src = profileData.profileImg || 'profile.png'; // Use the updated image from localStorage
+                document.getElementById('navbarProfileImg').src = profileData.profileImg || 'profile.png'; // Update navbar image
+            } else {
+                // If no profile data is found, set default values
+                document.getElementById('username').textContent = 'User'; // Default username
+                document.getElementById('profileImg').src = 'profile.png'; // Default image
+            }
+
+            // Event listener for the Edit Profile button to redirect to Edit Profile page
+            document.getElementById('editBtn').addEventListener('click', function() {
+                window.location.href = 'edit-alumniprofile.html'; // Redirect to Edit Profile page
+            });
+
+            // Dropdown functionality for navbar profile
+            const navbarProfileImg = document.getElementById('navbarProfileImg');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+
+            navbarProfileImg.addEventListener('click', function() {
+                dropdownMenu.classList.toggle('show'); // Toggle the visibility of the dropdown menu
+            });
+
+            // Close the dropdown if clicked outside
+            window.onclick = function(event) {
+                if (!event.target.matches('#navbarProfileImg')) {
+                    if (dropdownMenu.classList.contains('show')) {
+                        dropdownMenu.classList.remove('show'); // Close the dropdown if clicked outside
+                    }
+                }
+            };
+        };
+
+    </script> 
+</body>
+</html>
