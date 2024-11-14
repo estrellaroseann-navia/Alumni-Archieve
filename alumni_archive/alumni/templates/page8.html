@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 8</title>
+    <link rel="stylesheet" href="css/Survey8.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="employmentSurvey">
+            <br>
+            <h4>Place of work</h4>
+
+            <input type="radio" id="local" name="workLocation" value="local" required>
+            <label for="local">Local</label>
+
+            <input type="radio" id="abroad" name="workLocation" value="abroad" required>
+            <label for="abroad">Abroad</label>
+            <br>
+            <h4>Is this your first job after college?</h4>
+
+            <input type="radio" id="yesFirstJob" name="firstJob" value="yes" required>
+            <label for="yesFirstJob">Yes</label>
+
+            <input type="radio" id="noFirstJob" name="firstJob" value="no" required>
+            <label for="noFirstJob">No</label>
+            <br>
+            <h4>What are your reason(s) for staying on the job? You may check (✓) more than one answer.</h4>
+            <table>
+                <tr>
+                    <td><label for="salaries">Salaries and benefits</label></td>
+                    <td><input type="checkbox" id="salaries" name="jobReasons" value="salaries" required></td>
+                </tr>
+                <tr>
+                    <td><label for="career">Career challenge</label></td>
+                    <td><input type="checkbox" id="career" name="jobReasons" value="career" required></td>
+                </tr>
+                <tr>
+                    <td><label for="skills">Related to special skill</label></td>
+                    <td><input type="checkbox" id="skills" name="jobReasons" value="skills" required></td>
+                </tr>
+                <tr>
+                    <td><label for="course">Related to course or program of study</label></td>
+                    <td><input type="checkbox" id="course" name="jobReasons" value="course" required></td>
+                </tr>
+                <tr>
+                    <td><label for="proximity">Proximity to residence</label></td>
+                    <td><input type="checkbox" id="proximity" name="jobReasons" value="proximity" required></td>
+                </tr>
+                <tr>
+                    <td><label for="peer">Peer influence</label></td>
+                    <td><input type="checkbox" id="peer" name="jobReasons" value="peer" required></td>
+                </tr>
+                <tr>
+                    <td><label for="family">Family influence</label></td>
+                    <td><input type="checkbox" id="family" name="jobReasons" value="family" required></td>
+                </tr>
+                <tr>
+                    <td><label for="otherReason">Other reason(s), please specify</label></td>
+                    <td><input type="text" id="otherReasonText" name="otherReasonText" required></td>
+                </tr>
+            </table>
+            <h4>Is your first job related to the course you took up in college?</h4>
+
+            <label for="yesRelatedJob">Yes</label>
+            <input type="radio" id="yesRelatedJob" name="relatedJob" value="yes" required>
+
+            <label for="noRelatedJob">No</label>
+            <input type="radio" id="noRelatedJob" name="relatedJob" value="no" required>
+
+            <p>If NO, proceed to Skip Question</p>
+
+            <!-- Buttons moved inside the form -->
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='survey7.html'">Previous Page</button>
+                <button class="custom-button" type="submit" onclick="location.href='survey9.html'">Next Page</button>
+                <button class="custom-button" type="button" onclick="location.href='survey10.html'">Skip Question</button>
+            </div>
+        </form>
+    </div>
+
+    <p id="responseMessage"></p>
+    
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script >
+        // JavaScript for Survey8.html
+
+        // Dropdown menu functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileImg = document.getElementById('navbarProfileImg');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+
+            profileImg.addEventListener('click', () => {
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Hide the dropdown when clicking outside
+            window.addEventListener('click', (event) => {
+                if (!event.target.matches('#navbarProfileImg')) {
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('employmentSurvey').addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather form data
+            const formData = new FormData(event.target);
+            const jobLocation = formData.get('workLocation');
+            const firstJob = formData.get('firstJob');
+            const jobReasons = formData.getAll('jobReasons');
+            const relatedJob = formData.get('relatedJob');
+            const otherReasonText = formData.get('otherReasonText');
+
+            // Create a response message
+            let responseMessage = `Survey Submitted! \n\n`;
+            responseMessage += `Place of Work: ${jobLocation}\n`;
+            responseMessage += `First Job After College: ${firstJob}\n`;
+            responseMessage += `Job Reasons: ${jobReasons.length > 0 ? jobReasons.join(', ') : 'None'}\n`;
+            responseMessage += `First Job Related to Course: ${relatedJob}\n`;
+            responseMessage += `Other Reasons: ${otherReasonText ? otherReasonText : 'None'}\n`;
+
+            // Display the response message
+            document.getElementById('responseMessage').textContent = responseMessage;
+
+            // Redirect to the next page after displaying the message (optional)
+            // Uncomment the line below if you want to redirect after a delay
+            // setTimeout(() => { location.href = 'survey9.html'; }, 3000);
+        });
+
+    </script>
+</body>
+</html>

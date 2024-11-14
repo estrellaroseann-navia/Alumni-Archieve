@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 6</title>
+    <link rel="stylesheet" href="css/Survey6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+     <div class="container">
+        <div class="surveyform">
+            <h2>Alumni Survey Form</h2>
+            <form id="employmentStatusForm">
+                <div class="form-column">
+                    <h4>Please state reason(s) why you are not yet employed. You may check (✓) more than one answer.</h4> 
+                        <table>
+                            <tr>        
+                                <td><label for="study">Advance or further study</label></td>
+                                <td><input type="checkbox" id="study" name="reason" value="study" required></td>
+                            </tr>
+                            <tr> 
+                                <td><label for="familyConcern">Family concern and decided not to find a job</label></td>
+                                <td><input type="checkbox" id="familyConcern" name="reason" value="familyConcern" required></td>
+                            </tr>
+                            <tr> 
+                                <td><label for="health">Health-related reasons</label></td>
+                                <td><input type="checkbox" id="health" name="reason" value="health" required></td>
+                            </tr>
+                            <tr> 
+                                <td><label for="experience">Lack of work experience</label></td>
+                                <td><input type="checkbox" id="experience" name="reason" value="experience" required></td>
+                            </tr>
+                            <tr> 
+                                <td><label for="opportunity">No job opportunity</label></td>
+                                <td><input type="checkbox" id="opportunity" name="reason" value="opportunity" required></td>
+                            </tr>
+                            <tr> 
+                                <td><label for="noJobSearch">Did not look for a job</label></td>
+                                <td><input type="checkbox" id="noJobSearch" name="reason" value="noJobSearch" required></td>
+                            </tr>
+                            <tr> 
+                                <td><input type="text" id="otherReason" name="otherReason" placeholder="Other reason(s), please specify" required></td>
+                            </tr>
+                        </table> 
+                </div>
+            </form>
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='survey5.html'">Previous Page</button>
+                <button class="custom-button" type="button" onclick="location.href='Survey6.2.html'">Next Page</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Dropdown Menu Toggle for Profile
+        document.addEventListener('DOMContentLoaded', function () {
+            const profile = document.getElementById('profile');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const responseMessage = document.getElementById('responseMessage');
+
+            // Load saved response message from local storage
+            loadResponseMessage();
+
+            // Toggle dropdown menu on profile click
+            profile.addEventListener('click', function () {
+                dropdownMenu.classList.toggle('show');
+            });
+
+            // Close dropdown if clicked outside
+            window.addEventListener('click', function (e) {
+                if (!profile.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Functionality for Navigation Buttons
+            const prevButton = document.querySelector(".buttoncon .custom-button[type='button']:first-child");
+            const nextButton = document.querySelector(".buttoncon .custom-button[type='button']:last-child");
+
+            // Previous button action
+            prevButton.addEventListener('click', function () {
+                // Redirect to the previous page (Survey 5)
+                window.location.href = 'survey5.html';
+            });
+
+            // Next button action
+            nextButton.addEventListener('click', function (event) {
+                // Prevent form submission
+                event.preventDefault();
+
+                // Display a thank you message and save it to local storage
+                const thankYouMessage = "Thank you for taking the survey!";
+                responseMessage.textContent = thankYouMessage;
+                responseMessage.style.color = "green"; // Style the message
+
+                // Save the response message to local storage
+                localStorage.setItem('responseMessage', thankYouMessage);
+
+                // Save the survey data to local storage
+                saveSurveyData();
+
+                setTimeout(function () {
+                    window.location.href = 'Survey6.2.html'; // Redirect to next survey page
+                }, 2000); // 2-second delay
+            });
+
+            // Function to save survey data to local storage
+            function saveSurveyData() {
+                const surveyData = {
+                    reasons: [],
+                    employmentStatus: ''
+                };
+
+                // Store checkbox values for reasons
+                const reasonCheckboxes = document.querySelectorAll('input[name="reason"]');
+                reasonCheckboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        surveyData.reasons.push(checkbox.value);
+                    }
+                });
+
+                // Store employment data
+                const employmentCheckboxes = document.querySelectorAll('input[name="employment"]');
+                employmentCheckboxes.forEach((checkbox) => {
+                    if (checkbox.checked) {
+                        surveyData.employmentStatus = checkbox.value;
+                    }
+                });
+
+                // Save data to localStorage
+                localStorage.setItem('surveyPageData', JSON.stringify(surveyData));
+            }
+
+            // Function to load the response message from local storage
+            function loadResponseMessage() {
+                const savedMessage = localStorage.getItem('responseMessage');
+                if (savedMessage) {
+                    responseMessage.textContent = savedMessage;
+                    responseMessage.style.color = "green"; // Keep the message styled
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>

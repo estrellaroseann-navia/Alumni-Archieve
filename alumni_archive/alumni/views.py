@@ -104,3 +104,27 @@ def page4_view(request):
 
 def page5_view(request):
     return render(request, 'page5.html' )
+
+def page6_2_view(request):
+    return render(request, 'page6.2.html' )
+
+def page6_view(request):
+    return render(request, 'page6.html' )
+
+def page7_view(request):
+    return render(request, 'page7.html' )
+
+def page8_view(request):
+    return render(request, 'page8.html' )
+
+def page9_view(request):
+    return render(request, 'page9.html' )
+
+def page10_view(request):
+    return render(request, 'page10.html' )
+
+def page11_view(request):
+    return render(request, 'page11.html' )
+
+def page12_view(request):
+    return render(request, 'page12.html' )

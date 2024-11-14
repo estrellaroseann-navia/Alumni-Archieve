@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form</title>
+    <link rel="stylesheet" href="css/Survey7.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">USER</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="businessLineForm">
+            <h4>Major line of business of the company you are presently employed in. Check one only.</h4>
+            <br>
+            <input type="radio" id="agriculture" name="businessLine" value="Agriculture" required>
+            <label for="agriculture">Agriculture, Hunting and Forestry</label>
+            <br>
+            <input type="radio" id="fishing" name="businessLine" value="Fishing" required>
+            <label for="fishing">Fishing</label>
+            <br>
+            <input type="radio" id="mining" name="businessLine" value="Mining" required>
+            <label for="mining">Mining and Quarrying</label>
+            <br>
+            <input type="radio" id="manufacturing" name="businessLine" value="Manufacturing" required>
+            <label for="manufacturing">Manufacturing</label>
+            <br>
+            <input type="radio" id="electricity" name="businessLine" value="Electricity" required>
+            <label for="electricity">Electricity, Gas and Water Supply</label>
+            <br>
+            <input type="radio" id="construction" name="businessLine" value="Construction" required>
+            <label for="construction">Construction</label>
+            <br>
+            <input type="radio" id="wholesale" name="businessLine" value="Wholesale" required>
+            <label for="wholesale">Wholesale and Retail Trade, repair of motor vehicles, motorcycles and personal and household goods</label>
+            <br>
+            <input type="radio" id="hotels" name="businessLine" value="Hotels" required>
+            <label for="hotels">Hotels and Restaurants</label>
+            <br>
+            <input type="radio" id="transport" name="businessLine" value="Transport" required>
+            <label for="transport">Transport Storage and Communication</label>
+            <br>
+            <input type="radio" id="financial" name="businessLine" value="Financial" required>
+            <label for="financial">Financial Intermediation</label>
+            <br>
+            <input type="radio" id="realEstate" name="businessLine" value="RealEstate" required>
+            <label for="realEstate">Real Estate, Renting and Business Activities</label>
+            <br>
+            <input type="radio" id="publicAdmin" name="businessLine" value="PublicAdmin" required>
+            <label for="publicAdmin">Public Administration and Defense; Compulsory Social Security</label>
+            <br>
+            <input type="radio" id="education" name="businessLine" value="Education" required>
+            <label for="education">Education</label>
+            <br>
+            <input type="radio" id="health" name="businessLine" value="Health" required>
+            <label for="health">Health and Social Work</label>
+            <br>
+            <input type="radio" id="community" name="businessLine" value="Community" required>
+            <label for="community">Other Community, Social and Personal Service Activities</label>
+            <br>
+            <input type="radio" id="households" name="businessLine" value="Households" required>
+            <label for="households">Private Households with Employed Persons</label>
+            <br>
+            <input type="radio" id="extraTerritorial" name="businessLine" value="ExtraTerritorial" required>
+            <label for="extraTerritorial">Extra-territorial Organizations and Bodies</label>
+
+            <!-- Buttons Inside the Form Container -->
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='survey6.html'">Previous Page</button>
+                <button class="custom-button" type="submit" onclick="location.href='survey8.html'">Next Page</button>
+            </div>
+        </form>
+    </div>
+
+    <p id="responseMessage"></p>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Palawan State University Alumni Archive. All rights reserved.</p>
+    </footer>
+
+    <script >
+        // Function to toggle the dropdown menu visibility
+function toggleDropdown() {
+    const dropdownMenu = document.getElementById("dropdown-menu");
+    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+}
+
+// Close dropdown if clicked outside
+window.onclick = function(event) {
+    if (!event.target.matches('.avatar')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+            const openDropdown = dropdowns[i];
+            if (openDropdown.style.display === "block") {
+                openDropdown.style.display = "none";
+            }
+        }
+    }
+}
+
+// Handle form submission
+document.getElementById("businessLineForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Save form data to local storage
+    saveFormData();
+
+    // You can handle any validation or data processing here
+
+    // Redirect to the next page
+    location.href = 'survey8.html'; // Redirect to the next survey page
+});
+
+// Add click event listener to the profile image
+document.getElementById("navbarProfileImg").addEventListener("click", toggleDropdown);
+
+// Add click event listeners for the buttons
+document.querySelector(".buttoncon .custom-button[type='button']").addEventListener("click", function() {
+    location.href = 'Survey6.html'; // Redirect to the previous survey page
+});
+
+// Function to save form data to local storage
+function saveFormData() {
+    const formData = {};
+
+    // Get form inputs and save their values
+    const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
+    inputs.forEach(input => {
+        formData[input.name] = input.value; // Assuming each input has a 'name' attribute
+    });
+
+    // Save form data to local storage
+    localStorage.setItem('businessLineFormData', JSON.stringify(formData));
+}
+
+// Function to load form data from local storage
+function loadFormData() {
+    const savedData = JSON.parse(localStorage.getItem('businessLineFormData'));
+
+    if (savedData) {
+        const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
+        inputs.forEach(input => {
+            if (savedData[input.name]) {
+                input.value = savedData[input.name]; // Load saved value into input
+            }
+        });
+    }
+}
+
+// Load form data on page load
+document.addEventListener("DOMContentLoaded", loadFormData);
+
+    </script>
+</body>
+</html>
