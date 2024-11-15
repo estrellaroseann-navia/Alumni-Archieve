@@ -1,0 +1,197 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+/* Navbar Styles */
+header {
+    background-color: #f8eedf;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.navbar-links a {
+    margin: 0 15px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b;
+}
+
+.navbar-links a.active {
+    color: #f07d3b;
+    font-weight: bold;
+    border-bottom: 2px solid #f07d3b;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-profile span {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-profile img.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #f8eedf;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f07d3b;
+    color: white;
+}
+
+/* Container Styles */
+.container {
+    padding: 20px;
+    background-color: #f8eedf;
+    margin: 20px auto;
+    width: auto;
+    max-width: 1000px;
+    border: 2px solid #f07d3b;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* Survey Form Styles */
+form {
+    background-color: #f8eedf;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+form h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 15px;
+    border-spacing: 0;
+}
+
+h2 {
+    color: #f07d3b;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+}
+
+label {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Radio Button Styles */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Button Container Styles */
+.buttoncon {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.custom-button {
+    background-color: #f07d3b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+}
+
+.custom-button:hover {
+    background-color: #d06b2f;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+}
+
+a {
+    text-decoration: none;
+}

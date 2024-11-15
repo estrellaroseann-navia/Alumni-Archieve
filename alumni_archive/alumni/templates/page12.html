@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 12</title>
+    <link rel="stylesheet" href="css/Survey12.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Survey Form Container -->
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="curriculumSurvey">
+            <h4>Was the curriculum you had in college relevant to your first job?</h4>
+            <table>
+                <tr>
+                    <td><label for="yes">Yes</label></td>
+                    <td><input type="radio" id="yes" name="curriculumRelevance" value="yes" required></td>
+                </tr>
+                <tr>
+                    <td><label for="no">No</label></td>
+                    <td><input type="radio" id="no" name="curriculumRelevance" value="no" required></td>
+                </tr>
+            </table>
+            
+            <h4>If NO, please click the submit button.</h4>
+
+            <h4>If YES, what competencies learned in college did you find very useful in your first job? You may check (✓) more than one answer.</h4>
+            <table>
+                <tr>
+                    <td><label for="communication">Communication skills</label></td>
+                    <td><input type="checkbox" id="communication" name="competencies" value="communication"></td>
+                </tr>
+                <tr>
+                    <td><label for="humanRelations">Human Relations skills</label></td>
+                    <td><input type="checkbox" id="humanRelations" name="competencies" value="humanRelations"></td>
+                </tr>
+                <tr>
+                    <td><label for="entrepreneurial">Entrepreneurial skills</label></td>
+                    <td><input type="checkbox" id="entrepreneurial" name="competencies" value="entrepreneurial"></td>
+                </tr>
+                <tr>
+                    <td><label for="itSkills">Information Technology skills</label></td>
+                    <td><input type="checkbox" id="itSkills" name="competencies" value="itSkills"></td>
+                </tr>
+                <tr>
+                    <td><label for="problemSolving">Problem-solving skills</label></td>
+                    <td><input type="checkbox" id="problemSolving" name="competencies" value="problemSolving"></td>
+                </tr>
+                <tr>
+                    <td><label for="criticalThinking">Critical Thinking skills</label></td>
+                    <td><input type="checkbox" id="criticalThinking" name="competencies" value="criticalThinking"></td>
+                </tr>
+                <tr>
+                    <td><label for="otherSkills">Other skills, please specify</label></td>
+                    <td><input type="text" id="otherSkillsText" name="otherSkillsText"></td>
+                </tr>
+            </table>
+            <!-- Buttons inside the form -->
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='Survey11.html'">Previos Page</button>
+                <button class="custom-button" type="submit" onclick="location.href='submit.html'">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script >
+        // Survey12.js
+
+        // Function to toggle the dropdown menu
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById("dropdown-menu");
+            dropdownMenu.classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.navbar-profile') && !event.target.matches('#navbarProfileImg')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        // Event listener for profile click to toggle dropdown
+        document.getElementById("profile").onclick = toggleDropdown;
+
+        // Button Functions
+        document.querySelector(".buttoncon .custom-button[type='button']").onclick = function() {
+            // Navigate to the previous page
+            location.href = 'Survey11.html'; // Change 'Survey11.html' to the correct page link if necessary
+        };
+
+        document.querySelector(".buttoncon .custom-button[type='submit']").onclick = function(event) {
+            event.preventDefault(); // Prevent default form submission to handle it manually
+            const form = document.getElementById("curriculumSurvey");
+            
+            // Check if the form is valid
+            if (form.checkValidity()) {
+                // Gather the responses
+                const formData = {
+                    "Curriculum Relevance": form.curriculumRelevance.value,
+                    "Competencies Used": Array.from(form.querySelectorAll('input[name="competencies"]:checked')).map(input => input.nextElementSibling.textContent).join(", ")
+                };
+
+                // Retrieve existing responses from localStorage
+                const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
+                
+                // Merge new responses with existing ones
+                const updatedResponses = {
+                    ...existingResponses,
+                    ...formData
+                };
+
+                // Store updated responses back to localStorage
+                localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
+                
+                // Redirect to the submission page if the form is valid
+                location.href = 'submit.html'; // Change 'Submission.html' to the correct submission page link if necessary
+            } else {
+                // Optionally show an alert or message if the form is invalid
+                alert("Please fill out all required fields before submitting.");
+            }
+        };
+
+    </script>
+</body>
+</html>
