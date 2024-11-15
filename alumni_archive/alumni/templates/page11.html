@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 11</title>
+    <link rel="stylesheet" href="css/Survey11.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Survey Form Container -->
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="jobSurvey">
+            <h4>Job Level and Earnings Survey</h4>
+            <table>
+                <tr>
+                    <th>Job Level</th>
+                    <th>First Job</th>
+                    <th>Current or Present Job</th>
+                </tr>
+                <tr>
+                    <td>Rank or Clerical</td>
+                    <td><input type="radio" id="rankFirst" name="firstJobLevel" value="rank" required></td>
+                    <td><input type="radio" id="rankCurrent" name="currentJobLevel" value="rank" required></td>
+                </tr>
+                <tr>
+                    <td>Professional, Technical or Supervisory</td>
+                    <td><input type="radio" id="professionalFirst" name="firstJobLevel" value="professional" required></td>
+                    <td><input type="radio" id="professionalCurrent" name="currentJobLevel" value="professional" required></td>
+                </tr>
+                <tr>
+                    <td>Managerial or Executive</td>
+                    <td><input type="radio" id="managerialFirst" name="firstJobLevel" value="managerial" required></td>
+                    <td><input type="radio" id="managerialCurrent" name="currentJobLevel" value="managerial" required></td>
+                </tr>
+                <tr>
+                    <td>Self-employed</td>
+                    <td><input type="radio" id="selfEmployedFirst" name="firstJobLevel" value="selfEmployed" required></td>
+                    <td><input type="radio" id="selfEmployedCurrent" name="currentJobLevel" value="selfEmployed" required></td>
+                </tr>
+            </table>
+
+            <h4>What is your initial gross monthly earning in your first job after college?</h4>
+            <table>
+                <tr>
+                    <td><label for="below5000">Below P5,000.00</label></td>
+                    <td><input type="radio" id="below5000" name="initialEarnings" value="below5000" required></td>
+                </tr>
+                <tr>
+                    <td><label for="5000to10000">P5,000.00 to less than P10,000.00</label></td>
+                    <td><input type="radio" id="5000to10000" name="initialEarnings" value="5000to10000" required></td>
+                </tr>
+                <tr>
+                    <td><label for="10000to15000">P10,000.00 to less than P15,000.00</label></td>
+                    <td><input type="radio" id="10000to15000" name="initialEarnings" value="10000to15000" required></td>
+                </tr>
+                <tr>
+                    <td><label for="15000to20000">P15,000.00 to less than P20,000.00</label></td>
+                    <td><input type="radio" id="15000to20000" name="initialEarnings" value="15000to20000" required></td>
+                </tr>
+                <tr>
+                    <td><label for="20000to25000">P20,000.00 to less than P25,000.00</label></td>
+                    <td><input type="radio" id="20000to25000" name="initialEarnings" value="20000to25000" required></td>
+                </tr>
+                <tr>
+                    <td><label for="above25000">P25,000.00 and above</label></td>
+                    <td><input type="radio" id="above25000" name="initialEarnings" value="above25000" required></td>
+                </tr>
+            </table>
+
+            <!-- Buttons inside the form -->
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='survey10.html'">Previous Page</button>
+                <button class="custom-button" type="submit" onclick="location.href='survey12.html'">Next Page</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Script for Survey11.html
+
+            // Dropdown Menu Toggle
+            document.getElementById("navbarProfileImg").addEventListener("click", function () {
+                const dropdownMenu = document.getElementById("dropdown-menu");
+                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            });
+
+            // Close the dropdown if clicked outside
+            window.onclick = function (event) {
+                const dropdownMenu = document.getElementById("dropdown-menu");
+                if (!event.target.matches('#navbarProfileImg')) {
+                    if (dropdownMenu.style.display === "block") {
+                        dropdownMenu.style.display = "none";
+                    }
+                }
+            };
+
+            // Survey Form Submission
+            document.getElementById('jobSurvey').addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent form from submitting for demonstration purposes
+
+                // Capture the selected job levels
+                const firstJobLevel = document.querySelector('input[name="firstJobLevel"]:checked');
+                const currentJobLevel = document.querySelector('input[name="currentJobLevel"]:checked');
+
+                // Capture the initial gross monthly earnings
+                const initialEarnings = document.querySelector('input[name="initialEarnings"]:checked');
+
+                // Log survey responses to the console (for demonstration, replace with real submission handling)
+                console.log("First Job Level: ", firstJobLevel ? firstJobLevel.value : 'None');
+                console.log("Current Job Level: ", currentJobLevel ? currentJobLevel.value : 'None');
+                console.log("Initial Earnings: ", initialEarnings ? initialEarnings.value : 'None');
+
+                // Redirect to the next page
+                window.location.href = 'survey12.html';
+            });
+
+            // Optional: Pre-fill the username (replace with dynamic content if available)
+            document.getElementById("navbarUserName").textContent = localStorage.getItem("username") || "USER";
+
+            // Optional: Add profile image (replace with dynamic content if available)
+            document.getElementById("navbarProfileImg").src = localStorage.getItem("profileImage") || "profile.png";
+
+    </script>
+</body>
+</html>
