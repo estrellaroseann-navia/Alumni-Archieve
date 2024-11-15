@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 9</title>
+    <link rel="stylesheet" href="css/Survey10.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="jobSurvey">
+            <h4>How long did you stay in your first job?</h4>
+            <table>
+                <tr>
+                    <td><label for="lessThanMonth">Less than a month</label></td>
+                    <td><input type="radio" id="oneToSixMonths" name="stayDuration" value="oneToSixMonths" required></td>
+                </tr>
+                <tr>
+                    <td><label for="oneToSixMonths">1 to 6 months</label></td>
+                    <td><input type="radio" id="sevenToElevenMonths" name="stayDuration" value="sevenToElevenMonths" required></td>
+                </tr>
+                <tr>
+                    <td><label for="sevenToElevenMonths">7 to 11 months</label></td>
+                    <td><input type="radio" id="oneToTwoYears" name="stayDuration" value="oneToTwoYears" required></td>
+                </tr>
+                <tr>
+                    <td><label for="oneToTwoYears">1 year to less than 2 years</label></td>
+                    <td><input type="radio" id="twoToThreeYears" name="stayDuration" value="twoToThreeYears" required></td>
+                </tr>
+                <tr>
+                    <td><label for="twoToThreeYears">2 years to less than 3 years</label></td>
+                    <td><input type="radio" id="threeToFourYears" name="stayDuration" value="threeToFourYears" required></td>
+                </tr>
+                <tr>
+                    <td><label for="twoToThreeYears">2 years to less than 3 years</label></td>
+                    <td><input type="radio" id="threeToFourYears" name="stayDuration" value="threeToFourYears" required></td>
+                </tr>
+                <tr>
+                    <td><label for="threeToFourYears">3 years to less than 4 years</label></td>
+                    <td><input type="radio" id="moreThanFourYears" name="stayDuration" value="moreThanFourYears" required></td>
+                </tr>
+                <tr>
+                    <td><label for="moreThanFourYears">More than 4 years</label></td>
+                    <td><input type="radio" id="otherStayDuration" name="stayDuration" value="otherStayDuration" required></td>
+                </tr>
+                <tr>
+                    <td><label for="otherStayDuration">Others, please specify</label></td>
+                    <td><input type="text" id="otherStayDurationText" name="otherStayDurationText" required></td>
+                </tr>
+            </table>
+            <h4>How did you find your first job?</h4>
+            <table>
+                <tr>
+                    <td><label for="walkIn">Walk-in applicant</label></td>
+                    <td><input type="radio" id="walkIn" name="findJobMethod" value="walkIn" required></td>
+                </tr>
+                <tr>
+                    <td><label for="advertisement">Response to an advertisement</label></td>
+                    <td><input type="radio" id="advertisement" name="findJobMethod" value="advertisement" required></td>
+                </tr>
+                <tr>
+                    <td><label for="schoolPlacement">Arranged by school's job placement officer</label></td>
+                    <td><input type="radio" id="schoolPlacement" name="findJobMethod" value="schoolPlacement" required></td>
+                </tr>
+                <tr>
+                    <td><label for="familyBusiness">Family business</label></td>
+                    <td><input type="radio" id="familyBusiness" name="findJobMethod" value="familyBusiness" required></td>
+                </tr>
+                <tr>
+                    <td><label for="recommendation">Recommended by someone</label></td>
+                    <td><input type="radio" id="recommendation" name="findJobMethod" value="recommendation" required></td>
+                </tr>
+                <tr>
+                    <td><label for="jobFair">Job Fair or Public Employment Service Office (PESO)</label></td>
+                    <td><input type="radio" id="jobFair" name="findJobMethod" value="jobFair" required></td>
+                </tr>
+                <tr>
+                    <td><label for="friendsInfo">Information from friends</label></td>
+                    <td><input type="radio" id="friendsInfo" name="findJobMethod" value="friendsInfo" required></td>
+                </tr>
+                <tr>
+                    <td><label for="otherFindJobMethod">Others, please specify</label></td>
+                    <td><input type="text" id="otherFindJobMethodText" name="otherFindJobMethodText" required></td>
+                </tr>
+            </table>
+            
+            <h4>How long did it take you to land your first job?</h4>
+            <table>
+                <tr>
+                    <td><label for="lessThanMonthSearch">Less than a month</label></td>
+                    <td><input type="radio" id="lessThanMonthSearch" name="jobSearchDuration" value="lessThanMonthSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="oneToSixMonthsSearch">1 to 6 months</label></td>
+                    <td><input type="radio" id="oneToSixMonthsSearch" name="jobSearchDuration" value="oneToSixMonthsSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="sevenToElevenMonthsSearch">7 to 11 months</label></td>
+                    <td><input type="radio" id="sevenToElevenMonthsSearch" name="jobSearchDuration" value="sevenToElevenMonthsSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="oneToTwoYearsSearch">1 year to less than 2 years</label></td>
+                    <td><input type="radio" id="oneToTwoYearsSearch" name="jobSearchDuration" value="oneToTwoYearsSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="twoToThreeYearsSearch">2 years to less than 3 years</label></td>
+                    <td><input type="radio" id="twoToThreeYearsSearch" name="jobSearchDuration" value="twoToThreeYearsSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="threeToFourYearsSearch">3 years to less than 4 years</label></td>
+                    <td><input type="radio" id="threeToFourYearsSearch" name="jobSearchDuration" value="threeToFourYearsSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="moreThanFourYearsSearch">More than 4 years</label></td>
+                    <td><input type="radio" id="moreThanFourYearsSearch" name="jobSearchDuration" value="moreThanFourYearsSearch" required></td>
+                </tr>
+                <tr>
+                    <td><label for="otherJobSearchDuration">Others, please specify</label></td>         
+                    <td><input type="text" id="otherJobSearchDurationText" name="otherJobSearchDurationText" required></td>
+                </tr>
+            </table>
+            
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='survey9.html'">Previous Page</button>
+                <button class="custom-button" type="button" onclick="location.href='survey11.html'">Next Page</button>
+            </div>
+        </form>
+    </div>
+    
+    <p id="responseMessage"></p>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script >
+        document.addEventListener("DOMContentLoaded", function () {
+            // Handle dropdown menu in the profile section
+            const profile = document.getElementById("profile");
+            const dropdownMenu = document.getElementById("dropdown-menu");
+            const userName = document.getElementById("navbarUserName");
+            const profileImg = document.getElementById("navbarProfileImg");
+        
+            // Toggle dropdown menu when profile section is clicked
+            profile.addEventListener("click", function () {
+                dropdownMenu.classList.toggle("show");
+            });
+        
+            // Close dropdown menu when clicking outside of it
+            document.addEventListener("click", function (e) {
+                if (!profile.contains(e.target)) {
+                    dropdownMenu.classList.remove("show");
+                }
+            });
+        
+            // Load user data (assuming from localStorage as in previous examples)
+            function loadProfileData() {
+                const storedName = localStorage.getItem("userName");
+                if (storedName) {
+                    userName.textContent = storedName;
+                }
+        
+                const storedProfileImg = localStorage.getItem("profileImg");
+                if (storedProfileImg) {
+                    profileImg.src = storedProfileImg;
+                }
+            }
+        
+            // Initialize the profile and dropdown
+            loadProfileData();
+        
+            // Handle form validation and navigation
+            const prevButton = document.querySelector(".buttoncon .custom-button:first-child");
+            const nextButton = document.querySelector(".buttoncon .custom-button:last-child");
+            const form = document.getElementById("jobSurvey");
+        
+            prevButton.addEventListener("click", function () {
+                // Navigate to the previous page
+                location.href = 'survey9.html';
+            });
+        
+            nextButton.addEventListener("click", function () {
+                // Validate form fields before navigating to the next page
+                const stayDuration = document.querySelector('input[name="stayDuration"]:checked');
+                const findJobMethod = document.querySelector('input[name="findJobMethod"]:checked');
+                const jobSearchDuration = document.querySelector('input[name="jobSearchDuration"]:checked');
+                const otherStayDurationText = document.getElementById("otherStayDurationText").value;
+                const otherFindJobMethodText = document.getElementById("otherFindJobMethodText").value;
+                const otherJobSearchDurationText = document.getElementById("otherJobSearchDurationText").value;
+        
+                // Perform validation
+                if (!stayDuration || !findJobMethod || !jobSearchDuration || (stayDuration.value === "Other reasons" && !otherStayDurationText) || 
+                    (findJobMethod.value === "Other reasons" && !otherFindJobMethodText) || (jobSearchDuration.value === "Other reasons" && !otherJobSearchDurationText)) {
+                    document.getElementById("responseMessage").textContent = "Please fill out all fields, including specifying 'Other' fields.";
+                    return;
+                }
+        
+                // Navigate to the next page if all fields are valid
+                location.href = 'survey11.html';
+            });
+        });
+        
+    </script>
+</body>
+</html>
