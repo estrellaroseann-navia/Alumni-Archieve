@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Survey Form - Page 9</title>
+    <link rel="stylesheet" href="css/Survey9.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Alumni Survey Form</h2>
+        <form id="jobSurvey">
+            <h4>What were your reasons for accepting the job? You may check (✓) more than one answer.</h4>
+            <table>
+                <tr>
+                    <td><label for="salariesAccept">Salaries & benefits</label></td>
+                    <td><input type="checkbox" id="salariesAccept" name="acceptingJob" value="salaries" required></td>
+                </tr>
+                <tr>
+                    <td><label for="careerAccept">Career challenge</label></td>
+                    <td><input type="checkbox" id="careerAccept" name="acceptingJob" value="career" required></td>
+                </tr>
+                <tr>
+                    <td><label for="skillsAccept">Related to special skills</label></td>
+                    <td><input type="checkbox" id="skillsAccept" name="acceptingJob" value="skills" required></td>
+                </tr>
+                <tr>
+                    <td><label for="proximityAccept">Proximity to residence</label></td>
+                    <td><input type="checkbox" id="proximityAccept" name="acceptingJob" value="proximity" required></td>
+                </tr>
+                <tr>
+                    <td><label for="otherAccept">Other reason(s), please specify</label></td>
+                    <td><input type="text" id="otherAcceptText" name="otherAcceptText" required></td>
+                </tr>
+            </table>
+            
+            <h4>What were your reasons for changing jobs? You may check (✓) more than one answer.</h4>
+            <table>
+                <tr>
+                    <td><label for="salariesChange">Salaries & benefits</label></td>
+                    <td><input type="checkbox" id="salariesChange" name="changingJob" value="salaries" required></td>
+                </tr>
+                <tr>
+                    <td><label for="careerChange">Career challenge</label></td>
+                    <td><input type="checkbox" id="careerChange" name="changingJob" value="career" required></td>
+                </tr>
+                <tr>
+                    <td><label for="skillsChange">Related to special skills</label></td>
+                    <td><input type="checkbox" id="skillsChange" name="changingJob" value="skills" required></td>
+                </tr>
+                <tr>
+                    <td><label for="proximityChange">Proximity to residence</label></td>
+                    <td><input type="checkbox" id="proximityChange" name="changingJob" value="proximity" required></td>
+                </tr>
+                <tr>
+                    <td><label for="otherChange">Other reason(s), please specify</label></td>
+                    <td><input type="text" id="otherChangeText" name="otherChangeText" required></td>
+                </tr>
+            </table>
+            <!-- Buttons moved inside the form -->
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='Survey8.html'">Previous Page</button>
+                <button class="custom-button" type="submit" onclick="location.href='Survey10.html'">Next Page</button>
+            </div>
+        </form>
+    </div>
+
+    <p id="responseMessage"></p>
+
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to handle dropdown menu
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileIcon = document.querySelector(".navbar-profile img.avatar");
+            const dropdownContent = document.querySelector(".dropdown-content");
+
+            // Toggle the dropdown visibility on click
+            profileIcon.addEventListener("click", function () {
+                dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+            });
+
+            // Close the dropdown if clicked outside
+            window.addEventListener("click", function (event) {
+                if (!profileIcon.contains(event.target) && !dropdownContent.contains(event.target)) {
+                    dropdownContent.style.display = "none";
+                }
+            });
+        });
+
+        // Function to handle form submission
+        document.getElementById("jobSurvey").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Gather responses from the form
+            const form = event.target;
+            const formData = {
+                "Reasons for Accepting Job": Array.from(form.querySelectorAll('input[name="acceptingJob"]:checked')).map(input => input.value).join(", "),
+                "Reasons for Changing Job": Array.from(form.querySelectorAll('input[name="changingJob"]:checked')).map(input => input.value).join(", "),
+                "Other Reason (Accepting Job)": form.otherAcceptText.value,
+                "Other Reason (Changing Job)": form.otherChangeText.value
+            };
+
+            // Retrieve existing responses from localStorage
+            const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
+
+            // Merge new responses with existing ones
+            const updatedResponses = {
+                ...existingResponses,
+                ...formData
+            };
+
+            // Store updated responses back to localStorage
+            localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
+
+            // Redirect to the next page
+            location.href = 'Survey10.html'; // Adjust the link as needed
+        });
+
+        // Function to handle Previous button click
+        document.querySelector(".buttoncon .custom-button[type='button']").addEventListener("click", function () {
+            // Optionally, you can store the responses here if you want to keep them
+            // This is only if you want to save responses when going back
+            // You could also just navigate back without storing if you prefer
+
+            // Redirect to the previous page
+            location.href = 'Survey8.html'; // Adjust the link as needed
+        });
+
+    </script>
+</body>
+</html>

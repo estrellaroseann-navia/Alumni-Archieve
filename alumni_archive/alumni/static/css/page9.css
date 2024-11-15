@@ -1,0 +1,199 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styles */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: white; /* Light background for the entire body */
+}
+
+/* Navbar Styles */
+header {
+    background-color: #f8eedf;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-brand h1 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.navbar-brand p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.navbar-links a {
+    margin: 0 15px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-links a:hover {
+    color: #f07d3b; /* Hover color */
+}
+
+.navbar-links a.active {
+    color: #f07d3b;
+    font-weight: bold;
+    border-bottom: 2px solid #f07d3b;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-profile span {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.navbar-profile img.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #f8eedf;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f07d3b;
+    color: white;
+}
+
+/* Container Styles */
+.container {
+    padding: 60px;
+    background-color: #f8eedf; /* Consistent background */
+    margin: 20px auto; /* Add top margin for spacing from the top */
+    width: 90%; /* Increase width for better layout */
+    max-width: 1100px; /* Set a larger max-width for the container */
+    border: 2px solid #f07d3b; /* Add border for better visibility */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow to create depth */
+    border-radius: 10px; /* Keep the corners rounded */
+}
+/* Survey Form Styles */
+form {
+    background-color: #f8eedf;
+    padding: 40px; /* Increased padding for more space inside the form */
+    border-radius: 8px;
+    max-width: 1000px; /* Max-width for the form */
+    margin: auto; /* Center the form container with spacing above */
+}
+
+form h4 {
+    margin-bottom: 15px; /* Space below each question */
+    color: #333;
+}
+
+/* Label Styles */
+label {
+    font-size: 1rem;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f07d3b;
+    color: white;
+}
+
+h2 {
+    color: #f07d3b;
+    text-align: center;
+}
+
+/* Checkbox Styles */
+input[type="checkbox"] {
+    margin-right: 10px; /* Spacing between checkbox and label */
+}
+
+/* Button Container Styles */
+.buttoncon {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space above buttons */
+}
+
+.custom-button {
+    background-color: #f07d3b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px; /* Increased padding for larger buttons */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 10px; /* Spacing between buttons */
+}
+
+.custom-button:hover {
+    background-color: #d06b2f; /* Darker shade on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f07d3b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+}
+
+a {
+    text-decoration: none;
+}
