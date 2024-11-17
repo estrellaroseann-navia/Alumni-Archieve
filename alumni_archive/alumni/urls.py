@@ -40,6 +40,8 @@ urlpatterns = [
     path('survey/page10.html', views.page10_view, name='page10'),
     path('survey/page11.html', views.page11_view, name='page11'),
     path('survey/page12.html', views.page12_view, name='page12'),
+    path('survey/submit.html', views.submit_view, name='submit'),
+
 
     
 

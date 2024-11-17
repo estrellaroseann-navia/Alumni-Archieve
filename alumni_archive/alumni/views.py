@@ -133,3 +133,6 @@ def page11_view(request):
 def page12_view(request):
     return render(request, 'page12.html' )
 
+def submit_view(request):
+    return render(request, 'submit.html' )
+

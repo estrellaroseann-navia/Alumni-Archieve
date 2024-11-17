@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/submission.css' %}"> <!-- Link to your CSS for consistent style -->
+    <title>Alumni Survey Form 1</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="{% url 'homepage' %}"><h1>Alumni Archive</h1></a>
+                    <p>A Web-based System for Keeping Palawan State University Alumni Data Alive</p>
+                </div>
+                <nav class="navbar-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'survey' %}" class="active">Take Tracking Survey</a>
+                    <a href="{% url 'about' %}">About Us</a>
+                    <a href="{% url 'contact' %}">Contact Us</a>
+                    <a href="{% url 'donation' %}">Donate</a>
+                </nav>
+                <div class="navbar-profile" id="profile">
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
+                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="#">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'confirmlogout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2>Survey Responses</h2>
+            <div id="responses">
+                <!-- Survey responses will go here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Palawan State University. All rights reserved.</p>
+    </footer>
+
+    <script >
+        // Function to handle dropdown menu
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileImg = document.getElementById("navbarProfileImg");
+            const dropdownMenu = document.getElementById("dropdown-menu");
+            
+            // Toggle dropdown menu on avatar click
+            profileImg.addEventListener("click", function () {
+                dropdownMenu.classList.toggle("show");
+            });
+        
+            // Close dropdown if clicked outside
+            window.addEventListener("click", function (event) {
+                if (!profileImg.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove("show");
+                }
+            });
+        });
+        
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const responsesContainer = document.getElementById("responses");
+            const storedResponses = JSON.parse(localStorage.getItem("surveyResponses"));
+        
+            if (storedResponses) {
+            const curriculumRelevance = storedResponses["Curriculum Relevance"];
+            const competenciesUsed = storedResponses["Competencies Used"];
+        
+            const responseItem = document.createElement("div");
+            responseItem.classList.add("response-item");
+        
+            const curriculumElement = document.createElement("h2");
+            curriculumElement.textContent =
+                "Curriculum Relevance: " + curriculumRelevance;
+        
+            const competenciesElement = document.createElement("p");
+            competenciesElement.textContent = "Competencies Used: " + competenciesUsed;
+        
+            responseItem.appendChild(curriculumElement);
+            responseItem.appendChild(competenciesElement);
+        
+            responsesContainer.appendChild(responseItem);
+            } else {
+            responsesContainer.textContent = "No survey responses found.";
+            }
+        });
+        
+    </script>
+</body>
+</html>
