@@ -256,5 +256,6 @@ def page11_view(request):
 def page12_view(request):
     return render(request, 'page12.html' )
 
-def page6_2_view(request):
-    return render(request, 'page6.2.html' )
+def submit_view(request):
+    return render(request, 'submit.html' )
+

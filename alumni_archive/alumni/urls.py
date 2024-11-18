@@ -33,7 +33,6 @@ urlpatterns = [
     path('survey/page4.html', views.page4_view, name='page4'),
     path('survey/page5.html', views.page5_view, name='page5'),
     path('survey/page6.2.html', views.page6_2_view, name='page6.2'),
-    path('survey/page6.2.html', views.page6_2_view, name='page6.2'),
     path('survey/page6.html', views.page6_view, name='page6'),
     path('survey/page7.html', views.page7_view, name='page7'),
     path('survey/page8.html', views.page8_view, name='page8'),
@@ -41,6 +40,8 @@ urlpatterns = [
     path('survey/page10.html', views.page10_view, name='page10'),
     path('survey/page11.html', views.page11_view, name='page11'),
     path('survey/page12.html', views.page12_view, name='page12'),
+    path('survey/submit.html', views.submit_view, name='submit'),
+
 
     
 

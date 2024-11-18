@@ -91,8 +91,8 @@
             </table>
             <!-- Buttons inside the form -->
             <div class="buttoncon">
-                <button class="custom-button" type="button" onclick="location.href='page11.html'">Previos Page</button>
-                <button class="custom-button" type="submit" onclick="location.href='submit.html'">Submit</button>
+                <button class="custom-button" type="button" onclick="location.href='{% url 'page11' %}'">Previous Page</button>
+                <button class="custom-button" type="submit">Submit</button>
             </div>
         </form>
     </div>
@@ -130,12 +130,11 @@
 
         // Button Functions
         document.querySelector(".buttoncon .custom-button[type='button']").onclick = function() {
-            // Navigate to the previous page
-            location.href = 'page11.html'; // Change 'Survey11.html' to the correct page link if necessary
+            location.href = "{% url 'page11' %}";
         };
-
-        document.querySelector(".buttoncon .custom-button[type='submit']").onclick = function(event) {
-            event.preventDefault(); // Prevent default form submission to handle it manually
+    
+        document.querySelector("#curriculumSurvey").onsubmit = function(event) {
+            event.preventDefault();
             const form = document.getElementById("curriculumSurvey");
             
             // Check if the form is valid
@@ -143,23 +142,16 @@
                 // Gather the responses
                 const formData = {
                     "Curriculum Relevance": form.curriculumRelevance.value,
-                    "Competencies Used": Array.from(form.querySelectorAll('input[name="competencies"]:checked')).map(input => input.nextElementSibling.textContent).join(", ")
+                    "Competencies Used": Array.from(form.querySelectorAll('input[name="competencies"]:checked'))
+                        .map(input => input.value).join(", "),
+                    "Other Skills": document.getElementById("otherSkillsText").value
                 };
-
-                // Retrieve existing responses from localStorage
-                const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
+    
+                // Store in localStorage if needed
+                localStorage.setItem("surveyResponses", JSON.stringify(formData));
                 
-                // Merge new responses with existing ones
-                const updatedResponses = {
-                    ...existingResponses,
-                    ...formData
-                };
-
-                // Store updated responses back to localStorage
-                localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
-                
-                // Redirect to the submission page if the form is valid
-                location.href = 'submit.html'; // Change 'Submission.html' to the correct submission page link if necessary
+                // Redirect using Django URL
+                window.location.href = "{% url 'submit' %}";
             } else {
                 // Optionally show an alert or message if the form is invalid
                 alert("Please fill out all required fields before submitting.");
