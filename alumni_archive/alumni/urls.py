@@ -44,8 +44,10 @@ urlpatterns = [
 
     
 
-    
-
+    # Other URLs
+    path('get-campuses/', views.get_campuses, name='get_campuses'),
+    path('get-programs/', views.get_programs, name='get_programs'),
+    path('get-colleges/', views.get_colleges, name='get_colleges'),
     
 
     

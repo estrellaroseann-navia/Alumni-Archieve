@@ -15,116 +15,13 @@ CLUSTER_CHOICES = [
         ('cuyo', 'PCAT Cuyo'),
     ]
 
-CAMPUS_CHOICES = {
-    '':[''],
-    'main': [
-        ('maincampus', 'Puerto Princesa City')
-    ],
-    'cluster1': [
-        ('cluster1campus1', 'ROXAS'),
-        ('cluster1campus2', 'ARACELI'),
-        ('cluster1campus3', 'DUMARAN'),
-        ('cluster1campus4', 'SAN VICENTE')
-    ],
-    'cluster2': [
-        ('cluster2campus1', 'TAYTAY'),
-        ('cluster2campus2', 'EL NIDO'),
-        ('cluster2campus3', 'NILAPACAN'),
-        ('cluster2campus4', 'CORON')
-    ],
-    'cluster3': [
-        ('cluster3campus1', 'NARRA'),
-        ('cluster3campus2', 'QUEZON'),
-        ('cluster3campus3', 'RIZAL')
-    ],
-    'cluster4': [
-        ('cluster4campus1', 'ESPANOLA'),
-        ('cluster4campus2', 'BROOKES POINT'),
-        ('cluster4campus3', 'ESPANOLA'),
-        ('cluster4campus4', 'BATARAZA')
-    ],
-    'cuyo': [
-        ('cuyocampus1', 'CUYO')
-    ]
-}
-
-COLLEGE_CHOICES = [
-    ('', 'Select College'),
-    ('cs', 'College of Sciences'),
-    ('ceat', 'College of Engineering Architecture and Technology'),
-    ('cah', 'College of Arts and Humanities'),
-    ('cba', 'College of Business and Accountancy'),
-    ('ccje', 'College of Criminal Justice Education'),
-    ('cte', 'College of Teacher Education'),
-    ('chtm', 'College of Nursing and Health Sciences'),
-    ('ceat', 'College of Hospitality Management and Tourism'),
-    ('graduate-school', 'College of PSU-Graduate School')
-]
-
-PROGRAM_CHOICES = {
-    'cs': [
-        ('bio', 'Bachelor of Science in Biology'),
-        ('marbio', 'Bachelor of Science in Marine Biology'),
-        ('comsci', 'Bachelor of Science in Computer Science'),
-        ('envisci', 'Bachelor of Science in Environmental Science'),
-        ('it', 'Bachelor of Science in Information Technology')
-    ],
-    'ceat': [
-        ('archi', 'Bachelor of Science in Architecture'),
-        ('civil', 'Bachelor of Science in Civil Engineering'),
-        ('elect', 'Bachelor of Science in Electrical Engineering'),
-        ('peteng', 'Bachelor of Science in Petroleum Engineering')
-    ],
-    'cah': [
-        ('com', 'Bachelor of Arts in Communication'),
-        ('polsci', 'Bachelor of Arts in Political Science'),
-        ('solwork', 'Bachelor of Arts in Social Work'),
-        ('psych', 'Bachelor of Arts in Psychology')
-    ],
-    'cba': [
-        ('accountancy', 'Bachelor of Science in Accountancy'),
-        ('manaccount', 'Bachelor of Science in Management Accounting'),
-        ('bus-add', 'Bachelor of Science in Business Administration'),
-        ('entrep', 'Bachelor of Science in Entrepreneurship'),
-        ('fm', 'Bachelor of Science in Financial Management')
-    ],
-    'ccje': [
-        ('crim', 'Bachelor of Science in Criminology'),
-        ('program10', 'Program 10')  # Placeholder program name
-    ],
-    'cte': [
-        ('bee', 'Bachelor of Elementary Education'),
-        ('bse', 'Bachelor of Secondary Education'),
-        ('bpe', 'Bachelor of Physical Education')
-    ],
-    'cnhs': [
-        ('bsn', 'Bachelor of Science in Nursing'),
-        ('bsm', 'Bachelor of Science in Midwifery'),
-        ('diploma', 'Diploma in Midwifery')
-    ],
-    'chtm': [
-        ('hm', 'Bachelor of Science in Hospitality Management'),
-        ('btm', 'Bachelor of Science in Tourism Management'),
-        ('diploma', 'Diploma in Midwifery')
-    ],
-    'graduate-school': [
-        ('de', 'Doctor of Education'),
-        ('mba', 'Master of Business Administration'),
-        ('mst', 'Master of Science in Technopreneurship'),
-        ('mat', 'Master of Arts in Teaching'),
-        ('msem', 'Master of Science in Environmental Management'),
-        ('mpa', 'Master in Public Administration'),
-        ('msn', 'Master of Science in Nursing')
-    ]
-}
-
 
 class AlumniRegistrationForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm your password'}))
 
     cluster = forms.ChoiceField(choices=CLUSTER_CHOICES, widget=forms.Select(attrs={'id': 'id_cluster', 'placeholder': 'Select your cluster'}))
     campus = forms.ChoiceField(choices=[],required=True, widget=forms.Select(attrs={'id': 'id_campus', 'placeholder': 'Select Campus'}))
-    college = forms.ChoiceField(choices=COLLEGE_CHOICES,required=True, widget=forms.Select(attrs={'id': 'id_college', 'placeholder': 'Select College'}))
+    college = forms.ChoiceField(choices=[],required=True, widget=forms.Select(attrs={'id': 'id_college', 'placeholder': 'Select College'}))
     school_program = forms.ChoiceField(choices=[],required=True, widget=forms.Select(attrs={'id': 'id_school_program', 'placeholder': 'Select Program'}))
 
     #validate email if exist then throw error
@@ -181,8 +78,8 @@ class AlumniRegistrationForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["campus"].choices = CAMPUS_CHOICES.get(self.data.get('cluster'), [])
-        self.fields["school_program"].choices = PROGRAM_CHOICES.get(self.data.get('college'), [])
+        self.fields["campus"].choices = ""
+        self.fields["school_program"].choices = ""
 
         
     

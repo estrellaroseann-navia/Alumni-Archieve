@@ -19,4 +19,63 @@
       <p>&copy; 2024 Your Company. All rights reserved.</p>
     </footer>
   </body>
+  <script>
+    // Fetch campuses when a cluster is selected
+    document
+      .getElementById("id_cluster")
+      .addEventListener("change", function () {
+        var cluster = this.value;
+        fetch(`/get-campuses/?cluster=${cluster}`)
+          .then((response) => response.json())
+          .then((data) => {
+            var campusSelect = document.getElementById("id_campus");
+            campusSelect.innerHTML = ""; // Clear current options
+            data.campuses.forEach(function (campus) {
+              var option = document.createElement("option");
+              option.value = campus[0];
+              option.text = campus[1];
+              campusSelect.appendChild(option);
+            });
+          });
+      });
+
+    // Fetch colleges when a campus is selected
+    document
+      .getElementById("id_campus")
+      .addEventListener("change", function () {
+        var campus = this.value;
+        // Assuming you want to fetch colleges based on the selected campus
+        fetch(`/get-colleges/?campus=${campus}`) // Adjust your backend logic if needed
+          .then((response) => response.json())
+          .then((data) => {
+            var collegeSelect = document.getElementById("id_college");
+            collegeSelect.innerHTML = ""; // Clear current options
+            data.colleges.forEach(function (college) {
+              var option = document.createElement("option");
+              option.value = college[0];
+              option.text = college[1];
+              collegeSelect.appendChild(option);
+            });
+          });
+      });
+
+    // Fetch programs when a college is selected
+    document
+      .getElementById("id_college")
+      .addEventListener("change", function () {
+        var college = this.value;
+        fetch(`/get-programs/?college=${college}`)
+          .then((response) => response.json())
+          .then((data) => {
+            var programSelect = document.getElementById("id_school_program");
+            programSelect.innerHTML = ""; // Clear current options
+            data.programs.forEach(function (program) {
+              var option = document.createElement("option");
+              option.value = program[0];
+              option.text = program[1];
+              programSelect.appendChild(option);
+            });
+          });
+      });
+  </script>
 </html>
