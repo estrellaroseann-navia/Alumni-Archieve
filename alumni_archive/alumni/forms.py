@@ -81,8 +81,6 @@ class AlumniRegistrationForm(forms.ModelForm):
         self.fields["campus"].choices = ""
         self.fields["school_program"].choices = ""
 
-        
-    
 class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)

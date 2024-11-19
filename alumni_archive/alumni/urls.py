@@ -42,18 +42,11 @@ urlpatterns = [
     path('survey/page12.html', views.page12_view, name='page12'),
     path('survey/submit.html', views.submit_view, name='submit'),
 
-
-    
-
     # Other URLs
     path('get-campuses/', views.get_campuses, name='get_campuses'),
     path('get-programs/', views.get_programs, name='get_programs'),
     path('get-colleges/', views.get_colleges, name='get_colleges'),
     
-
-    
-
-
 
 
 ]
