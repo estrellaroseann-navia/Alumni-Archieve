@@ -160,6 +160,22 @@
             // Optional: Add profile image (replace with dynamic content if available)
             document.getElementById("navbarProfileImg").src = localStorage.getItem("profileImage") || "profile.png";
 
+            // Retrieve existing responses from localStorage
+            const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
+
+             // Function to save form data to local storage
+             function saveFormData() {
+                const formData = {};
+    
+                // Get form inputs and save their values
+                const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
+                inputs.forEach(input => {
+                    formData[input.name] = input.value; // Assuming each input has a 'name' attribute
+                });
+    
+                // Save form data to local storage
+                localStorage.setItem('surveyResponses', JSON.stringify(formData));
+
     </script>
 </body>
 </html>

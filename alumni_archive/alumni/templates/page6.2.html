@@ -26,7 +26,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">USER</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -69,7 +69,7 @@
 
                 <!-- Buttons Inside the Form Container -->
                 <div class="buttoncon">
-                    <button class="custom-button" type="button" onclick="history.back()">Previous Page</button>
+                    <button class="custom-button" type="button" onclick="location.href='page6.html'">Previous Page</button>
                     <button class="custom-button" type="submit" onclick="location.href='page7.html'">Next Page</button>
                 </div>
             </div>
@@ -84,64 +84,76 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Dropdown menu functionality for profile section
-            const profile = document.getElementById('profile');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const navbarProfileImg = document.getElementById('navbarProfileImg');
-        
-            // Toggle dropdown on click
-            profile.addEventListener('click', () => {
-                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
-            });
-        
-            // Close dropdown when clicking outside of the profile section
-            window.addEventListener('click', (event) => {
-                if (!profile.contains(event.target)) {
-                    dropdownMenu.style.display = 'none';
-                }
-            });
-        
-            // Handling Previous and Next buttons
-            const prevButton = document.querySelector(".custom-button[type='button']");
-            const nextButton = document.querySelector(".custom-button[type='submit']");
-        
-            // Load saved data from localStorage
-            loadSavedData();
-        
-            prevButton.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default action to handle it with JS
-                window.location.href = 'page6.html'; // Redirect to Survey6.html
-            });
-        
-            nextButton.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default action to handle it with JS
-                // Before navigating, save any data to localStorage
-                saveData();
-        
-                window.location.href = 'page7.html'; // Redirect to Survey7.html
-            });
-        
-            // Function to save data to localStorage
-            function saveData() {
-                const inputField = document.getElementById('inputField'); // Change 'inputField' to your actual input element ID
-                if (inputField) {
-                    localStorage.setItem('surveyInputData', inputField.value); // Save input value
-                }
-            }
-        
-            // Function to load saved data from localStorage
-            function loadSavedData() {
-                const savedData = localStorage.getItem('surveyInputData');
-                if (savedData) {
-                    const inputField = document.getElementById('inputField'); // Change 'inputField' to your actual input element ID
-                    if (inputField) {
-                        inputField.value = savedData; // Load saved value into input
+        // Select the form
+        const form = document.getElementById("employmentStatusForm");
+
+        // Function to save form data to localStorage
+        function saveFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                // Handle different input types
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                if (inputElement) {
+                    if (inputElement.type === 'checkbox') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
                     }
                 }
             }
+            
+            // Save to localStorage
+            localStorage.setItem("employmentStatusFormData", JSON.stringify(data));
+        }
+
+        // Function to load saved form data
+        function loadSavedFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const savedData = localStorage.getItem("employmentStatusFormData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'checkbox') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Add event listeners to save data
+        if (form) {
+            // Save on any input change
+            form.addEventListener("input", saveFormData);
+            form.addEventListener("change", saveFormData);
+            
+            // Load saved data on page load
+            loadSavedFormData();
+        }
+
+        // Handle form submission
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            saveFormData(); // Save form data to localStorage
+            
+            // Redirect to next page
+            location.href = 'page7.html';
         });
-        
+
     </script>
 </body>
 </html>

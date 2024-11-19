@@ -26,7 +26,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">USER</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -98,7 +98,7 @@
 
             <!-- Buttons Inside the Form Container -->
             <div class="buttoncon">
-                <button class="custom-button" type="button" onclick="location.href='page6.html'">Previous Page</button>
+                <button class="custom-button" type="button" onclick="location.href='page6.2.html'">Previous Page</button>
                 <button class="custom-button" type="submit" onclick="location.href='page8.html'">Next Page</button>
             </div>
         </form>
@@ -112,77 +112,110 @@
     </footer>
 
     <script >
-        // Function to toggle the dropdown menu visibility
-function toggleDropdown() {
-    const dropdownMenu = document.getElementById("dropdown-menu");
-    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-}
+        // Select the form
+        const form = document.getElementById("businessLineForm");
 
-// Close dropdown if clicked outside
-window.onclick = function(event) {
-    if (!event.target.matches('.avatar')) {
-        const dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.style.display === "block") {
-                openDropdown.style.display = "none";
+        // Function to save form data to localStorage
+        function saveFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                // Handle different input types
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                if (inputElement) {
+                    if (inputElement.type === 'radio') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
+                    }
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("businessLineFormData", JSON.stringify(data));
+        }
+
+        // Function to load saved form data
+        function loadSavedFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const savedData = localStorage.getItem("businessLineFormData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'radio') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
+                    }
+                }
             }
         }
-    }
-}
 
-// Handle form submission
-document.getElementById("businessLineForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent default form submission
+        // Add event listeners to save data
+        if (form) {
+            // Save on any input change
+            form.addEventListener("input", saveFormData);
+            form.addEventListener("change", saveFormData);
+            
+            // Load saved data on page load
+            loadSavedFormData();
+        }
 
-    // Save form data to local storage
-    saveFormData();
-
-    // You can handle any validation or data processing here
-
-    // Redirect to the next page
-    location.href = 'page8.html'; // Redirect to the next survey page
-});
-
-// Add click event listener to the profile image
-document.getElementById("navbarProfileImg").addEventListener("click", toggleDropdown);
-
-// Add click event listeners for the buttons
-document.querySelector(".buttoncon .custom-button[type='button']").addEventListener("click", function() {
-    location.href = 'page6.html'; // Redirect to the previous survey page
-});
-
-// Function to save form data to local storage
-function saveFormData() {
-    const formData = {};
-
-    // Get form inputs and save their values
-    const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
-    inputs.forEach(input => {
-        formData[input.name] = input.value; // Assuming each input has a 'name' attribute
-    });
-
-    // Save form data to local storage
-    localStorage.setItem('businessLineFormData', JSON.stringify(formData));
-}
-
-// Function to load form data from local storage
-function loadFormData() {
-    const savedData = JSON.parse(localStorage.getItem('businessLineFormData'));
-
-    if (savedData) {
-        const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
-        inputs.forEach(input => {
-            if (savedData[input.name]) {
-                input.value = savedData[input.name]; // Load saved value into input
-            }
+        // Handle form submission
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            saveFormData(); // Save form data to localStorage
+            
+            // Redirect to next page
+            location.href = 'page8.html';
         });
-    }
-}
 
-// Load form data on page load
-document.addEventListener("DOMContentLoaded", loadFormData);
+        // Optional: Form validation before navigation
+        function validateForm() {
+            const requiredFields = form.querySelectorAll("[required]");
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error'); // Optional: Add error styling
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Add validation to navigation buttons
+        const navigationButtons = document.querySelectorAll(".custom-button");
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function(event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Prevent navigation if form is invalid
+                    alert("Please fill out all required fields.");
+                }
+            });
+        });
+
+        // Clear saved data function (optional)
+        function clearSavedFormData() {
+            localStorage.removeItem("businessLineFormData");
+        }
 
     </script>
+    
 </body>
 </html>

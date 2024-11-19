@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -28,7 +28,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -89,54 +89,91 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const profile = document.getElementById('profile');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-
-            // Toggle dropdown menu on profile click
-            profile.addEventListener('click', function () {
-                dropdownMenu.classList.toggle('show');
-            });
-
-            // Close the dropdown menu if the user clicks outside of it
-            window.addEventListener('click', function (event) {
-                if (!profile.contains(event.target)) {
-                    dropdownMenu.classList.remove('show');
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("education-form");
+            
+            function saveFormData() {
+                const formData = new FormData(form);
+                const data = {};
+                
+                for (const [key, value] of formData.entries()) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    if (inputElement) {
+                        data[key] = value;
+                    }
                 }
-            });
-
-            // Buttons responsive and functional
-            const previousButton = document.querySelector('.buttoncon .custom-button:nth-child(1)');
-            const nextButton = document.querySelector('.buttoncon .custom-button:nth-child(2)');
-
-            previousButton.addEventListener('click', function () {
-                window.location.href = 'page1.html'; // Redirect to Page 1.html
-            });
-
-            nextButton.addEventListener('click', function () {
-                // Gather responses from the form
-                const form = document.getElementById("curriculumSurvey"); // Ensure you have the correct form ID
-                const formData = {
-                    "Curriculum Relevance": form.curriculumRelevance.value,
-                    "Competencies Used": Array.from(form.querySelectorAll('input[name="competencies"]:checked')).map(input => input.nextElementSibling.textContent).join(", ")
-                };
-
-                // Retrieve existing responses from localStorage
-                const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
-
-                // Merge new responses with existing ones
-                const updatedResponses = {
-                    ...existingResponses,
-                    ...formData
-                };
-
-                // Store updated responses back to localStorage
-                localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
-
-                window.location.href = 'page3.html';
+                
+                try {
+                    localStorage.setItem("educationFormData", JSON.stringify(data));
+                    console.log("Form data saved successfully");
+                } catch (error) {
+                    console.error("Error saving form data:", error);
+                }
+            }
+            
+            function loadSavedFormData() {
+                try {
+                    const savedData = localStorage.getItem("educationFormData");
+                    if (savedData) {
+                        const formData = JSON.parse(savedData);
+                        
+                        for (const [key, value] of Object.entries(formData)) {
+                            const inputElement = form.querySelector(`[name="${key}"]`);
+                            if (inputElement) {
+                                inputElement.value = value;
+                            }
+                        }
+                        console.log("Saved form data loaded");
+                    }
+                } catch (error) {
+                    console.error("Error loading form data:", error);
+                }
+            }
+            
+            function validateForm() {
+                const requiredFields = form.querySelectorAll("[required]");
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error-field');
+                    } else {
+                        field.classList.remove('error-field');
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            // Event listeners for form inputs
+            form.addEventListener("input", saveFormData);
+            form.addEventListener("change", saveFormData);
+            
+            // Load saved data on page load
+            loadSavedFormData();
+            
+            // Navigation buttons
+            const navigationButtons = document.querySelectorAll(".custom-button");
+            navigationButtons.forEach(button => {
+                button.addEventListener("click", function(event) {
+                    if (validateForm()) {
+                        saveFormData();
+                        // Navigation logic can be added here if needed
+                    } else {
+                        event.preventDefault();
+                        alert("Please fill out all required fields.");
+                    }
+                });
             });
         });
-
+        
+        // Optional: Function to clear saved form data
+        function clearSavedFormData() {
+            localStorage.removeItem("educationFormData");
+            console.log("Saved form data cleared");
+        }
     </script>
+    
 </body>
 </html>

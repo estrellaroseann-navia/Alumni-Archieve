@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -26,7 +27,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -80,79 +81,107 @@
     </footer>
 
     <script>
-                document.addEventListener('DOMContentLoaded', () => {
-            // Dropdown menu functionality for the profile section
-            const profile = document.getElementById('profile');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const navbarProfileImg = document.getElementById('navbarProfileImg');
-
-            // Toggle dropdown on click
-            navbarProfileImg.addEventListener('click', () => {
-                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
-            });
-
-            // Close dropdown when clicking outside of the profile section
-            window.addEventListener('click', (event) => {
-                if (!profile.contains(event.target)) {
-                    dropdownMenu.style.display = 'none';
-                }
-            });
-
-            // Responsive behavior for Previous and Next buttons
-            const prevButton = document.querySelector(".custom-button:nth-child(1)");
-            const nextButton = document.querySelector(".custom-button:nth-child(2)");
-
-            prevButton.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default action to handle it with JS
-                saveSurveyData(); // Save data before navigating
-                window.location.href = 'page3.html'; // Redirect to Page3.html
-            });
-
-            nextButton.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default action to handle it with JS
-                saveSurveyData(); // Save data before navigating
-                window.location.href = 'page5.html'; // Redirect to Survey5.html
-            });
-
-            // Survey form handling
-            const othersInput = document.querySelector('input[name="otherSkillsText"]'); // Ensure the correct input name
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            // Load saved data from localStorage when the page loads
-            loadSurveyData();
-
-            // Function to save survey data
-            function saveSurveyData() {
-                const surveyData = {};
-
-                // Store checkbox values
-                checkboxes.forEach((checkbox, index) => {
-                    surveyData[`checkbox${index}`] = checkbox.checked;
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("train-form");
+            
+            function saveFormData() {
+                const data = [];
+                const rows = form.querySelectorAll('tr');
+                
+                // Convert NodeList to Array and skip the header row
+                Array.from(rows).slice(1).forEach(row => {
+                    const inputs = row.querySelectorAll('input');
+                    const rowData = {
+                        title: inputs[0].value,
+                        duration: inputs[1].value,
+                        name: inputs[2].value
+                    };
+                    
+                    // Only save rows with data
+                    if (rowData.title || rowData.duration || rowData.name) {
+                        data.push(rowData);
+                    }
                 });
-
-                // Store the value of the 'Others' input
-                surveyData.others = othersInput.value;
-
-                // Save data to localStorage
-                localStorage.setItem('surveyPage4Data', JSON.stringify(surveyData));
-            }
-
-            // Function to load survey data
-            function loadSurveyData() {
-                const savedData = JSON.parse(localStorage.getItem('surveyPage4Data'));
-
-                if (savedData) {
-                    // Load checkbox values
-                    checkboxes.forEach((checkbox, index) => {
-                        checkbox.checked = savedData[`checkbox${index}`] || false;
-                    });
-
-                    // Load 'Others' input value
-                    othersInput.value = savedData.others || '';
+                
+                try {
+                    localStorage.setItem("trainingFormData", JSON.stringify(data));
+                    console.log("Form data saved successfully");
+                } catch (error) {
+                    console.error("Error saving form data:", error);
                 }
             }
+            
+            function loadSavedFormData() {
+                try {
+                    const savedData = localStorage.getItem("trainingFormData");
+                    if (savedData) {
+                        const formData = JSON.parse(savedData);
+                        const rows = form.querySelectorAll('tr');
+                        
+                        formData.forEach((rowData, index) => {
+                            if (rows[index + 1]) {
+                                const inputs = rows[index + 1].querySelectorAll('input');
+                                inputs[0].value = rowData.title || '';
+                                inputs[1].value = rowData.duration || '';
+                                inputs[2].value = rowData.name || '';
+                            }
+                        });
+                        
+                        console.log("Saved form data loaded");
+                    }
+                } catch (error) {
+                    console.error("Error loading form data:", error);
+                }
+            }
+            
+            function validateForm() {
+                const requiredInputs = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('error-field');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('error-field');
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            // Event listeners for form inputs
+            const inputs = form.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener("input", saveFormData);
+                input.addEventListener("change", saveFormData);
+            });
+            
+            // Load saved data on page load
+            loadSavedFormData();
+            
+            // Navigation buttons
+            const navigationButtons = document.querySelectorAll(".custom-button");
+            navigationButtons.forEach(button => {
+                button.addEventListener("click", function(event) {
+                    if (validateForm()) {
+                        saveFormData();
+                    } else {
+                        event.preventDefault();
+                        alert("Please fill out all required fields.");
+                    }
+                });
+            });
         });
-
+        
+        // Optional: Function to clear saved form data
+        function clearSavedFormData() {
+            localStorage.removeItem("trainingFormData");
+            console.log("Saved form data cleared");
+        }
+    
     </script>
+
+    
 </body>
 </html>

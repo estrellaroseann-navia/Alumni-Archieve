@@ -25,8 +25,8 @@
                     <a href="{% url 'donation' %}">Donate</a>
                 </nav>
                 <div class="navbar-profile" id="profile">
-                    <span id="navbarUserName">USER</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <span id="navbarUserName">Hello</span>
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -90,95 +90,111 @@
     </footer>
     
     <script>
-        // Dropdown Menu Toggle for Profile
-        document.addEventListener('DOMContentLoaded', function () {
-            const profile = document.getElementById('profile');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const responseMessage = document.getElementById('responseMessage');
+        // Select the form
+        const form = document.getElementById("employmentStatusForm");
 
-            // Load saved response message from local storage
-            loadResponseMessage();
-
-            // Toggle dropdown menu on profile click
-            profile.addEventListener('click', function () {
-                dropdownMenu.classList.toggle('show');
-            });
-
-            // Close dropdown if clicked outside
-            window.addEventListener('click', function (e) {
-                if (!profile.contains(e.target)) {
-                    dropdownMenu.classList.remove('show');
-                }
-            });
-
-            // Functionality for Navigation Buttons
-            const prevButton = document.querySelector(".buttoncon .custom-button[type='button']:first-child");
-            const nextButton = document.querySelector(".buttoncon .custom-button[type='button']:last-child");
-
-            // Previous button action
-            prevButton.addEventListener('click', function () {
-                // Redirect to the previous page (Survey 5)
-                window.location.href = 'page5.html';
-            });
-
-            // Next button action
-            nextButton.addEventListener('click', function (event) {
-                // Prevent form submission
-                event.preventDefault();
-
-                // Display a thank you message and save it to local storage
-                const thankYouMessage = "Thank you for taking the survey!";
-                responseMessage.textContent = thankYouMessage;
-                responseMessage.style.color = "green"; // Style the message
-
-                // Save the response message to local storage
-                localStorage.setItem('responseMessage', thankYouMessage);
-
-                // Save the survey data to local storage
-                saveSurveyData();
-
-                setTimeout(function () {
-                    window.location.href = 'page6.2.html'; // Redirect to next survey page
-                }, 2000); // 2-second delay
-            });
-
-            // Function to save survey data to local storage
-            function saveSurveyData() {
-                const surveyData = {
-                    reasons: [],
-                    employmentStatus: ''
-                };
-
-                // Store checkbox values for reasons
-                const reasonCheckboxes = document.querySelectorAll('input[name="reason"]');
-                reasonCheckboxes.forEach((checkbox) => {
-                    if (checkbox.checked) {
-                        surveyData.reasons.push(checkbox.value);
+        // Function to save form data to localStorage
+        function saveFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                // Handle different input types
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                if (inputElement) {
+                    if (inputElement.type === 'checkbox') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
                     }
-                });
-
-                // Store employment data
-                const employmentCheckboxes = document.querySelectorAll('input[name="employment"]');
-                employmentCheckboxes.forEach((checkbox) => {
-                    if (checkbox.checked) {
-                        surveyData.employmentStatus = checkbox.value;
-                    }
-                });
-
-                // Save data to localStorage
-                localStorage.setItem('surveyPageData', JSON.stringify(surveyData));
-            }
-
-            // Function to load the response message from local storage
-            function loadResponseMessage() {
-                const savedMessage = localStorage.getItem('responseMessage');
-                if (savedMessage) {
-                    responseMessage.textContent = savedMessage;
-                    responseMessage.style.color = "green"; // Keep the message styled
                 }
             }
+            
+            // Save to localStorage
+            localStorage.setItem("employmentStatusFormData", JSON.stringify(data));
+        }
+
+        // Function to load saved form data
+        function loadSavedFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const savedData = localStorage.getItem("employmentStatusFormData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'checkbox') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Add event listeners to save data
+        if (form) {
+            // Save on any input change
+            form.addEventListener("input", saveFormData);
+            form.addEventListener("change", saveFormData);
+            
+            // Load saved data on page load
+            loadSavedFormData();
+        }
+
+        // Navigation buttons (if they exist)
+        const navigationButtons = document.querySelectorAll(".custom-button");
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                saveFormData(); // Ensure data is saved before navigation
+                
+                // Add your navigation logic here
+                // For example: 
+                // if (this.getAttribute('data-next-page')) {
+                //     location.href = this.getAttribute('data-next-page');
+                // }
+            });
         });
 
+        // Optional: Form validation before navigation
+        function validateForm() {
+            const requiredFields = form.querySelectorAll("[required]");
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error'); // Optional: Add error styling
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Add validation to navigation buttons
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function(event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Prevent navigation if form is invalid
+                    alert("Please fill out all required fields.");
+                }
+            });
+        });
+
+        // Clear saved data function (optional)
+        function clearSavedFormData() {
+            localStorage.removeItem("employmentStatusFormData");
+        }
 
     </script>
 </body>

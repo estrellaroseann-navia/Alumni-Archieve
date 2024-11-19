@@ -145,8 +145,18 @@
                 ...formData
             };
 
-            // Store updated responses back to localStorage
-            localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
+             // Function to save form data to local storage
+             function saveFormData() {
+                const formData = {};
+    
+                // Get form inputs and save their values
+                const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
+                inputs.forEach(input => {
+                    formData[input.name] = input.value; // Assuming each input has a 'name' attribute
+                });
+    
+                // Save form data to local storage
+                localStorage.setItem('surveyResponses', JSON.stringify(formData));
 
             // Redirect to the next page
             location.href = 'page10.html'; // Adjust the link as needed

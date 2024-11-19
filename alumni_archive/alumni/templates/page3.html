@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/page3.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Font Awesome for icons -->
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <header>
@@ -25,8 +27,8 @@
                     <a href="{% url 'donation' %}">Donate</a>
                 </nav>
                 <div class="navbar-profile" id="profile">
-                    <span id="navbarUserName">USER</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <span id="navbarUserName">Hello</span>
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -144,74 +146,94 @@
     </footer>
 
     <script>
-        // Function to toggle the dropdown menu and handle page interactions
-        document.addEventListener('DOMContentLoaded', function () {
-            const profile = document.getElementById('profile');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            const othersInput = document.querySelector('input[name="Others"]'); // Ensure the correct input name
-
-            // Toggle the dropdown menu when the profile icon is clicked
-            profile.addEventListener('click', function () {
-                dropdownMenu.classList.toggle('show');
-            });
-
-            // Close the dropdown if the user clicks outside
-            window.addEventListener('click', function (event) {
-                if (!profile.contains(event.target)) {
-                    dropdownMenu.classList.remove('show');
-                }
-            });
-
-            // Load saved data from localStorage when the page loads
-            loadSurveyData();
-
-            // Button handling for navigation
-            const previousButton = document.querySelector('.buttoncon .custom-button:nth-child(1)');
-            const nextButton = document.querySelector('.buttoncon .custom-button:nth-child(2)');
-
-            previousButton.addEventListener('click', function () {
-                saveSurveyData();  // Save data before navigating
-                window.location.href = 'page2.html';  // Redirect to Survey2.html
-            });
-
-            nextButton.addEventListener('click', function () {
-                saveSurveyData();  // Save data before navigating
-                window.location.href = 'page4.html';  // Redirect to Survey4.html
-            });
-
-            // Function to save survey data
-            function saveSurveyData() {
-                const surveyData = {};
-
-                // Store checkbox values
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector(".surveyForm");
+            
+            function saveFormData() {
+                const data = {};
+                const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                const otherInput = form.querySelector('input[name="Others"]');
+                
                 checkboxes.forEach((checkbox, index) => {
-                    surveyData[`checkbox${index}`] = checkbox.checked;
+                    data[`checkbox_${index}`] = checkbox.checked;
                 });
-
-                // Store the value of the 'Others' input
-                surveyData.others = othersInput.value;
-
-                // Save data to localStorage
-                localStorage.setItem('surveyPage3Data', JSON.stringify(surveyData));
-            }
-
-            // Function to load survey data
-            function loadSurveyData() {
-                const savedData = JSON.parse(localStorage.getItem('surveyPage3Data'));
-
-                if (savedData) {
-                    // Load checkbox values
-                    checkboxes.forEach((checkbox, index) => {
-                        checkbox.checked = savedData[`checkbox${index}`] || false;
-                    });
-
-                    // Load 'Others' input value
-                    othersInput.value = savedData.others || '';
+                
+                if (otherInput) {
+                    data['others_input'] = otherInput.value;
+                }
+                
+                try {
+                    localStorage.setItem("surveyReasonsData", JSON.stringify(data));
+                    console.log("Form data saved successfully");
+                } catch (error) {
+                    console.error("Error saving form data:", error);
                 }
             }
+            
+            function loadSavedFormData() {
+                try {
+                    const savedData = localStorage.getItem("surveyReasonsData");
+                    if (savedData) {
+                        const formData = JSON.parse(savedData);
+                        
+                        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                        checkboxes.forEach((checkbox, index) => {
+                            checkbox.checked = formData[`checkbox_${index}`] || false;
+                        });
+                        
+                        const otherInput = form.querySelector('input[name="Others"]');
+                        if (otherInput && formData['others_input']) {
+                            otherInput.value = formData['others_input'];
+                        }
+                        
+                        console.log("Saved form data loaded");
+                    }
+                } catch (error) {
+                    console.error("Error loading form data:", error);
+                }
+            }
+            
+            function validateForm() {
+                const otherInput = form.querySelector('input[name="Others"]');
+                if (otherInput && !otherInput.value.trim()) {
+                    otherInput.classList.add('error-field');
+                    return false;
+                }
+                otherInput.classList.remove('error-field');
+                return true;
+            }
+            
+            // Event listeners for form inputs
+            const inputs = form.querySelectorAll('input[type="checkbox"], input[name="Others"]');
+            inputs.forEach(input => {
+                input.addEventListener("change", saveFormData);
+                input.addEventListener("input", saveFormData);
+            });
+            
+            // Load saved data on page load
+            loadSavedFormData();
+            
+            // Navigation buttons
+            const navigationButtons = document.querySelectorAll(".custom-button");
+            navigationButtons.forEach(button => {
+                button.addEventListener("click", function(event) {
+                    if (validateForm()) {
+                        saveFormData();
+                        // Navigation logic can be added here if needed
+                    } else {
+                        event.preventDefault();
+                        alert("Please fill out the 'Others' field.");
+                    }
+                });
+            });
         });
-
+        
+        // Optional: Function to clear saved form data
+        function clearSavedFormData() {
+            localStorage.removeItem("surveyReasonsData");
+            console.log("Saved form data cleared");
+        }
     </script>
+
 </body>
 </html>

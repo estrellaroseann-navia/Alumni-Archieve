@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
@@ -26,7 +27,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -73,7 +74,7 @@
             <div class="buttoncon">
                 <button class="custom-button" type="button" onclick="location.href='page4.html'">Previous Page</button>
                 <button class="custom-button" type="button" onclick="location.href='page6.html'">Next Page</button>
-                <button class="custom-button" type="button" onclick="location.href='page6p2.html'">Skip Question</button>
+                <button class="custom-button" type="button" onclick="location.href='page7.html'">Skip Question</button>
             </div>
         </form>
     </div>
@@ -83,104 +84,111 @@
     </footer>
     
     <script>
-        // Function to toggle the dropdown menu
-        function toggleDropdown() {
-            const dropdownContent = document.getElementById('dropdown-menu');
-            dropdownContent.classList.toggle('show');
+        // Select the form
+        const form = document.getElementById("questionnaire-form");
+
+        // Function to save form data to localStorage
+        function saveFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                // Handle different input types
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                if (inputElement) {
+                    if (inputElement.type === 'checkbox') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
+                    }
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("questionnaireFormData", JSON.stringify(data));
         }
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function (event) {
-            const dropdownContent = document.getElementById('dropdown-menu');
-            const profile = document.getElementById('profile');
-            if (!profile.contains(event.target)) {
-                dropdownContent.classList.remove('show');
+        // Function to load saved form data
+        function loadSavedFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const savedData = localStorage.getItem("questionnaireFormData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'checkbox') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
+                    }
+                }
             }
         }
 
-        // Attach the click event to the profile avatar
-        document.addEventListener('DOMContentLoaded', function () {
-            const profileAvatar = document.getElementById('navbarProfileImg');
-            profileAvatar.addEventListener('click', toggleDropdown);
+        // Add event listeners to save data
+        if (form) {
+            // Save on any input change
+            form.addEventListener("input", saveFormData);
+            form.addEventListener("change", saveFormData);
+            
+            // Load saved data on page load
+            loadSavedFormData();
+        }
 
-            // Handle button actions for navigation
-            const prevButton = document.querySelector('.buttoncon .custom-button:nth-child(1)');
-            const nextButton = document.querySelector('.buttoncon .custom-button:nth-child(2)');
-            const skipButton = document.querySelector('.buttoncon .custom-button:nth-child(3)');
-
-            prevButton.addEventListener('click', function () {
-                saveSurveyData();  // Save data before navigating
-                location.href = 'page4.html'; // Navigate to the previous page
+        // Navigation buttons (if they exist)
+        const navigationButtons = document.querySelectorAll(".custom-button");
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                saveFormData(); // Ensure data is saved before navigation
+                
+                // Add your navigation logic here
+                // For example: 
+                // if (this.getAttribute('data-next-page')) {
+                //     location.href = this.getAttribute('data-next-page');
+                // }
             });
-
-            nextButton.addEventListener('click', function () {
-                saveSurveyData();  // Save data before navigating
-                location.href = 'page6.html'; // Navigate to the next page
-            });
-
-            skipButton.addEventListener('click', function () {
-                saveSurveyData();  // Save data before skipping
-                location.href = 'page6.2.html'; // Skip question and navigate to the next page
-            });
-
-            // Load saved data from localStorage when the page loads
-            loadSurveyData();
         });
 
-        // Function to save survey data
-        function saveSurveyData() {
-            const surveyData = {
-                reasons: [],
-                employmentStatus: ''
-            };
-
-            // Store checkbox values for reasons
-            const reasonCheckboxes = document.querySelectorAll('input[name="reason"]');
-            reasonCheckboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    surveyData.reasons.push(checkbox.value);
+        // Optional: Form validation before navigation
+        function validateForm() {
+            const requiredFields = form.querySelectorAll("[required]");
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error'); // Optional: Add error styling
+                } else {
+                    field.classList.remove('error');
                 }
             });
+            
+            return isValid;
+        }
 
-            // Store the value of the 'Others' input
-            const otherReasonInput = document.getElementById('other-reason');
-            surveyData.otherReason = otherReasonInput.value;
-
-            // Store employment data
-            const employmentCheckboxes = document.querySelectorAll('input[name="employment"]');
-            employmentCheckboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    surveyData.employmentStatus = checkbox.value;
+        // Add validation to navigation buttons
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function(event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Prevent navigation if form is invalid
+                    alert("Please fill out all required fields.");
                 }
             });
+        });
 
-            // Save data to localStorage
-            localStorage.setItem('surveyPage5Data', JSON.stringify(surveyData));
+        // Clear saved data function (optional)
+        function clearSavedFormData() {
+            localStorage.removeItem("questionnaireFormData");
         }
-
-        // Function to load survey data
-        function loadSurveyData() {
-            const savedData = JSON.parse(localStorage.getItem('surveyPage5Data'));
-
-            if (savedData) {
-                // Load reason checkbox values
-                const reasonCheckboxes = document.querySelectorAll('input[name="reason"]');
-                reasonCheckboxes.forEach((checkbox) => {
-                    checkbox.checked = savedData.reasons.includes(checkbox.value);
-                });
-
-                // Load 'Others' input value
-                const otherReasonInput = document.getElementById('other-reason');
-                otherReasonInput.value = savedData.otherReason || '';
-
-                // Load employment status checkbox values
-                const employmentCheckboxes = document.querySelectorAll('input[name="employment"]');
-                employmentCheckboxes.forEach((checkbox) => {
-                    checkbox.checked = checkbox.value === savedData.employmentStatus;
-                });
-            }
-        }
-
     </script>
 </body>
 </html>

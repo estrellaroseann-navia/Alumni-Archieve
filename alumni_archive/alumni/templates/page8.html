@@ -166,7 +166,20 @@
             // Redirect to the next page after displaying the message (optional)
             // Uncomment the line below if you want to redirect after a delay
             // setTimeout(() => { location.href = 'survey9.html'; }, 3000);
+
         });
+             // Function to save form data to local storage
+            function saveFormData() {
+            const formData = {};
+
+            // Get form inputs and save their values
+            const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
+            inputs.forEach(input => {
+                formData[input.name] = input.value; // Assuming each input has a 'name' attribute
+            });
+
+            // Save form data to local storage
+            localStorage.setItem('surveyResponses', JSON.stringify(formData));
 
     </script>
 </body>

@@ -28,7 +28,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}" ="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -91,60 +91,104 @@
     </footer>
     
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const profileImg = document.getElementById("navbarProfileImg");
-            const dropdownMenu = document.getElementById("dropdown-menu");
-            
-            // Toggle dropdown menu on avatar click
-            profileImg.addEventListener("click", function () {
-                dropdownMenu.classList.toggle("show");
-            });
+        // Select the form
+        const form = document.getElementById("alumniSurveyForm");
 
-            // Close dropdown if clicked outside
-            window.addEventListener("click", function (event) {
-                if (!profileImg.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.remove("show");
+        // Function to save form data to localStorage
+        function saveFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                // Handle different input types
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                if (inputElement) {
+                    data[key] = value;
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("alumniSurveyData", JSON.stringify(data));
+        }
+
+        // Function to load saved form data
+        function loadSavedFormData() {
+            if (!form) return; // Exit if form not found
+            
+            const savedData = localStorage.getItem("alumniSurveyData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        inputElement.value = value;
+                    }
+                }
+            }
+        }
+
+        // Add event listeners to save data
+        if (form) {
+            // Save on any input change
+            form.addEventListener("input", saveFormData);
+            form.addEventListener("change", saveFormData);
+            
+            // Load saved data on page load
+            loadSavedFormData();
+        }
+
+        // Navigation buttons (if they exist)
+        const navigationButtons = document.querySelectorAll(".custom-button");
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                saveFormData(); // Ensure data is saved before navigation
+                
+                // Add your navigation logic here
+                // For example: 
+                // if (this.getAttribute('data-next-page')) {
+                //     location.href = this.getAttribute('data-next-page');
+                // }
+            });
+        });
+
+        // Optional: Form validation before navigation
+        function validateForm() {
+            const requiredFields = form.querySelectorAll("[required]");
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error'); // Optional: Add error styling
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Add validation to navigation buttons
+        navigationButtons.forEach(button => {
+            button.addEventListener("click", function(event) {
+                if (!validateForm()) {
+                    event.preventDefault(); // Prevent navigation if form is invalid
+                    alert("Please fill out all required fields.");
                 }
             });
         });
 
-        // Function to handle form submission and button click
-        document.getElementById("alumniSurveyForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
+        // Clear saved data function (optional)
+        function clearSavedFormData() {
+            localStorage.removeItem("alumniSurveyData");
+        }
+    </script>
 
-            // Gather form responses
-            const form = event.target; // Reference to the form
-            const formData = {
-                "Curriculum Relevance": form.curriculumRelevance.value,
-                "Competencies Used": Array.from(form.querySelectorAll('input[name="competencies"]:checked')).map(input => input.nextElementSibling.textContent).join(", ")
-            };
-
-            // Retrieve existing responses from localStorage
-            const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
-            
-            // Merge new responses with existing ones
-            const updatedResponses = {
-                ...existingResponses,
-                ...formData
-            };
-
-            // Store updated responses back to localStorage
-            localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
-
-            // Redirect to the next page
-            location.href = 'page2.html'; // Adjust the link as needed
-        });
-
-        // Enable button if required fields are filled
-        const formFields = document.querySelectorAll("#alumniSurveyForm input[required]");
-        const nextButton = document.querySelector(".custom-button");
-
-        formFields.forEach(field => {
-            field.addEventListener("input", function () {
-                const allFilled = Array.from(formFields).every(input => input.value.trim() !== "");
-                nextButton.disabled = !allFilled; // Enable or disable the button based on the input fields
-            });
-        });
-
-    </script> 
+</body>
 </html>
