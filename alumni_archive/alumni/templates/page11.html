@@ -26,7 +26,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -116,65 +116,58 @@
 
     <!-- JavaScript -->
     <script>
-        // Script for Survey11.html
+        // Select the form
+        const form = document.getElementById("jobSurvey");
 
-            // Dropdown Menu Toggle
-            document.getElementById("navbarProfileImg").addEventListener("click", function () {
-                const dropdownMenu = document.getElementById("dropdown-menu");
-                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-            });
-
-            // Close the dropdown if clicked outside
-            window.onclick = function (event) {
-                const dropdownMenu = document.getElementById("dropdown-menu");
-                if (!event.target.matches('#navbarProfileImg')) {
-                    if (dropdownMenu.style.display === "block") {
-                        dropdownMenu.style.display = "none";
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                
+                if (inputElement) {
+                    if (inputElement.type === 'radio') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
                     }
                 }
-            };
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("jobSurveyData", JSON.stringify(data));
+        }
 
-            // Survey Form Submission
-            document.getElementById('jobSurvey').addEventListener('submit', function (e) {
-                e.preventDefault(); // Prevent form from submitting for demonstration purposes
+        // Function to load saved form data
+        function loadSavedFormData() {
+            const savedData = localStorage.getItem("jobSurveyData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'radio') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
+                    }
+                }
+            }
+        }
 
-                // Capture the selected job levels
-                const firstJobLevel = document.querySelector('input[name="firstJobLevel"]:checked');
-                const currentJobLevel = document.querySelector('input[name="currentJobLevel"]:checked');
+        // Add event listener to form inputs
+        form.addEventListener("input", saveFormData);
+        form.addEventListener("change", saveFormData);
 
-                // Capture the initial gross monthly earnings
-                const initialEarnings = document.querySelector('input[name="initialEarnings"]:checked');
-
-                // Log survey responses to the console (for demonstration, replace with real submission handling)
-                console.log("First Job Level: ", firstJobLevel ? firstJobLevel.value : 'None');
-                console.log("Current Job Level: ", currentJobLevel ? currentJobLevel.value : 'None');
-                console.log("Initial Earnings: ", initialEarnings ? initialEarnings.value : 'None');
-
-                // Redirect to the next page
-                window.location.href = 'page12.html';
-            });
-
-            // Optional: Pre-fill the username (replace with dynamic content if available)
-            document.getElementById("navbarUserName").textContent = localStorage.getItem("username") || "USER";
-
-            // Optional: Add profile image (replace with dynamic content if available)
-            document.getElementById("navbarProfileImg").src = localStorage.getItem("profileImage") || "profile.png";
-
-            // Retrieve existing responses from localStorage
-            const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
-
-             // Function to save form data to local storage
-             function saveFormData() {
-                const formData = {};
-    
-                // Get form inputs and save their values
-                const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
-                inputs.forEach(input => {
-                    formData[input.name] = input.value; // Assuming each input has a 'name' attribute
-                });
-    
-                // Save form data to local storage
-                localStorage.setItem('surveyResponses', JSON.stringify(formData));
+        // Load saved form data on page load
+        window.addEventListener("load", loadSavedFormData);
 
     </script>
 </body>

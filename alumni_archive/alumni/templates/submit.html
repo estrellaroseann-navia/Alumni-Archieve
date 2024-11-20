@@ -27,7 +27,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -47,6 +47,9 @@
             <h2>Survey Responses</h2>
             <div id="responses">
                 <!-- Survey responses will go here -->
+            </div>
+            <div class="buttoncon">
+                <button class="custom-button" type="button" onclick="location.href='{% url 'homepage' %}'">Back to Home</button>
             </div>
         </div>
     </main>

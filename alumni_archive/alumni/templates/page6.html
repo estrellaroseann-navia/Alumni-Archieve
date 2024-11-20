@@ -25,7 +25,7 @@
                     <a href="{% url 'donation' %}">Donate</a>
                 </nav>
                 <div class="navbar-profile" id="profile">
-                    <span id="navbarUserName">Hello</span>
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
                     <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
@@ -150,51 +150,11 @@
             loadSavedFormData();
         }
 
-        // Navigation buttons (if they exist)
-        const navigationButtons = document.querySelectorAll(".custom-button");
-        navigationButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                saveFormData(); // Ensure data is saved before navigation
-                
-                // Add your navigation logic here
-                // For example: 
-                // if (this.getAttribute('data-next-page')) {
-                //     location.href = this.getAttribute('data-next-page');
-                // }
-            });
+        // Handle form submission
+        // Note: Since the form is not actually submitted, we'll just save the data on next page click
+        document.querySelector(".buttoncon .custom-button:nth-child(2)").addEventListener("click", function(event) {
+            saveFormData(); // Save form data to localStorage
         });
-
-        // Optional: Form validation before navigation
-        function validateForm() {
-            const requiredFields = form.querySelectorAll("[required]");
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.classList.add('error'); // Optional: Add error styling
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            return isValid;
-        }
-
-        // Add validation to navigation buttons
-        navigationButtons.forEach(button => {
-            button.addEventListener("click", function(event) {
-                if (!validateForm()) {
-                    event.preventDefault(); // Prevent navigation if form is invalid
-                    alert("Please fill out all required fields.");
-                }
-            });
-        });
-
-        // Clear saved data function (optional)
-        function clearSavedFormData() {
-            localStorage.removeItem("employmentStatusFormData");
-        }
 
     </script>
 </body>

@@ -26,7 +26,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -104,73 +104,68 @@
 
     <!-- JavaScript -->
     <script >
-        // Survey12.js
+        // Select the form
+        const form = document.getElementById("curriculumSurvey");
 
-        // Function to toggle the dropdown menu
-        function toggleDropdown() {
-            const dropdownMenu = document.getElementById("dropdown-menu");
-            dropdownMenu.classList.toggle("show");
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                
+                if (inputElement) {
+                    if (inputElement.type === 'radio') {
+                        data[key] = inputElement.checked;
+                    } else if (inputElement.type === 'checkbox') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
+                    }
+                }
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("alumniSurveyData", JSON.stringify(data));
         }
 
-        // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.navbar-profile') && !event.target.matches('#navbarProfileImg')) {
-                const dropdowns = document.getElementsByClassName("dropdown-content");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
+        // Function to load saved form data
+        function loadSavedFormData() {
+            const savedData = localStorage.getItem("alumniSurveyData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'radio') {
+                            inputElement.checked = value;
+                        } else if (inputElement.type === 'checkbox') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
                     }
                 }
             }
         }
 
-        // Event listener for profile click to toggle dropdown
-        document.getElementById("profile").onclick = toggleDropdown;
-
-        // Button Functions
-        document.querySelector(".buttoncon .custom-button[type='button']").onclick = function() {
-            location.href = "{% url 'page11' %}";
-        };
-    
-        document.querySelector("#curriculumSurvey").onsubmit = function(event) {
+        // Add event listener to form submission
+        form.addEventListener("submit", function(event) {
             event.preventDefault();
-            const form = document.getElementById("curriculumSurvey");
-
-            // Retrieve existing responses from localStorage
-            const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
             
-            // Check if the form is valid
-            if (form.checkValidity()) {
-                // Gather the responses
-                const formData = {
-                    "Curriculum Relevance": form.curriculumRelevance.value,
-                    "Competencies Used": Array.from(form.querySelectorAll('input[name="competencies"]:checked'))
-                        .map(input => input.value).join(", "),
-                    "Other Skills": document.getElementById("otherSkillsText").value
-                };
-    
-                // Store in localStorage if needed
-                localStorage.setItem("surveyResponses", JSON.stringify(formData));
-                
-                // Redirect using Django URL
-                window.location.href = "{% url 'submit' %}";
-            } else {
-                // Optionally show an alert or message if the form is invalid
-                alert("Please fill out all required fields before submitting.");
-            }
-        };
+            saveFormData();
+            
+            // Redirect to submit.html
+            window.location.href = "submit.html";
+        });
 
-            // Function to save form data to local storage
-            function saveFormData() {
-            const formData = {};
-
-            // Get form inputs and save their values
-            const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
-            inputs.forEach(input => {
-                formData[input.name] = input.value; // Assuming each input has a 'name' attribute
-            });
-
+        // Load saved form data on page load
+        window.addEventListener("load", loadSavedFormData);
 
     </script>
 </body>

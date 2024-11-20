@@ -25,7 +25,7 @@
                     <a href="{% url 'donation' %}">Donate</a>
                 </nav>
                 <div class="navbar-profile" id="profile">
-                    <span id="navbarUserName">USER</span>
+                    <span id="navbarUserName">Hello, {{request.user}}</span>
                     <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
@@ -111,21 +111,19 @@
         <p>&copy; 2024 Palawan State University Alumni Archive. All rights reserved.</p>
     </footer>
 
-    <script >
+    <script>
         // Select the form
         const form = document.getElementById("businessLineForm");
 
         // Function to save form data to localStorage
         function saveFormData() {
-            if (!form) return; // Exit if form not found
-            
             const formData = new FormData(form);
             const data = {};
             
             // Collect data from all form inputs
             for (const [key, value] of formData.entries()) {
-                // Handle different input types
                 const inputElement = form.querySelector(`[name="${key}"]`);
+                
                 if (inputElement) {
                     if (inputElement.type === 'radio') {
                         data[key] = inputElement.checked;
@@ -141,8 +139,6 @@
 
         // Function to load saved form data
         function loadSavedFormData() {
-            if (!form) return; // Exit if form not found
-            
             const savedData = localStorage.getItem("businessLineFormData");
             if (savedData) {
                 const formData = JSON.parse(savedData);
@@ -162,60 +158,21 @@
             }
         }
 
-        // Add event listeners to save data
-        if (form) {
-            // Save on any input change
-            form.addEventListener("input", saveFormData);
-            form.addEventListener("change", saveFormData);
-            
-            // Load saved data on page load
-            loadSavedFormData();
-        }
+        // Add event listener to form inputs
+        form.addEventListener("input", saveFormData);
+        form.addEventListener("change", saveFormData);
 
-        // Handle form submission
+        // Add event listener to form submission
         form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
-            
-            saveFormData(); // Save form data to localStorage
-            
-            // Redirect to next page
-            location.href = 'page8.html';
+            event.preventDefault();
+            saveFormData();
+            window.location.href = "page8.html";
         });
 
-        // Optional: Form validation before navigation
-        function validateForm() {
-            const requiredFields = form.querySelectorAll("[required]");
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.classList.add('error'); // Optional: Add error styling
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            return isValid;
-        }
-
-        // Add validation to navigation buttons
-        const navigationButtons = document.querySelectorAll(".custom-button");
-        navigationButtons.forEach(button => {
-            button.addEventListener("click", function(event) {
-                if (!validateForm()) {
-                    event.preventDefault(); // Prevent navigation if form is invalid
-                    alert("Please fill out all required fields.");
-                }
-            });
-        });
-
-        // Clear saved data function (optional)
-        function clearSavedFormData() {
-            localStorage.removeItem("businessLineFormData");
-        }
-
+        // Load saved form data on page load
+        loadSavedFormData();
+                
     </script>
-    
+
 </body>
 </html>

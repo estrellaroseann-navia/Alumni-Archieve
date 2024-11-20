@@ -26,7 +26,7 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="profile.png" alt="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}"="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
                         <a href="#">
                             <i class="fas fa-user"></i> Profile
@@ -105,73 +105,62 @@
     </footer>
 
     <script>
-        // Function to handle dropdown menu
-        document.addEventListener("DOMContentLoaded", function () {
-            const profileIcon = document.querySelector(".navbar-profile img.avatar");
-            const dropdownContent = document.querySelector(".dropdown-content");
+        // Select the form
+        const form = document.getElementById("jobSurvey");
 
-            // Toggle the dropdown visibility on click
-            profileIcon.addEventListener("click", function () {
-                dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-            });
-
-            // Close the dropdown if clicked outside
-            window.addEventListener("click", function (event) {
-                if (!profileIcon.contains(event.target) && !dropdownContent.contains(event.target)) {
-                    dropdownContent.style.display = "none";
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect data from all form inputs
+            for (const [key, value] of formData.entries()) {
+                const inputElement = form.querySelector(`[name="${key}"]`);
+                
+                if (inputElement) {
+                    if (inputElement.type === 'radio') {
+                        data[key] = inputElement.checked;
+                    } else if (inputElement.type === 'checkbox') {
+                        data[key] = inputElement.checked;
+                    } else {
+                        data[key] = value;
+                    }
                 }
-            });
-        });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem("jobSurveyData", JSON.stringify(data));
+        }
 
-        // Function to handle form submission
-        document.getElementById("jobSurvey").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
+        // Function to load saved form data
+        function loadSavedFormData() {
+            const savedData = localStorage.getItem("jobSurveyData");
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                
+                // Restore form fields
+                for (const [key, value] of Object.entries(formData)) {
+                    const inputElement = form.querySelector(`[name="${key}"]`);
+                    
+                    if (inputElement) {
+                        if (inputElement.type === 'radio') {
+                            inputElement.checked = value;
+                        } else if (inputElement.type === 'checkbox') {
+                            inputElement.checked = value;
+                        } else {
+                            inputElement.value = value;
+                        }
+                    }
+                }
+            }
+        }
 
-            // Gather responses from the form
-            const form = event.target;
-            const formData = {
-                "Reasons for Accepting Job": Array.from(form.querySelectorAll('input[name="acceptingJob"]:checked')).map(input => input.value).join(", "),
-                "Reasons for Changing Job": Array.from(form.querySelectorAll('input[name="changingJob"]:checked')).map(input => input.value).join(", "),
-                "Other Reason (Accepting Job)": form.otherAcceptText.value,
-                "Other Reason (Changing Job)": form.otherChangeText.value
-            };
+        // Add event listener to form inputs
+        form.addEventListener("input", saveFormData);
+        form.addEventListener("change", saveFormData);
 
-            // Retrieve existing responses from localStorage
-            const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
-
-            // Merge new responses with existing ones
-            const updatedResponses = {
-                ...existingResponses,
-                ...formData
-            };
-
-             // Function to save form data to local storage
-             function saveFormData() {
-                const formData = {};
-    
-                // Get form inputs and save their values
-                const inputs = document.querySelectorAll("#businessLineForm input, #businessLineForm select, #businessLineForm textarea");
-                inputs.forEach(input => {
-                    formData[input.name] = input.value; // Assuming each input has a 'name' attribute
-                });
-    
-                // Save form data to local storage
-                localStorage.setItem('surveyResponses', JSON.stringify(formData));
-
-            // Redirect to the next page
-            location.href = 'page10.html'; // Adjust the link as needed
-        });
-
-        // Function to handle Previous button click
-        document.querySelector(".buttoncon .custom-button[type='button']").addEventListener("click", function () {
-            // Optionally, you can store the responses here if you want to keep them
-            // This is only if you want to save responses when going back
-            // You could also just navigate back without storing if you prefer
-
-            // Redirect to the previous page
-            location.href = 'page8.html'; // Adjust the link as needed
-        });
-
+        // Load saved form data on page load
+        loadSavedFormData();
     </script>
 </body>
 </html>

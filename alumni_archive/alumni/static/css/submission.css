@@ -168,6 +168,25 @@ main {
     color: #777;
 }
 
+/* Button Styles */
+.buttoncon {
+    text-align: center; /* Center align buttons */
+}
+
+.buttoncon {
+    background-color: #f07d3b; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth background change */
+}
+
+.buttoncon :hover {
+    background-color: #d06530; /* Darker shade on hover */
+}
+
 /* Footer Styling */
 footer {
     background-color: #f07d3b;
