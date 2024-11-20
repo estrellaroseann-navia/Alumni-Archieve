@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/survey.css' %}"> <!-- Link to the same CSS for consistent style -->
     <title>Tracking Page</title>
 </head>
-
 <body>
     <!-- Navigation Bar -->
     <header>
@@ -30,7 +29,7 @@
                     <span id="navbarUserName">Hello, {{request.user}}</span>
                     <img src="{% static 'img/profile.png' %}" alt="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
-                        <a href="#">
+                        <a href="{% url 'alumniprofile' %}">
                             <i class="fas fa-user"></i> Profile
                         </a>
                         <a href="{% url 'confirmlogout' %}">
@@ -52,6 +51,9 @@
                 <label for="consentCheckbox">I agree to participate in the survey</label>
             </div>
             <button id="proceedButton" class="submit-button" disabled>Proceed</button>
+        </div>
+        <div style="height: 390px;">
+            <!-- This empty div creates extra space -->
         </div>
     </section>
 

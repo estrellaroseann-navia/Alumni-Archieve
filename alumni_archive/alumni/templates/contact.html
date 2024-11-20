@@ -32,11 +32,8 @@
                     <span id="navbarUserName">Hello, {{request.user}}</span>
                     <img src="{% static 'img/profile.png' %}" alt="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
-                        <a href="#">
+                        <a href="{% url 'alumniprofile' %}">
                             <i class="fas fa-user"></i> Profile
-                        </a>
-                        <a href="#">
-                            <i class="fas fa-cog"></i> Settings
                         </a>
                         <a href="{% url 'confirmlogout' %}">
                             <i class="fas fa-sign-out-alt"></i> Logout

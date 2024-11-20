@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/page1.css' %}"> <!-- Link to your CSS for consistent style -->
     <title>Alumni Survey Form 1</title>
 </head>
-
 <body>
     <!-- Navigation Bar -->
     <header>
@@ -28,9 +27,9 @@
                 </nav>
                 <div class="navbar-profile" id="profile">
                     <span id="navbarUserName">Hello, {{request.user}}</span>
-                    <img src="{% static 'img/profile.png' %}" ="User Profile" class="avatar" id="navbarProfileImg">
+                    <img src="{% static 'img/profile.png' %}" alt="User Profile" class="avatar" id="navbarProfileImg">
                     <div class="dropdown-content" id="dropdown-menu">
-                        <a href="#">
+                        <a href="{% url 'alumniprofile' %}">
                             <i class="fas fa-user"></i> Profile
                         </a>
                         <a href="{% url 'confirmlogout' %}">
