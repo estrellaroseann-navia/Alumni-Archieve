@@ -90,103 +90,62 @@
     </footer>
     
     <script>
-        // Select the form
+        // Function to handle dropdown menu
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileImg = document.getElementById("navbarProfileImg");
+            const dropdownMenu = document.getElementById("dropdown-menu");
+            
+            // Toggle dropdown menu on avatar click
+            profileImg.addEventListener("click", function () {
+                dropdownMenu.classList.toggle("show");
+            });
+
+            // Close dropdown if clicked outside
+            window.addEventListener("click", function (event) {
+                if (!profileImg.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove("show");
+                }
+            });
+        });
+
+        // Get the form element
         const form = document.getElementById("alumniSurveyForm");
 
-        // Function to save form data to localStorage
-        function saveFormData() {
-            if (!form) return; // Exit if form not found
-            
-            const formData = new FormData(form);
-            const data = {};
-            
-            // Collect data from all form inputs
-            for (const [key, value] of formData.entries()) {
-                // Handle different input types
-                const inputElement = form.querySelector(`[name="${key}"]`);
-                if (inputElement) {
-                    data[key] = value;
-                }
-            }
-            
-            // Save to localStorage
-            localStorage.setItem("alumniSurveyData", JSON.stringify(data));
-        }
+        // Add an event listener to the form submission
+        form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-        // Function to load saved form data
-        function loadSavedFormData() {
-            if (!form) return; // Exit if form not found
-            
-            const savedData = localStorage.getItem("alumniSurveyData");
-            if (savedData) {
-                const formData = JSON.parse(savedData);
-                
-                // Restore form fields
-                for (const [key, value] of Object.entries(formData)) {
-                    const inputElement = form.querySelector(`[name="${key}"]`);
-                    
-                    if (inputElement) {
-                        inputElement.value = value;
-                    }
-                }
-            }
-        }
+        // Get the form data
+        const formData = {
+            name: form.name.value,
+            permanentAddress: form.permanentAddress.value,
+            email: form.email.value,
+            telephone: form.telephone.value,
+            mobileNumber: form.mobileNumber.value,
+            civilStatus: form.civilStatus.value,
+            sex: form.sex.value,
+            birthday: form.birthday.value,
+            region: form.region.value,
+            province: form.province.value,
+            residenceLocation: form.residenceLocation.value
+        };
 
-        // Add event listeners to save data
-        if (form) {
-            // Save on any input change
-            form.addEventListener("input", saveFormData);
-            form.addEventListener("change", saveFormData);
-            
-            // Load saved data on page load
-            loadSavedFormData();
-        }
+        // Retrieve existing responses from localStorage
+        const existingResponses = JSON.parse(localStorage.getItem("surveyResponses")) || {};
 
-        // Navigation buttons (if they exist)
-        const navigationButtons = document.querySelectorAll(".custom-button");
-        navigationButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                saveFormData(); // Ensure data is saved before navigation
-                
-                // Add your navigation logic here
-                // For example: 
-                // if (this.getAttribute('data-next-page')) {
-                //     location.href = this.getAttribute('data-next-page');
-                // }
-            });
+        // Merge new responses with existing ones
+        const updatedResponses = {
+            ...existingResponses,
+            ...formData
+        };
+
+        // Store updated responses back to localStorage
+        localStorage.setItem("surveyResponses", JSON.stringify(updatedResponses));
+
+        // Redirect to the next page
+        location.href = "page2.html";
         });
 
-        // Optional: Form validation before navigation
-        function validateForm() {
-            const requiredFields = form.querySelectorAll("[required]");
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.classList.add('error'); // Optional: Add error styling
-                } else {
-                    field.classList.remove('error');
-                }
-            });
-            
-            return isValid;
-        }
-
-        // Add validation to navigation buttons
-        navigationButtons.forEach(button => {
-            button.addEventListener("click", function(event) {
-                if (!validateForm()) {
-                    event.preventDefault(); // Prevent navigation if form is invalid
-                    alert("Please fill out all required fields.");
-                }
-            });
-        });
-
-        // Clear saved data function (optional)
-        function clearSavedFormData() {
-            localStorage.removeItem("alumniSurveyData");
-        }
     </script>
 
 </body>
